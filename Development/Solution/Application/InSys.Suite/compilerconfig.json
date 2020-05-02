@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "wwwroot/Base/Styles/System/Master.css",
+    "inputFile": "wwwroot/Base/Styles/System/Master.scss"
+  },
+  {
+    "outputFile": "wwwroot/Base/Styles/System/Dark/Dark_Master.css",
+    "inputFile": "wwwroot/Base/Styles/System/Dark/Dark_Master.scss"
+  },
+  {
+    "outputFile": "wwwroot/Base/Styles/System/Default.css",
+    "inputFile": "wwwroot/Base/Styles/System/Default.scss"
+  }
+]

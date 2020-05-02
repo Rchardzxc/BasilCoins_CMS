@@ -1,0 +1,6 @@
+﻿<div class="Orbit-ChangeOfSchedule main-container">
+    <div class="module-title"><i ng-click="return()" ng-if="RecordID != ''" class="fas fa-long-arrow-alt-left" title="Back to list"></i> Change Of Schedule</div>
+    <ui-view>
+        <div ng-include="HtmlTemplatePath + '/Web/Directives/insysTable.tmpl.html'" include-replace></div>
+    </ui-view>
+</div>

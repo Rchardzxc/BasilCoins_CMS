@@ -1,0 +1,379 @@
+﻿<div class="mp-personalInfo">
+    <ul class="nav nav-tabs pi-navtab">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#general">General</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#address">Address</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#education">Educational Background</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#employment_history">Employment History</a>
+        </li>
+        <!--<li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#family">Family</a>
+        </li>-->
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#government_id">Government ID</a>
+        </li>
+        <!--<li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#other">Other Info</a>
+        </li>-->
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#licenses">Licenses/Certificates</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#char_ref">Character References</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <!--General-->
+        <div class="tab-pane container active" id="general">
+            <div class="pi-head">General</div>
+            <div class="col-lg-10 col-md-12 row">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Last name</label>
+                        <p ng-bind="Val(Persona.LastName)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Middlename</label>
+                        <p ng-bind="Val(Persona.MiddleName)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Nickname</label>
+                        <p ng-bind="Val(Persona.NickName)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Date of Birth</label>
+                        <p ng-bind="Val(FormatDate(Persona.BirthDate, 'LL'))"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Age</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Civil Status</label>
+                        <p ng-bind="Val(Persona.CivilStatus)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Weight</label>
+                        <p ng-bind="Val(Persona.Weight)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Blood Type</label>
+                        <p ng-bind="Val(Persona.BloodType)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Mobile No</label>
+                        <p ng-bind="Val(Persona.MobileNo)"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>First name</label>
+                        <p ng-bind="Val(Persona.FirstName)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Suffix</label>
+                        <p ng-bind="Val(Persona.Suffix)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Gender</label>
+                        <p ng-bind="Val(Persona.Gender)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Place of Birth</label>
+                        <p ng-bind="Val(Persona.BirthPlace)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Religion</label>
+                        <p ng-bind="Val(Persona.Religion)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Citizenship</label>
+                        <p ng-bind="Val(Persona.Citizenship)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Height</label>
+                        <p ng-bind="Val(Persona.Height)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Email Address</label>
+                        <p ng-bind="Val(Persona.EmailAddress)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Phone No</label>
+                        <p ng-bind="Val(Persona.PhoneNo)"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Address-->
+        <div class="tab-pane container fade" id="address">
+            <div class="pi-head">Address</div>
+            <div class="col-lg-10 col-md-12 row">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="pi-title">Permanent</div>
+                    <div class="lbl-grp">
+                        <label>No/Blk/Lot</label>
+                        <p ng-bind="Val(Address[0].HouseNo)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Street name/Subdivision</label>
+                        <p ng-bind="Val(Address[0].StreetName)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Province</label>
+                        <p ng-bind="Val(Address[0].Province)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>City</label>
+                        <p ng-bind="Val(Address[0].City)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Barangay</label>
+                        <p ng-bind="Val(Address[0].Barangay)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Zip Code</label>
+                        <p ng-bind="Val(Address[0].ZipCode)"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="pi-title">Current</div>
+                    <div class="lbl-grp">
+                        <label>No/Blk/Lot</label>
+                        <p ng-bind="Val(Address[1].HouseNo)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Street name/Subdivision</label>
+                        <p ng-bind="Val(Address[1].StreetName)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Province</label>
+                        <p ng-bind="Val(Address[1].Province)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>City</label>
+                        <p ng-bind="Val(Address[1].City)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Barangay</label>
+                        <p ng-bind="Val(Address[1].Barangay)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Zip Code</label>
+                        <p ng-bind="Val(Address[1].ZipCode)"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Educational Background-->
+        <div class="tab-pane container fade" id="education">
+            <div class="pi-head">Educational Background</div>
+            <div class="li-item" ng-repeat="e in Education">
+                <div class="li-name" ng-bind="Val(e.SchoolAttended)"></div>
+                <div class="li-sub" ng-bind="Val(e.EducationAttainmentStatus)"></div>
+                <div class="li-other"><b>Course/Degree:</b> <span ng-bind="Val(e.CourseDegree)"></span></div>
+                <div class="li-other"><b>Period:</b> <span ng-bind="Val(e.From) + ' - ' + Val(e.To)"></span></div>
+            </div>
+            <div class="li-item-norec" ng-if="Education.length == 0">
+                No record found.
+            </div>
+        </div>
+        <!--Employment History-->
+        <div class="tab-pane container fade" id="employment_history">
+            <div class="pi-head">Employment History</div>
+            <div class="li-item" ng-repeat="eh in EmpHist">
+                <div class="li-name" ng-bind="Val(eh.Company)"></div>
+                <div class="li-sub" ng-bind="Val(eh.Position)"></div>
+                <div class="li-other"><b>Period:</b> <span ng-bind="Val(FormatDate(eh.From) + ' - ' + Val(FormatDate(eh.To))"></span></div>
+                <div class="li-other"><b>Salary:</b> <span ng-bind="Val(FormatNumber(eh.Salary))"></span></div>
+                <div class="li-other"><b>Address:</b> <span ng-bind="Val(eh.Address)"></span></div>
+                <div class="li-other"><b>Reason for Leaving:</b> <span ng-bind="Val(eh.ReasonForLeaving)"></span></div>
+            </div>
+            <div class="li-item-norec" ng-if="EmpHist.length == 0">
+                No record found.
+            </div>
+        </div>
+        <!--Family-->
+        <!--<div class="tab-pane container fade" id="family">
+            <div class="pi-head">Family</div>
+            <div class="col-lg-10 col-md-12 row">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="pi-title">Father</div>
+                    <div class="lbl-grp">
+                        <label>Name</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Age</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Occupation</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Contact No.</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="pi-title">Mother</div>
+                    <div class="lbl-grp">
+                        <label>Name</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Age</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Occupation</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Contact No.</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="pi-title">Spouse/Partner</div>
+                    <div class="lbl-grp">
+                        <label>Name</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Age</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Occupation</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Contact No.</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="pi-title">Other</div>
+                    <div class="lbl-grp">
+                        <label>No. of Children</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Age Range</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="pi-title">Siblings</div>
+            <div class="li-item">
+                <div class="li-name">John Doe</div>
+                <div class="li-sub">Civil Engineer</div>
+                <div class="li-other"><b>Age:</b> 32</div>
+                <div class="li-other"><b>Contact #:</b> 09191222333</div>
+            </div>
+        </div>-->
+        <!--Government ID-->
+        <div class="tab-pane container fade" id="government_id">
+            <div class="pi-head">Government ID</div>
+            <div class="col-lg-10 col-md-12 row">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>SSS No.</label>
+                        <p ng-bind="Val(Persona.SSSNo)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>HDMF No.</label>
+                        <p ng-bind="Val(Persona.HDMFNo)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>PhilHealth No.</label>
+                        <p ng-bind="Val(Persona.PhilHealthNo)"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>TIN</label>
+                        <p ng-bind="Val(Persona.TINNo)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Passport No.</label>
+                        <p ng-bind="Val(Persona.PassportNo)"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Other Info-->
+        <!--<div class="tab-pane container fade" id="other">
+            <div class="pi-head">Other Info</div>
+            <div class="col-lg-10 col-md-12 row">
+                <div class="col-12">
+                    <div class="lbl-grp">
+                        <label>Special/Technical Skills</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Have You Ever Been Convicted Of A Crime? If Yes, Please Give Details</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Have You Ever Been Hospitalized? If Yes, Please Give Details</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Do You Have Any Medical Condition That May Prevent You From Performing Certain Types Of Jobs? If Yes, Please Specify.</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Do You Have Any Relatives/Family Members/People In A Relationship With You, Who Are Working With Us?</label>
+                        <p ng-bind="'-'"></p>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <!--Licenses/Certificates-->
+        <div class="tab-pane container fade" id="licenses">
+            <div class="pi-head">Licenses/Certificates</div>
+            <div class="li-item" ng-repeat="l in Licenses">
+                <div class="li-name" ng-bind="Val(l.Name)"></div>
+                <div class="li-sub">Valid until: <span ng-bind="Val(FormatDate(l.ValidityDate))"></span></div>
+                <div class="li-other"><b>License No.:</b> <span ng-bind="Val(l.LicenseNo)"></span></div>
+                <div class="li-other"><b>Description:</b> <span ng-bind="Val(l.Description)"></span></div>
+            </div>
+            <div class="li-item-norec" ng-if="Licenses.length == 0">
+                No record found.
+            </div>
+        </div>
+        <!--Character References-->
+        <div class="tab-pane container fade" id="char_ref">
+            <div class="pi-head">Character References</div>
+            <div class="pi-title">General</div>
+            <!--<div class="li-item">
+                <div class="li-name">Jane Doe</div>
+                <div class="li-sub">091922200011</div>
+                <div class="li-other"><b>Company:</b> Accenture</div>
+                <div class="li-other"><b>Position:</b> Data Analyst</div>
+            </div>-->
+            <div class="li-item-norec">
+                No record found.
+            </div>
+            <div class="pi-title">From Previous Employment</div>
+            <!--<div class="li-item">
+                <div class="li-name">Jane Doe</div>
+                <div class="li-sub">091922200011</div>
+                <div class="li-other"><b>Company:</b> Accenture</div>
+                <div class="li-other"><b>Position:</b> Data Analyst</div>
+            </div>-->
+            <div class="li-item-norec">
+                No record found.
+            </div>
+        </div>
+    </div>
+</div>

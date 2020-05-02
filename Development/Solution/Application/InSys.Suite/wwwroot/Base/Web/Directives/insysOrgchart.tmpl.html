@@ -1,0 +1,14 @@
+﻿<ul class="insys-orgchart">
+    <li id="tree-{{row.ID_Menus}}" ng-repeat="(rowIdx, row) in insysOrgChart" ng-click="selectNode(row)" class="tree-li">
+        <div ng-if="row.Children.length > 0" class="pr">
+            <div class="tree-label" title="{{ row[displayColumn] }}"><i class="fas fa-users"></i> <label ng-bind="row[displayColumn]"></label></div>
+            <div class="tree-desc" title="{{ row.Description }}" ng-bind="row.Description"></div>
+            <i class="fas tree-toggle" ng-class="getNodeState(row)" ng-click="ToggleChildren(row)"></i>
+        </div>
+        <div ng-class="{'one' : row.Children.length == 1}" ng-if="row.Children.length > 0 && row.ShowChild == true" allow-check="allowCheck" get-selected="selectNode(data)" display-column="displayColumn" ng-transclude insys-org-chart="row.Children"></div>
+        <div ng-if="row.Children.length == 0" class="ch">
+            <div class="tree-label" title="{{ row[displayColumn] }}" ng-bind="row[displayColumn]"></div>
+            <div class="tree-desc" title="{{ row.Description }}" ng-bind="row.Description"></div>
+        </div>
+    </li>
+</ul>

@@ -1,0 +1,93 @@
+﻿<div class="record">
+    <div class="record-header"></div>
+    <div class="record-body">
+        <!--Tabs-->
+        <div class="record-tab d-none d-md-block">
+            <div class="record-tab-header">
+                <span>Tabs</span>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                </li>
+            </ul>
+        </div>
+
+        <form ng-submit="saveForm()" autocomplete="off" spellcheck="false" class="tab-content" method="post" novalidate name="form.examination">
+            <!--Button Group-->
+            <div class="rh-btn-grp">
+                <button class="emphasized d-none d-md-block" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()" type="button"><i class="fas fa-plus"></i> New</button>
+                <button class="emphasized d-none d-md-block" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0"><i class="fas fa-save"></i> Save</button>
+
+                <!--These dropdowns will display when mobile-->
+                <!--Actions-->
+                <div class="dropdown mobile d-block d-md-none">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()">New</button>
+                        <button class="dropdown-item" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0">Save</button>
+                    </div>
+                </div>
+                <!--Tabs-->
+                <div class="dropdown mobile d-block d-md-none" role="tablist">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Tabs</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--General Tab-->
+            <div id="general" role="tabpanel" class="tab-pane fade show active">
+                <!--Form Header-->
+                <div class="rf-header">
+                    <h5>General</h5>
+                </div>
+
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('Code')">
+                                <label class="control-label">Code <i ng-if="GetIsRequired('Code')" title="Code is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="Code" ng-model="Schema.Code" ng-required="GetIsRequired('Code')" />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('Name')">
+                                <label class="control-label">Name <i ng-if="GetIsRequired('Name')" title="Name is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="Name" ng-model="Schema.Name" ng-required="GetIsRequired('Name')" />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('Remarks')">
+                                <label class="control-label">Remarks</label>
+                                <textarea class="form-control" name="Remarks" ng-model="Schema.Remarks" ng-required="GetIsRequired('Remarks')"></textarea>
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('PassingPoints')">
+                                <label class="control-label">Passing Points <i ng-if="GetIsRequired('PassingPoints')" title="Passing Points is required" class="fa fa-exclamation-circle"></i></label>
+                                <input c-label="Passing Points" name="PassingPoints" class="form-control" type="text" ng-input text-type="number" ng-model="Schema.PassingPoints" ng-required="GetIsRequired('PassingPoints')" />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('TotalPoints')">
+                                <label class="control-label">Total Points <i ng-if="GetIsRequired('PassTotalPointsingPoints')" title="Total Points is required" class="fa fa-exclamation-circle"></i></label>
+                                <input c-label="Total Points" name="TotalPoints" class="form-control" type="text" ng-input text-type="number" ng-required="GetIsRequired('TotalPoints')" ng-model="Schema.TotalPoints" />
+                            </div>
+
+                            <div class="form-group">
+                                <span class="form-check-holder">
+                                    <input id="ur-check-0" name="IsActive" class="form-check" ng-model="Schema.IsActive" type="checkbox" />
+                                    <label for="ur-check-0">Active</label>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

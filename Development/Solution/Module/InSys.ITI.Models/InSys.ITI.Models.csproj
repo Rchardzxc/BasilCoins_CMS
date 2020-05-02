@@ -1,0 +1,195 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Sql\BrowserSession.sql" />
+    <None Remove="Sql\fApproverMatrix.sql" />
+    <None Remove="Sql\fApproverMatrixPerLevel.sql" />
+    <None Remove="Sql\fGetApprovalHistory.sql" />
+    <None Remove="Sql\fgetMaxApproverLevel.sql" />
+    <None Remove="Sql\getDefaultJobOffer.sql" />
+    <None Remove="Sql\getEmployeeTraining.sql" />
+    <None Remove="Sql\LoadProfile.sql" />
+    <None Remove="Sql\pSetCompanyMenus.sql" />
+    <None Remove="Sql\vApplicationForm.sql" />
+    <None Remove="Sql\vApplicationForm_Address.sql" />
+    <None Remove="Sql\vApprovalEmployeeMRF.sql" />
+    <None Remove="Sql\vApprovalEmployeeTrainingSummary.sql" />
+    <None Remove="Sql\vApprovalHistory.sql" />
+    <None Remove="Sql\vApprovalLeaveListing.sql" />
+    <None Remove="Sql\vApproverEmployeeTraining.sql" />
+    <None Remove="Sql\vApprover_Module.sql" />
+    <None Remove="Sql\vDepartment.sql" />
+    <None Remove="Sql\vDesignation.sql" />
+    <None Remove="Sql\vDivision.sql" />
+    <None Remove="Sql\vEmployee.sql" />
+    <None Remove="Sql\vEmployeeLeaveDetails.sql" />
+    <None Remove="Sql\vEmployeeTimeKeepingSummary.sql" />
+    <None Remove="Sql\vEtfMigration.sql" />
+    <None Remove="Sql\vJobClass.sql" />
+    <None Remove="Sql\vJobClassGroup.sql" />
+    <None Remove="Sql\vMovement.sql" />
+    <None Remove="Sql\vMovement_Employee.sql" />
+    <None Remove="Sql\vMovement_Employee_Detail.sql" />
+    <None Remove="Sql\vMyModule.sql" />
+    <None Remove="Sql\vOrg_Department.sql" />
+    <None Remove="Sql\vOrg_Designation.sql" />
+    <None Remove="Sql\vOrg_Division.sql" />
+    <None Remove="Sql\vOrg_JobClass.sql" />
+    <None Remove="Sql\vOrg_JobClassGroup.sql" />
+    <None Remove="Sql\vOrg_Section.sql" />
+    <None Remove="Sql\vParameter.sql" />
+    <None Remove="Sql\vPersona.sql" />
+    <None Remove="Sql\vPersonaAddress.sql" />
+    <None Remove="Sql\vPolicy.sql" />
+    <None Remove="Sql\vPolicy_Branch.sql" />
+    <None Remove="Sql\vPolicy_Company.sql" />
+    <None Remove="Sql\vPolicy_Department.sql" />
+    <None Remove="Sql\vPolicy_Designation.sql" />
+    <None Remove="Sql\vPolicy_Division.sql" />
+    <None Remove="Sql\vPolicy_Employee.sql" />
+    <None Remove="Sql\vPolicy_JobClass.sql" />
+    <None Remove="Sql\vPolicy_JobClassGroup.sql" />
+    <None Remove="Sql\vPolicy_Section.sql" />
+    <None Remove="Sql\vRecruitmentStatus.sql" />
+    <None Remove="Sql\vSection.sql" />
+    <None Remove="Sql\vWeeklySchedule.sql" />
+    <None Remove="Sql\vzApplicationForm.sql" />
+    <None Remove="Sql\vzApplicationForm_Address.sql" />
+    <None Remove="Sql\vzApplicationForm_Character.sql" />
+    <None Remove="Sql\vzApplicationForm_Education.sql" />
+    <None Remove="Sql\vzApplicationForm_Employment.sql" />
+    <None Remove="Sql\vzApplicationForm_License.sql" />
+    <None Remove="Sql\vzApplicationForm_SourcingPartner.sql" />
+    <None Remove="Sql\vzCharacter_PreviousEmployment.sql" />
+    <None Remove="Sql\vzFamilyBackground.sql" />
+    <None Remove="Sql\vzMRFReport.sql" />
+    <None Remove="Sql\vzTrainingBondReport.sql" />
+    <None Remove="Sql\vzTrainingEmployeeBondReport.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Sql\vApprovalLeaveListing.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Sql\vMyModule.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Sql\vEmployeeTimeKeepingSummary.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Sql\vEmployeeLeaveDetails.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Sql\vApprover_Module.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Sql\vEtfMigration.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Sql\vDesignation.sql" />
+    <EmbeddedResource Include="Sql\vJobClass.sql" />
+    <EmbeddedResource Include="Sql\vJobClassGroup.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Sql\vDepartment.sql" />
+    <EmbeddedResource Include="Sql\vDivision.sql" />
+    <EmbeddedResource Include="Sql\vMovement.sql" />
+    <EmbeddedResource Include="Sql\vMovement_Employee.sql" />
+    <EmbeddedResource Include="Sql\vMovement_Employee_Detail.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Sql\vOrg_Designation.sql" />
+    <EmbeddedResource Include="Sql\vOrg_JobClass.sql" />
+    <EmbeddedResource Include="Sql\vOrg_JobClassGroup.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Sql\BrowserSession.sql" />
+    <EmbeddedResource Include="Sql\fApproverMatrix.sql" />
+    <EmbeddedResource Include="Sql\fApproverMatrixPerLevel.sql" />
+    <EmbeddedResource Include="Sql\fGetApprovalHistory.sql" />
+    <EmbeddedResource Include="Sql\fgetMaxApproverLevel.sql" />
+    <EmbeddedResource Include="Sql\getDefaultJobOffer.sql" />
+    <EmbeddedResource Include="Sql\getEmployeeTraining.sql" />
+    <EmbeddedResource Include="Sql\LoadProfile.sql" />
+    <EmbeddedResource Include="Sql\vApplicationForm.sql" />
+    <EmbeddedResource Include="Sql\vApplicationForm_Address.sql" />
+    <EmbeddedResource Include="Sql\vApprovalEmployeeMRF.sql" />
+    <EmbeddedResource Include="Sql\vApprovalEmployeeTrainingSummary.sql" />
+    <EmbeddedResource Include="Sql\vApprovalHistory.sql" />
+    <EmbeddedResource Include="Sql\vApproverEmployeeTraining.sql" />
+    <EmbeddedResource Include="Sql\vEmployee.sql">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sql\vOrg_Department.sql" />
+    <EmbeddedResource Include="Sql\vOrg_Division.sql" />
+    <EmbeddedResource Include="Sql\vOrg_Section.sql" />
+    <EmbeddedResource Include="Sql\vParameter.sql" />
+    <EmbeddedResource Include="Sql\vPersona.sql" />
+    <EmbeddedResource Include="Sql\vPersonaAddress.sql" />
+    <EmbeddedResource Include="Sql\vPolicy.sql" />
+    <EmbeddedResource Include="Sql\vPolicy_Branch.sql" />
+    <EmbeddedResource Include="Sql\vPolicy_Company.sql" />
+    <EmbeddedResource Include="Sql\vPolicy_Department.sql" />
+    <EmbeddedResource Include="Sql\vPolicy_Designation.sql" />
+    <EmbeddedResource Include="Sql\vPolicy_Division.sql" />
+    <EmbeddedResource Include="Sql\vPolicy_Employee.sql" />
+    <EmbeddedResource Include="Sql\vPolicy_JobClass.sql" />
+    <EmbeddedResource Include="Sql\vPolicy_JobClassGroup.sql" />
+    <EmbeddedResource Include="Sql\vPolicy_Section.sql" />
+    <EmbeddedResource Include="Sql\vSection.sql" />
+    <EmbeddedResource Include="Sql\vWeeklySchedule.sql" />
+    <EmbeddedResource Include="Sql\vzCharacter_PreviousEmployment.sql" />
+    <EmbeddedResource Include="Sql\vzFamilyBackground.sql" />
+    <EmbeddedResource Include="Sql\vzMRFReport.sql" />
+    <EmbeddedResource Include="Sql\vRecruitmentStatus.sql" />
+    <EmbeddedResource Include="Sql\vzApplicationForm.sql" />
+    <EmbeddedResource Include="Sql\vzApplicationForm_Address.sql" />
+    <EmbeddedResource Include="Sql\vzApplicationForm_Character.sql" />
+    <EmbeddedResource Include="Sql\vzApplicationForm_Education.sql" />
+    <EmbeddedResource Include="Sql\vzApplicationForm_Employment.sql" />
+    <EmbeddedResource Include="Sql\vzApplicationForm_License.sql" />
+    <EmbeddedResource Include="Sql\vzApplicationForm_SourcingPartner.sql" />
+    <EmbeddedResource Include="Sql\vzTrainingEmployeeBondReport.sql" />
+    <EmbeddedResource Include="Sql\vzTrainingBondReport.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.design" Version="2.2.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.sqlserver" Version="2.2.3" />
+    <PackageReference Include="z.Data.Standard" Version="1.2.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Sql\pSetCompanyMenus.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System">
+      <HintPath>System</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>System.Data</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>System.Drawing</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <HintPath>System.Xml</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

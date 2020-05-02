@@ -1,0 +1,62 @@
+﻿<div class="rf-header">
+    <h5>Job Offer</h5>
+</div>
+<div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+    <div class="detail-form">
+        <div class="df-head flex-end">
+            <div class="df-btn-grp">
+                <button ng-click="LoadJOReport()" type="button"><i class="fas fa-print"></i> Load Report</button>
+            </div>
+        </div>
+        <div class="df-body list">
+            <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                <div class="col-xl-10 col-lg-10 col-md-12 row">
+                    <div class="col-xl-6 col-lg-10">
+                        <div class="form-group" ng-required="GetIsRequired('ID_EmployeeStatus',JobOfferTableSchema)">
+                            <label class="control-label">Status (Upon Hiring) <i title="Status is required" class="fa fa-exclamation-circle"></i></label>
+                            <select name="ID_EmployeeStatus" ng-options="es.ID as es.Name for es in EmployeeStatusListForJO" class="form-control" ng-model="JobOffer.ID_EmployeeStatus"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Designation <i title="Designation is required at Job Offer Tab" class="fa fa-exclamation-circle"></i></label>
+                            <input class="form-control" type="text" name="Designation" ng-model="JobOffer.Designation" readonly ng-required="GetIsRequired('Designation',JobOfferTableSchema)"/>
+
+                            <div class="form-group">
+                                <div insys-lookup is-required="GetIsRequired('ID_Jobclass',JobOfferTableSchema)" lookup-options="JobClassLookup" lookup-data="{'model': JobOffer,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_JobClass', 'displayContainer': 'JobClass', 'label': 'Job Class'}"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <div insys-lookup is-required="GetIsRequired('ID_Department',JobOfferTableSchema)" lookup-options="DepartmentLookup" lookup-data="{'model': JobOffer,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Department', 'displayContainer': 'Department', 'label': 'Deparment'}"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <div insys-lookup is-required="GetIsRequired('ID_Division',JobOfferTableSchema)" lookup-options="DivisionLookup" lookup-data="{'model': JobOffer,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Division', 'displayContainer': 'Division', 'label': 'Division'}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-10">
+                        <div class="form-group" ng-required="GetIsRequired('Salary',JobOfferTableSchema)">
+                            <label class="control-label">Salary <i title="Salary is required at Job Offer Tab" class="fa fa-exclamation-circle"></i></label>
+                            <input ng-blur="ComputeAnnualSalary()" class="form-control" type="text" name="Salary" ng-model="JobOffer.Salary" />
+                        </div>
+                        <div class="form-group" ng-required="GetIsRequired('AnnualizedSalary',JobOfferTableSchema)">
+                            <label class="control-label">Annualized Salary (Salary * 13 Months) <i title="Annualized Salary is required" class="fa fa-exclamation-circle"></i></label>
+                            <input class="form-control" type="text" name="AnnualizedSalary" ng-model="JobOffer.AnnualizedSalary" readonly />
+                        </div>
+                        <div class="form-group" ng-required="GetIsRequired('ID_CostCenter',JobOfferTableSchema)">
+                            <label class="control-label">Cost Center</label>
+                            <select name="ID_CostCenter" ng-options="cc.ID as cc.Name for cc in CostCenterListJO" class="form-control" ng-model="JobOffer.ID_CostCenter"></select>
+                        </div>
+                        <div class="form-group" ng-required="GetIsRequired('ID_NatureOfRequests',JobOfferTableSchema)">
+                            <label class="control-label">Nature Of Request</label>
+                            <select name="ID_NatureOfRequests" ng-options="nr.ID as nr.Name for nr in NatureOfRequestsJO" class="form-control" ng-model="JobOffer.ID_NatureOfRequests"></select>
+                        </div>
+                        <div class="form-group" ng-required="GetIsRequired('Notes',JobOfferTableSchema)">
+                            <label class="control-label">Notes </label>
+                            <textarea class="form-control" name="Notes" ng-model="JobOffer.Notes"></textarea>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,328 @@
+﻿//bba
+$filed-color: #495057;
+$approved-color: #28a745;
+$disapproved-color: #dc3545;
+
+.rbGrid {
+    height: 100%;
+    overflow: auto;
+    position: relative;
+    display: flex;
+    user-select: none;
+
+    .rbGrid-column-container {
+        position: relative;
+        display: flex;
+        /*width: 100%;*/
+        .rbGrid-pinned-filler {
+        }
+    }
+
+    .rbGrid-pinned-container {
+        position: absolute;
+        display: flex;
+        background-color: #333;
+        z-index: 1;
+        transition: box-shadow .3s;
+
+        &.pinned-scroll {
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+            transition: box-shadow .3s;
+        }
+    }
+
+    .rbGrid-sticky-container {
+        position: absolute;
+        display: flex;
+        z-index: 2;
+        background-color: #333;
+        box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+        margin-top: -1px;
+
+        .rbGrid-sticky-pinned {
+            display: flex;
+            position: absolute;
+            background-color: #333;
+            z-index: 1;
+
+            &.pinned-scroll {
+                box-shadow: 2px 0 3px rgba(0,0,0,0.3);
+                transition: box-shadow .3s;
+            }
+        }
+
+        .rbGrid-sticky-column {
+            display: flex;
+
+            .rbGrid-sticky-column-filler {
+            }
+        }
+    }
+}
+
+.rbGrid-norec {
+    position: absolute;
+    width: 100%;
+    top: 30px;
+    height: calc(100% - 30px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .no-rec-ico {
+        position: relative;
+        overflow: hidden;
+        background-color: rgba(0,0,0,0.3);
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+
+        i {
+            &.fa-file-alt {
+                color: rgba(255,255,255,0.1);
+                position: absolute;
+                left: 8px;
+                top: 7px;
+                font-size: 80px;
+            }
+
+            &.fa-search {
+                color: #555;
+                position: absolute;
+                right: 11px;
+                bottom: 13px;
+                font-size: 60px;
+            }
+        }
+    }
+
+    p {
+        color: #aaa;
+        margin: 0;
+    }
+}
+
+.rbGrid-column {
+
+    &.toolBox {
+        width: 0px !important;
+
+        .tbl-check + label:before {
+            margin-top: -3px;
+            width: 13px;
+            height: 13px;
+        }
+
+        .tbl-check + label:after {
+            font-size: 12px;
+            left: 3px;
+            top: 1px;
+        }
+    }
+
+    .rbGrid-row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .rbGrid-cell {
+        height: 30px;
+
+        &:nth-child(odd) {
+            background-color: rgba(0,0,0,0.15);
+        }
+
+        input[required]:focus {
+            border-color: red !important;
+        }
+    }
+
+    .rbGrid-row-label {
+        white-space: nowrap;
+        min-width: 100px;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0;
+        height: 30px;
+        padding: 5px;
+        cursor: pointer;
+        display: flex;
+
+        .tbl-check + label:before {
+            margin-top: -3px;
+            width: 13px;
+            height: 13px;
+        }
+
+        .tbl-check + label:after {
+            font-size: 12px;
+            left: 3px;
+            top: 1px;
+        }
+
+        &.selector {
+            max-width: 20px !important;
+            min-width: 20px !important;
+        }
+
+        &:before {
+            display: none;
+            content: '';
+            position: absolute;
+            height: 30px;
+            margin-top: -5px;
+            left: 0;
+            width: 100%;
+            background-color: rgba(41, 128, 185,.2);
+        }
+
+        &:after {
+            display: none;
+            content: '';
+            position: absolute;
+            height: 30px;
+            margin-top: -24px;
+            right: -100%;
+            width: 100%;
+            background-color: rgba(41, 128, 185,.2);
+        }
+
+        &:hover {
+
+            &:before, &:after {
+                //display: block;
+            }
+        }
+
+        .lbl-check.fa-check-square {
+            color: #3498db;
+        }
+
+        .lbl-check.fa-square {
+            color: #aaa;
+        }
+
+        &[value="Approved"] {
+            color: $approved-color;
+        }
+
+        &[value="Disapproved"] {
+            color: $disapproved-color;
+        }
+
+        &[value="Cancelled"] { //bba
+            color: $filed-color;
+            font-style: italic;
+        }
+    }
+
+    .rbGrid-resize-indicator {
+        width: 20px;
+        position: absolute;
+        right: 0;
+    }
+
+    .rbGrid-resize-indicator:hover {
+        cursor: col-resize;
+        border-right: 1px solid #ddd;
+    }
+
+    .rbGrid-sort-indicator {
+        width: 20px;
+        opacity: 0.5;
+    }
+
+    .rbGrid-sort-indicator:hover {
+        cursor: pointer;
+        border-right: 1px solid #ddd;
+        opacity: 1;
+    }
+
+    &:last-child {
+        flex: 1;
+    }
+
+    .tool {
+        width: 20px !important;
+        height: 20px !important;
+        display: flex;
+        align-items: center;
+
+        i {
+            color: #f1c40f;
+        }
+
+        .fa-square,
+        .fa-check-square {
+            width: 15px;
+            height: 15px;
+            font-size: 15px;
+            border: 2px solid #777;
+            color: transparent;
+        }
+
+        .fa-check-square {
+            border: none;
+            color: #3498db;
+            font-size: 17px;
+        }
+    }
+}
+
+.rbGrid-column-label {
+    display: flex;
+    max-height: 30px;
+    min-height: 30px;
+    min-width: 100px;
+    padding: 5px;
+    position: relative;
+    font-weight: bold;
+
+    .tool {
+        width: 20px !important;
+        height: 20px !important;
+        display: flex;
+        align-items: center;
+
+        i {
+            color: #f1c40f;
+        }
+
+        .fa-square,
+        .fa-check-square {
+            width: 15px;
+            height: 15px;
+            font-size: 15px;
+            border: 2px solid #777;
+            color: transparent;
+        }
+
+        .fa-check-square {
+            border: none;
+            color: #3498db;
+            font-size: 17px;
+        }
+    }
+
+    label {
+        margin: 0 10px 0 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+.rbGrid-resize-border {
+    border-right: 1px solid #ddd;
+}
+
+.toolBox.hasTool {
+    width: 20px !important;
+}
+
+.toolBox.hasBothTool {
+    width: 40px !important;
+}

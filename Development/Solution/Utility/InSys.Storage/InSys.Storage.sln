@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InSys.Storage", "InSys.Storage\InSys.Storage.csproj", "{F29DB2F2-A660-443B-AB9D-732FF5308C84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InSys.Storage.Test", "InSys.Storage.Test\InSys.Storage.Test.csproj", "{A3AD5791-06EA-4E34-A8A6-80902482AEA9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F29DB2F2-A660-443B-AB9D-732FF5308C84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F29DB2F2-A660-443B-AB9D-732FF5308C84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F29DB2F2-A660-443B-AB9D-732FF5308C84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F29DB2F2-A660-443B-AB9D-732FF5308C84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3AD5791-06EA-4E34-A8A6-80902482AEA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3AD5791-06EA-4E34-A8A6-80902482AEA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3AD5791-06EA-4E34-A8A6-80902482AEA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3AD5791-06EA-4E34-A8A6-80902482AEA9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AFD0DFF7-DA49-4ADA-B726-99DF3E008DE7}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "moment-range@4.0.2",
+      "destination": "wwwroot/Base/Scripts/References/moment-range/",
+      "files": [
+        "moment-range.js"
+      ]
+    }
+  ]
+}

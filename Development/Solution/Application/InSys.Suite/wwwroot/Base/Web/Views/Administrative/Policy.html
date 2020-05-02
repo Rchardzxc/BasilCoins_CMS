@@ -1,0 +1,191 @@
+﻿<div class="policy main-container">
+    <div class="module-title"><i ng-click="return()" ng-if="RecordID != ''" class="fas fa-long-arrow-alt-left" title="Back to list"></i> Policy</div>
+    <ui-view>
+        <div class="list-tab">
+            <div class="lt-holder">
+                <div ng-click="changeTab(0)" id="lt-0" class="lt-item active" title="Policy list">
+                    <label>Policy list</label>
+                </div>
+                <div ng-click="changeTab(1)" id="lt-1" class="lt-item" title="Policy detail">
+                    <label>Policy detail</label>
+                </div>
+            </div>
+        </div>
+        <div id="ct-0" class="content-tab active">
+            <div ng-include="HtmlTemplatePath + '/Web/Directives/insysTable.tmpl.html'" include-replace></div>
+        </div>
+        <div id="ct-1" class="content-tab">
+            <div class="record">
+                <div class="record-header"></div>
+                <div class="record-body">
+                    <!--Tabs-->
+                    <div class="record-tab d-none d-md-block">
+                        <div class="record-tab-header">
+                            <span>Tabs</span>
+                        </div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a data-target="#employee" class="nav-link active" data-toggle="tab" role="tab">Employee</a>
+                                <a ng-click="loadDesignation()" data-target="#designation" class="nav-link" data-toggle="tab" role="tab">Designation</a>
+                                <a ng-click="loadJobClass()" data-target="#jobclass" class="nav-link" data-toggle="tab" role="tab">Job Class</a>
+                                <a ng-click="loadJobClassGroup()" data-target="#jobclassgroup" class="nav-link" data-toggle="tab" role="tab">Job Class Group</a>
+                                <a ng-click="loadSection()" data-target="#section" class="nav-link" data-toggle="tab" role="tab">Section</a>
+                                <a ng-click="loadDepartment()" data-target="#department" class="nav-link" data-toggle="tab" role="tab">Department</a>
+                                <a ng-click="loadDivision()" data-target="#division" class="nav-link" data-toggle="tab" role="tab">Division</a>
+                                <a ng-click="loadBranch()" data-target="#branch" class="nav-link" data-toggle="tab" role="tab">Branch</a>
+                                <a ng-click="loadCompany()" data-target="#company" class="nav-link" data-toggle="tab" role="tab">Company</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <form ng-submit="saveForm()" autocomplete="off" spellcheck="false" class="tab-content" method="post" novalidate name="form.policy">
+                        <!--Button Group-->
+                        <div class="rh-btn-grp">
+                            <button class="emphasized d-none d-md-block" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()" type="button"><i class="fas fa-plus"></i> New</button>
+                            <button class="emphasized d-none d-md-block" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0"><i class="fas fa-save"></i> Save</button>
+
+                            <!--These dropdowns will display when mobile-->
+                            <!--Actions-->
+                            <div class="dropdown mobile d-block d-md-none">
+                                <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <button class="dropdown-item" type="button" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()">New</button>
+                                    <button class="dropdown-item" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0">Save</button>
+                                </div>
+                            </div>
+
+                            <!--Tabs-->
+                            <div class="dropdown mobile d-block d-md-none" role="tablist">
+                                <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Tabs</button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a data-target="#employee" class="nav-link active" data-toggle="tab" role="tab">Employee</a>
+                                            <a ng-click="loadDesignation()" data-target="#designation" class="nav-link" data-toggle="tab" role="tab">Designation</a>
+                                            <a ng-click="loadJobClass()" data-target="#jobclass" class="nav-link" data-toggle="tab" role="tab">Job Class</a>
+                                            <a ng-click="loadJobClassGroup()" data-target="#jobclassgroup" class="nav-link" data-toggle="tab" role="tab">Job Class Group</a>
+                                            <a ng-click="loadSection()" data-target="#section" class="nav-link" data-toggle="tab" role="tab">Section</a>
+                                            <a ng-click="loadDepartment()" data-target="#department" class="nav-link" data-toggle="tab" role="tab">Department</a>
+                                            <a ng-click="loadDivision()" data-target="#division" class="nav-link" data-toggle="tab" role="tab">Division</a>
+                                            <a ng-click="loadBranch()" data-target="#branch" class="nav-link" data-toggle="tab" role="tab">Branch</a>
+                                            <a ng-click="loadCompany()" data-target="#company" class="nav-link" data-toggle="tab" role="tab">Company</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="employee" role="tabpanel" class="tab-pane fade show active">
+                            <div class="rf-header">
+                                <h5>Employee</h5>
+                            </div>
+                            <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                                <div class="detail-form">
+                                    <div class="df-body list grid">
+                                        <insys-table options="employeeOptions" get-load="employeeOptions.trigger"></insys-table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="designation" role="tabpanel" class="tab-pane fade">
+                            <div class="rf-header">
+                                <h5>Designation</h5>
+                            </div>
+                            <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                                <div class="detail-form">
+                                    <div class="df-body list grid">
+                                        <insys-table options="designationOptions" get-load="designationOptions.trigger"></insys-table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="jobclass" role="tabpanel" class="tab-pane fade">
+                            <div class="rf-header">
+                                <h5>Job Class</h5>
+                            </div>
+                            <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                                <div class="detail-form">
+                                    <div class="df-body list grid">
+                                        <insys-table options="jobclassOptions" get-load="jobclassOptions.trigger"></insys-table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="jobclassgroup" role="tabpanel" class="tab-pane fade">
+                            <div class="rf-header">
+                                <h5>Job Class Group</h5>
+                            </div>
+                            <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                                <div class="detail-form">
+                                    <div class="df-body list grid">
+                                        <insys-table options="jobclassgroupOptions" get-load="jobclassgroupOptions.trigger"></insys-table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="section" role="tabpanel" class="tab-pane fade">
+                            <div class="rf-header">
+                                <h5>Section</h5>
+                            </div>
+                            <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                                <div class="detail-form">
+                                    <div class="df-body list grid">
+                                        <insys-table options="sectionOptions" get-load="sectionOptions.trigger"></insys-table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="department" role="tabpanel" class="tab-pane fade">
+                            <div class="rf-header">
+                                <h5>Department</h5>
+                            </div>
+                            <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                                <div class="detail-form">
+                                    <div class="df-body list grid">
+                                        <insys-table options="departmentOptions" get-load="departmentOptions.trigger"></insys-table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="division" role="tabpanel" class="tab-pane fade">
+                            <div class="rf-header">
+                                <h5>Division</h5>
+                            </div>
+                            <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                                <div class="detail-form">
+                                    <div class="df-body list grid">
+                                        <insys-table options="divisionOptions" get-load="divisionOptions.trigger"></insys-table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="branch" role="tabpanel" class="tab-pane fade">
+                            <div class="rf-header">
+                                <h5>Branch</h5>
+                            </div>
+                            <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                                <div class="detail-form">
+                                    <div class="df-body list grid">
+                                        <insys-table options="branchOptions" get-load="branchOptions.trigger"></insys-table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="company" role="tabpanel" class="tab-pane fade">
+                            <div class="rf-header">
+                                <h5>Company</h5>
+                            </div>
+                            <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                                <div class="detail-form">
+                                    <div class="df-body list grid">
+                                        <insys-table options="companyOptions" get-load="companyOptions.trigger"></insys-table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </ui-view>
+</div>

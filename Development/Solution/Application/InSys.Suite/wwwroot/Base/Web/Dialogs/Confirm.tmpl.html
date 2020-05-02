@@ -1,0 +1,16 @@
+﻿<div class="panel">
+    <div class="panel-heading">
+        <label>
+            <i ng-if="Icon == 'info'" class="fas fa-question-circle"></i>
+            <i style="color:orange !important" ng-if="Icon == 'warning'" class="fas fa-exclamation-triangle"></i>
+            {{ Title }}
+        </label>
+    </div>
+    <div class="panel-body">
+        <p class="panel-msg">{{ Message }}</p>
+    </div>
+    <div class="panel-footer">
+        <button type="button" class="btn cancel" ng-click="Cancel()">Cancel</button>
+        <button type="button" class="btn emphasized" ng-click="OK()">OK</button>
+    </div>
+</div>

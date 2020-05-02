@@ -1,0 +1,153 @@
+﻿.table-summary {
+    .summary-flex {
+        display: flex;
+        height: calc(100vh - 85px);
+    }
+
+    ui-view {
+        flex: 1;
+    }
+
+    #chartLeaveTypeContainer,
+    #chartWorkCreditContainer {
+        text-align: center;
+    }
+
+    .table-summary-container {
+        margin-top: 40px;
+        min-width: 300px;
+        max-width: 300px;
+        display: flex;
+        flex-direction: column;
+        padding-right: 5px;
+        overflow-y: auto;
+
+        .summary-filter {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 5px;
+
+            .form-group {
+                flex: 1;
+                margin: 0 5px 0 0 !important;
+
+                label {
+                    margin-bottom: 3px;
+                    text-transform: uppercase;
+                    font-size: 11px;
+                    font-weight: 500;
+                }
+
+                select {
+                    background-color: #3498db;
+                    color: #fff;
+
+                    option {
+                        color: #333;
+                        background-color: #fff;
+                    }
+                }
+
+                &:last-child {
+                    margin: 0 !important;
+                }
+            }
+        }
+
+        .summary-chart, .summary-div {
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            margin-bottom: 5px;
+
+            .summary-title {
+                font-size: 14px;
+                padding: 5px;
+                text-align: center;
+                background-color: #f5f5f5;
+                border-radius: 5px;
+            }
+        }
+    }
+
+    .sum-emp-itm {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        border-bottom: 1px solid #eee;
+
+        .sum-emp-initial, .sum-emp-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            color: #aaa;
+            background-color: #eee;
+            text-transform: capitalize;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .sum-emp-icon {
+            color: #fff;
+            background-color: #f39c12;
+        }
+
+        .sum-emp-desc {
+            padding: 5px;
+
+            h5 {
+                font-size: 14px;
+                margin: 0;
+            }
+
+            label {
+                font-size: 12px;
+                margin: 0;
+                color: #3498db;
+                cursor: pointer;
+
+                &.gray {
+                    color: #aaa;
+                    cursor: default;
+                }
+            }
+        }
+
+        &:last-child {
+            border: none;
+        }
+    }
+
+    .sum-count {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        .sum-count-itm {
+            text-align: center;
+
+            h5 {
+                font-size: 16px;
+                margin: 0;
+            }
+
+            label {
+                margin: 0;
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: 11px;
+                color: #aaa;
+            }
+        }
+    }
+
+    .listing .tbl-holder {
+        width: calc(100vw - 605px);
+    }
+}

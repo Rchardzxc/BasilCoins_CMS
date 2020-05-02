@@ -1,0 +1,37 @@
+﻿<div class="panel">
+    <div class="panel-heading">
+        <label>
+            <i class="fas fa-user"></i>
+            <span class="fi-desc">
+                <label ng-bind="' ' + Applicant.FirstName + ' ' + Applicant.LastName"></label>
+                <span ng-bind="'Applying for ' + Applicant.Designation"></span>
+            </span>
+        </label>
+        <i class="fas fa-times" ng-click="close()"></i>
+    </div>
+    <div class="panel-body">
+        <div>
+            <form name="InterviewerApplicantUI" ng-submit="submitExam()" autocomplete="off" method="post">
+                <div class="form-group" required="required">
+                    <label class="control-label">Findings <i title="This field is required" class="fas fa-exclamation-circle"></i></label>
+                    <select class="form-control" name="ID_InterviewerStatus" ng-options="d.ID as d.Name for d in ExamAndInterviewStatus | filter: {ID: '!4'}" ng-model="Exam.ID_ExamAndInterviewStatus" required="required"></select>
+                </div>
+                <div class="form-group" required="required">
+                    <label class="control-label">Total Score <i title="This field is required" class="fas fa-exclamation-circle"></i></label>
+                    <input class="form-control" type="text" ng-input text-type="'number'" ng-model="Exam.TotalScore" name="TotalScore" required />
+                </div>
+                <div class="form-group" required="required">
+                    <label class="control-label">Percentage Based <i title="This field is required" class="fas fa-exclamation-circle"></i></label>
+                    <input class="form-control" type="text" ng-input text-type="'decimal'" maxlength="18" decimal-place="2" format="decimal" ng-model="Exam.PercentageBased" name="TotalScore" required />
+                </div>
+                <div class="form-group" required="required">
+                    <label class="control-label">Remarks <i title="This field is required" class="fas fa-exclamation-circle"></i></label>
+                    <textarea class="form-control" ng-model="Exam.Notes" name="Remarks" required></textarea>
+                </div>
+                <div class="panel-footer">
+                    <button type="submit" class="btn emphasized">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

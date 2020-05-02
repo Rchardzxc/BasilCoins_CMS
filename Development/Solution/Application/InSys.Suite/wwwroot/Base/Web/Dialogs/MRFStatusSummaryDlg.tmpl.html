@@ -1,0 +1,15 @@
+﻿<div class="panel">
+    <div class="panel-heading">
+        <label><i class="fas fa-clipboard-list"></i> Summary</label>
+        <i class="fas fa-times" ng-click="close()"></i>
+    </div>
+    <div class="panel-body">
+        <div class="mrfs-itm" title="{{ s.ApplicationStatus }}" ng-repeat="s in SchemaSummary">
+            <label ng-bind="s.ApplicationStatus"></label>
+            <span ng-bind="s.TotalCount"></span>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <button type="button" class="btn emphasized" ng-click="close()">Close</button>
+    </div>
+</div>

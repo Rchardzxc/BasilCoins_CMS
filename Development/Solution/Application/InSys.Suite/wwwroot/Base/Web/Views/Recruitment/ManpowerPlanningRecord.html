@@ -1,0 +1,201 @@
+﻿<div class="record">
+    <div class="record-header"></div>
+    <div class="record-body">
+        <!--Tabs-->
+        <div class="record-tab d-none d-md-block">
+            <div class="record-tab-header">
+                <span>Tabs</span>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                </li>
+                <li class="nav-item">
+                    <a data-target="#details" class="nav-link" data-toggle="tab" role="tab">Details</a>
+                </li>
+            </ul>
+        </div>
+
+        <form ng-submit="saveForm()" name="form.manpowerplanning" autocomplete="off" spellcheck="false" class="tab-content" method="post" novalidate>
+            <div class="rh-btn-grp">
+                <button class="emphasized d-none d-md-block" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()" type="button"><i class="fas fa-plus"></i> New</button>
+                <button class="emphasized d-none d-md-block" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0"><i class="fas fa-save"></i> Save</button>
+
+                <!--These dropdowns will display when mobile-->
+                <!--Actions-->
+                <div class="dropdown mobile d-block d-md-none">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()">New</button>
+                        <button class="dropdown-item" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0">Save</button>
+                    </div>
+                </div>
+                <!--Tabs-->
+                <div class="dropdown mobile d-block d-md-none" role="tablist">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Tabs</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-target="#details" class="nav-link" data-toggle="tab" role="tab">Details</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--General Tab-->
+            <div id="general" role="tabpanel" class="tab-pane fade show active">
+                <div class="rf-header">
+                    <h5>General</h5>
+                </div>
+
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+
+                            <div ng-if="IsAllCompany" class="form-group" ng-disabled="!(RecordID == 0)" ng-required="GetIsRequired('ID_Company')">
+                                <label class="control-label">Company <i title="Company is required" class="fa fa-exclamation-circle"></i></label>
+                                <select c-label="Company" ng-change="SelectCompany()" ng-disabled="!(RecordID == 0)" name="ID_Company" ng-options="cl.ID as cl.Name for cl in CompanyList" class="form-control" ng-model="Schema.ID_Company" ng-required="GetIsRequired('ID_Company')"></select>
+                            </div>
+
+                            <div class="form-group" readonly>
+                                <label class="control-label">Ref#</label>
+                                <input class="form-control" type="text" name="RefNum" ng-model="Schema.RefNum" readonly />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('Name')">
+                                <label class="control-label">Name <i title="Name is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="Name" ng-model="Schema.Name" ng-required="GetIsRequired('Name')" maxlength="{{GetMaxLength('Name')}}" />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('Remarks')">
+                                <label class="control-label">Remarks <i title="Remarks is required" class="fa fa-exclamation-circle"></i></label>
+                                <textarea class="form-control" name="Remarks" ng-model="Schema.Remarks" ng-required="GetIsRequired('Remarks')" maxlength="{{GetMaxLength('Remarks')}}"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <span class="form-check-holder">
+                                    <input id="ur-check-0" name="IsActive" class="form-check" ng-model="Schema.IsActive" type="checkbox" />
+                                    <label for="ur-check-0">Is Active</label>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('FromDate')">
+                                <label class="control-label">From Date <i title="From Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input c-label="From Date" type="text" name="FromDate" ng-model="Schema.FromDate" ng-input text-type="'date'" class="form-control" ng-required="GetIsRequired('FromDate')" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('ToDate')">
+                                <label class="control-label">To Date <i title="To Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input c-label="To Date" type="text" name="ToDate" ng-model="Schema.ToDate" ng-input text-type="'date'" class="form-control" ng-required="GetIsRequired('ToDate')" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <insys-upload readonly="false" required="false" target-model="Schema.FileName" name="FileName" options="UploadOptions"></insys-upload>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--Details Tab-->
+            <div id="details" role="tabpanel" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Details</h5>
+                </div>
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="detail-form">
+                        <div class="df-head flex-end">
+                            <div class="df-btn-grp">
+                                <button ng-click="newSchemaDetails()" type="button"><i class="fas fa-plus"></i> Add row</button>
+                                <!--<button ng-click="saveSchemaDetails()" type="button"><i class="fas fa-save"></i> Save Details</button>-->
+                                <button ng-click="deleteSchemaDetails()" type="button"><i class="fas fa-trash"></i> Delete selected</button>
+                            </div>
+                        </div>
+                        <div class="df-body list">
+                            <div class="tbl-holder no-paging" ng-class="{ 'custom-scroll' : isChrome }">
+                                <table id="manpower_details" class="table table-striped table-hover table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th class="tbl-ctrl">
+                                                <input type="checkbox" class="tbl-check" id="selectAllDetails" ng-model="SelectAllDetailRows" ng-click="CheckAllDetails()" />
+                                                <label for="selectAllDetails"></label>
+                                            </th>
+                                            <th>Position</th>
+                                            <th>Plantilla</th>
+                                            <th>HeadCount</th>
+                                            <th>Vacancy</th>
+                                            <th>Hold</th>
+                                            <th>Replacement</th>
+                                            <th>Active Vacancy</th>
+                                            <th>Remarks</th>
+                                            <th>Additional Info</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="sd in SchemaDetails">
+                                            <td class="tbl-ctrl">
+                                                <input type="checkbox" class="tbl-check" id="sdc-{{$index}}" ng-model="sd.IsChecked" />
+                                                <label for="sdc-{{$index}}"></label>
+                                            </td>
+                                            <td>
+                                                <div insys-lookup lookup-options="positionLookup" lookup-data="{'model': sd,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Designation', 'displayContainer': 'Position', 'label': 'Position'}"></div>
+                                            </td>
+                                            <td><input class="form-control" type="text" ng-input text-type="'number'" ng-model="sd.Plantilla" name="Plantilla" ng-required="GetIsRequired('Plantilla',DetailSchema)" /></td>
+                                            <td><input class="form-control" type="number" ng-model="sd.HeadCount" readonly /></td>
+                                            <td><input class="form-control" type="number" ng-model="sd.Vacancy" readonly /></td>
+                                            <td><input class="form-control" type="number" ng-model="sd.OnHold" readonly /></td>
+                                            <td><input class="form-control" type="number" ng-model="sd.Replacement" readonly /></td>
+                                            <td><input class="form-control" type="number" ng-model="sd.ActiveVacancies" readonly /></td>
+                                            <td><input class="form-control long" type="text" name="Remarks" ng-model="sd.Remarks" ng-required="GetIsRequired('Remarks',DetailSchema)" /></td>
+                                            <td><input c-label="Additional Info" class="form-control long" type="text" name="AdditionalInfo" ng-model="sd.AdditionalInfo" ng-required="GetIsRequired('AdditionalInfo',DetailSchema)" /></td>
+                                        </tr>
+                                        <tr class="no_record" ng-if="SchemaDetails.length == 0">
+                                            <td>
+                                                <div class="no-rec-ico">
+                                                    <i class="fas fa-file-alt"></i>
+                                                    <i class="fas fa-search"></i>
+                                                </div>
+                                                <p>No record found.</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="listing-footer">
+                                <div class="lp-count d-none d-lg-block"><span ng-bind="SchemaDetails.length"></span> record(s) found</div>
+                                <div class="lp-pagination">
+                                    <label>Show</label>
+                                    <select><option>1</option></select>
+                                    <label>of Page</label>
+                                    <select><option>1</option></select>
+                                    <button type="button" class="fas fa-angle-double-left" title="previous page"></button>
+                                    <button type="button" class="fas fa-angle-double-right" title="next page"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

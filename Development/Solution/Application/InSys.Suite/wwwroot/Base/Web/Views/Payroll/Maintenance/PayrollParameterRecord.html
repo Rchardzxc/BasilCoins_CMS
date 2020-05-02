@@ -1,0 +1,124 @@
+﻿<div class="record">
+    <div class="record-header"></div>
+    <div class="record-body">
+        <!--tabs-->
+        <div class="record-tab d-none d-md-block">
+            <div class="record-tab-header">
+                <span>Tabs</span>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                </li>
+                <li class="nav-item">
+                    <a ng-click="loadPayrollItemRate()" data-target="#payrollItemRate" class="nav-link" data-toggle="tab" role="tab">Payroll Item Rate</a>
+                </li>
+            </ul>
+        </div>
+        <form ng-submit="saveForm()" name="form.payrollparameter" novalidate autocomplete="off" class="tab-content" method="post">
+            <!--button group-->
+            <div class="rh-btn-grp">
+                <button class="emphasized d-none d-md-block" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()" type="button"><i class="fas fa-plus"></i> New</button>
+                <button class="emphasized d-none d-md-block" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0"><i class="fas fa-save"></i> Save</button>
+
+                <!--this dropdowns will display when mobile-->
+                <!--actions-->
+                <div class="dropdown mobile d-block d-md-none">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button" ng-if="MenuPrivileges.HasNew == true && isNull(Schema.ID, 0) != 0" ng-click="newForm()">New</button>
+                        <button class="dropdown-item" type="submit" ng-if="(MenuPrivileges.HasEdit == true && isNull(Schema.ID,0) >= 0) || isNull(Schema.ID, 0) == 0">Save</button>
+                    </div>
+                </div>
+                <!--tabs-->
+                <div class="dropdown mobile d-block d-md-none" role="tablist">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Tabs</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                            </li>
+                            <li class="nav-item">
+                                <a ng-click="loadPayrollItemRate()" data-target="#payrollItemRate" class="nav-link" data-toggle="tab" role="tab">Payroll Item Rate</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--general tab-->
+            <div id="general" role="tabpanel" class="tab-pane fade show active">
+                <!--form header-->
+                <div class="rf-header">
+                    <h5>General</h5>
+                </div>
+
+                <!--form content-->
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <!--panel-->
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <!--<div class="lbl-grp">
+                                <label>ID</label>
+                                <p ng-bind="Schema.ID"></p>
+                            </div>-->
+
+                            <div class="form-group" ng-required="GetIsRequired('Code')">
+                                <label class="control-label">Code <i title="Name is Code" class="fas fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="Code" ng-model="Schema.Code" maxlength="{{GetMaxLength('Code')}}" ng-required="GetIsRequired('Code')" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('Name')">
+                                <label class="control-label">Name <i title="Name is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="Name" ng-model="Schema.Name" maxlength="{{GetMaxLength('Name')}}" ng-required="GetIsRequired('Name')" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('MonthsPerYear')">
+                                <label class="control-label">Months Per Year <i title="Months Per Year is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control"  type="text" ng-input text-type="'decimal'" name="MonthsPerYear" ng-model="Schema.MonthsPerYear" maxlength="{{GetMaxLength('MonthsPerYear')}}" ng-required="GetIsRequired('MonthsPerYear')" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('DaysPerYear')">
+                                <label class="control-label">Days Per Year <i title="Days Per Year is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" ng-input text-type="'decimal'" name="DaysPerYear" ng-model="Schema.DaysPerYear" maxlength="{{GetMaxLength('DaysPerYear')}}" ng-required="GetIsRequired('DaysPerYear')" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('HoursPerDay')">
+                                <label class="control-label">Hours Per Day <i title="Hours Per Day is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" ng-input text-type="'decimal'" name="HoursPerDay" ng-model="Schema.HoursPerDay" maxlength="{{GetMaxLength('HoursPerDay')}}" ng-required="GetIsRequired('HoursPerDay')" />
+                            </div>
+                            <div insys-lookup is-required="GetisReqiured('ID_Company')" lookup-options="CompanyLookUp" lookup-data="{'model': Schema, 'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Company', 'displayContainer': 'Company', 'label': 'Company'}"></div>
+                        </div>
+                        <!--2nd panel-->
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div insys-lookup is-required="GetisReqiured('ID_TaxComputation')" lookup-options="taxComputationLookUp" lookup-data="{'model': Schema, 'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_TaxComputation', 'displayContainer': 'TaxComputation', 'label': 'Tax Computation'}"></div>
+                            <div class="rf-title">
+                                Minimum Take Home Pay
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('MinTakeHomePayPerc')">
+                                <label class="control-label">Percentage <i title="Min Take Home Pay Percentage is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" ng-input text-type="'decimal'" name="MinTakeHomePayPerc" ng-model="Schema.MinTakeHomePayPerc" maxlength="{{GetMaxLength('MinTakeHomePayPerc')}}" ng-required="GetIsRequired('MinTakeHomePayPerc')" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('MinTakeHomePayAmt')">
+                                <label class="control-label">Amount <i title="Min Take Home Pay Amount is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" ng-input text-type="'decimal'" name="MinTakeHomePayAmt" ng-model="Schema.MinTakeHomePayAmt" maxlength="{{GetMaxLength('MinTakeHomePayAmt')}}" ng-required="GetIsRequired('MinTakeHomePayAmt')" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--detail tab-->
+            <div id="payrollItemRate" role="tabpanel" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Payroll Item Rate</h5>
+                </div>
+
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="detail-form">
+                        <div class="df-body list grid">
+                            <insys-table options="payrollItemRateOptions" get-load="payrollItemRateOptions.trigger"></insys-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Contents\Base\**" />
+    <Compile Remove="wwwroot\Base\ErrorLogs\**" />
+    <Compile Remove="wwwroot\ErrorLogs\**" />
+    <Content Remove="Contents\Base\**" />
+    <Content Remove="wwwroot\Base\ErrorLogs\**" />
+    <Content Remove="wwwroot\ErrorLogs\**" />
+    <EmbeddedResource Remove="Contents\Base\**" />
+    <EmbeddedResource Remove="wwwroot\Base\ErrorLogs\**" />
+    <EmbeddedResource Remove="wwwroot\ErrorLogs\**" />
+    <None Remove="Contents\Base\**" />
+    <None Remove="wwwroot\Base\ErrorLogs\**" />
+    <None Remove="wwwroot\ErrorLogs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\Base\Styles\System\Master.css" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="3.0.415" />
+    <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.design" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.sqlserver" Version="2.2.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Module\Administrative\InSys.ITI.ApproverMatrix\InSys.ITI.ApproverMatrix.csproj" />
+    <ProjectReference Include="..\..\Module\Administrative\InSys.ITI.Roles\InSys.ITI.Roles.csproj" />
+    <ProjectReference Include="..\..\Module\Administrative\InSys.ITI.Users\InSys.ITI.Users.csproj" />
+    <ProjectReference Include="..\..\Module\Dashboard\InSys.ITI.DashBoard\InSys.ITI.DashBoard.csproj" />
+    <ProjectReference Include="..\..\Module\InSys.ITI.Common\InSys.ITI.Common.csproj" />
+    <ProjectReference Include="..\..\Module\InSys.ITI.Controller\InSys.ITI.Controller.csproj" />
+    <ProjectReference Include="..\..\Module\InSys.ITI.Index\InSys.ITI.Index.csproj" />
+    <ProjectReference Include="..\..\Module\InSys.ITI.Login\InSys.ITI.Login.csproj" />
+    <ProjectReference Include="..\..\Module\InSys.ITI.Menu\InSys.ITI.Menu.csproj" />
+    <ProjectReference Include="..\..\Module\InSys.ITI.Models\InSys.ITI.Models.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\BC.Category\BC.Category.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\BC.Color\BC.Color.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\BC.CompanySettings\BC.CompanySettings.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\BC.Country\BC.Country.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\BC.Customer\BC.Customer.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\BC.Denomination\BC.Denomination.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\BC.FilingStatus\BC.FilingStatus.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\BC.Orders\BC.Orders.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\BC.PaymentMethod\BC.PaymentMethod.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\BC.ProductBrand\BC.ProductBrand.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\BC.ProductsSale\BC.ProductsSale.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\BC.Products\BC.Products.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\BC.Province\BC.Province.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\BC.YearsofMint\BC.YearsofMint.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\HomePage\BC.Banners\BC.Banners.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\HomePage\BC.OurCollections\BC.OurCollections.csproj" />
+    <ProjectReference Include="..\..\Module\Maintenance\HomePage\BC.ProductsRecommended\BC.ProductsRecommended.csproj" />
+    <ProjectReference Include="..\..\Module\People\InSys.ITI.InitialMigration\InSys.ITI.InitialMigration.csproj" />
+    <ProjectReference Include="..\..\Utility\InSys.Assembly\InSys.Assembly.csproj" />
+    <ProjectReference Include="..\..\Utility\InSys.Context\InSys.Context.csproj" />
+    <ProjectReference Include="..\..\Utility\InSys.Helper\InSys.Helper.csproj" />
+    <ProjectReference Include="..\..\Utility\InSys.Storage\InSys.Storage\InSys.Storage.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Service Include="{c0c07587-41a7-46c8-8fbd-3f9c8ebe2ddc}" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Contents\ETF\New\" />
+    <Folder Include="Contents\ETF\Processing\" />
+    <Folder Include="Contents\ETF\Successful\" />
+    <Folder Include="Contents\ETF\Unprocess\" />
+    <Folder Include="Contents\Files\" />
+    <Folder Include="Contents\Images\" />
+  </ItemGroup>
+</Project>

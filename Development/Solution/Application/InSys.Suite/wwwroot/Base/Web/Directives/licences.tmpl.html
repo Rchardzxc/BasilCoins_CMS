@@ -1,0 +1,29 @@
+﻿<div class="tbl-holder">
+    <table class="table table-striped table-hover table-sm">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Licence No.</th>
+                <th>Description</th>
+                <th>Validity Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-if="Licences.length > 0" ng-repeat="d in Licences">
+                <td><span ng-bind="d.Name"></span></td>
+                <td><span ng-bind="d.LicenseNo"></span></td>
+                <td><span ng-bind="d.Description"></span></td>
+                <td><span ng-bind="d.ValidityDate"></span></td>
+            </tr>
+            <tr class="no_record" ng-if="Licences.length == 0">
+                <td>
+                    <div class="no-rec-ico">
+                        <i class="fas fa-file-alt"></i>
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <p>No record found.</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

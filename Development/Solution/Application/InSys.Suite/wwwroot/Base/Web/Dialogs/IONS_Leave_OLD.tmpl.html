@@ -1,0 +1,163 @@
+﻿<div class="panel" ng-init="Init()">
+    <div class="panel-heading">
+        <label><i class="fas fa-plus"></i> Leave</label>
+    </div>
+    <form name="leaveFrm">
+        <div class="panel-body">
+            <div class="computed-panel">
+                <div class="cp-title">Details</div>
+                <div class="cp-item">
+                    <label>Reference No.:</label>
+                    <span ng-bind="Data.RefNum"></span>
+                </div>
+                <div class="cp-item">
+                    <label>Employee:</label>
+                    <span ng-bind="Data.EmployeeName"></span>
+                </div>
+                <div class="cp-item">
+                    <label>Date Filed:</label>
+                    <span ng-bind="Data.FiledDate | date:'MMM dd yyyy'"></span>
+                </div>
+                <div class="cp-item">
+                    <label>Posted:</label>
+                    <span ng-bind="Data.IsPosted ? 'Yes' : 'No'"></span>
+                </div>
+                <div class="cp-item">
+                    <label>Status:</label>
+                    <span ng-bind="Data.Status"></span>
+                </div>
+
+                <!--<div class="cp-title">Approval History</div>
+                <div class="filing-status">
+                    <i class="status-icon fas fa-check-circle"></i>
+                    <div class="filing-right">
+                        <div class="filing-top">
+                            <h5>John Doe</h5>
+                            <label>10/08/2019 at 4:00 PM</label>
+                        </div>
+                        <div class="approver-lvl">Approver 1</div>
+                    </div>
+                </div>-->
+                <!--<div class="filing-status">
+                    <i class="status-icon fas fa-times-circle"></i>
+                    <div class="filing-right">
+                        <div class="filing-top">
+                            <h5>Jane Doe</h5>
+                            <label>10/08/2019 at 4:03 PM</label>
+                        </div>
+                        <div class="approver-lvl">Approver 2</div>
+                        <div class="approver-reason">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                    </div>
+                </div>-->
+            </div>
+            <div class="field-panel">
+                <div class="row">
+                    <!--General-->
+                    <div class="filing-title col-12">General</div>
+
+                    <div class="form-group col-12">
+                        <label class="control-label">Leave Item</label>
+                        <select name="ID_LeaveItem" class="form-control" ng-options="pi.ID as pi.Name for pi in PayrollItems" ng-model="Data.ID_LeavePayrollItem">
+                            <option>Vacation Leave</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                        <label class="control-label">Start Date</label>
+                        <input type="text" name="StartDate" ng-model="Data.StartDate" ng-required="GetIsRequired('StartDate')" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" placeholder="mm/dd/yyyy" class="form-control" />
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                        <label class="control-label">End Date</label>
+                        <input type="text" name="EndDate" ng-model="Data.EndDate" ng-required="GetIsRequired('EndDate')" ng-input text-type="'date'" text-format="'MM/DD/YYYY'" placeholder="mm/dd/yyyy" class="form-control" />
+                    </div>
+                    <div class="form-group col-12">
+                        <label class="control-label">Reason</label>
+                        <textarea name="Reason" ng-model="Data.Reasons" ng-required="GetIsRequired('Reason')" placeholder="Your comment here..." class="form-control"></textarea>
+                    </div>
+                    <!--<div class="form-group col-lg-6 col-12">
+                        <label class="control-label">Start Date</label>
+                        <div class="input-group custom-ig-lu">
+                            <input type="text" name="StartDate" ng-input text-type="'date'" format="MM/DD/YYYY" placeholder="mm/dd/yyyy" class="form-control" />
+                            <span class="input-group-btn lu">
+                                <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-6 col-12">
+                        <label class="control-label">End Date</label>
+                        <div class="input-group custom-ig-lu">
+                            <input type="text" name="EndDate" ng-input text-type="'date'" format="MM/DD/YYYY" placeholder="mm/dd/yyyy" class="form-control" />
+                            <span class="input-group-btn lu">
+                                <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-12">
+                        <label class="control-label">Reason</label>
+                        <textarea class="form-control"></textarea>
+                    </div>-->
+                    <!--Leave Detail-->
+                    <!--<div class="filing-title col-12">Leave Detail</div>-->
+                    <!--<div class="listing-container col-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Duration</th>
+                                    <th>With Pay</th>
+                                    <th>Days</th>
+                                    <th>Comment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="input-group custom-ig-lu">
+                                            <input type="text" name="Date" ng-input text-type="'date'" format="MM/DD/YYYY" placeholder="mm/dd/yyyy" class="form-control" />
+                                            <span class="input-group-btn lu">
+                                                <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td><select class="form-control"><option>Whole Day</option></select></td>
+                                    <td>Yes</td>
+                                    <td>1</td>
+                                    <td><input class="form-control" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>-->
+                    <!--Attachments-->
+                    <!--<div class="filing-title col-12">Attachments</div>
+                    <div class="filing-listing-btngroup col-12">
+                        <button><i class="fas fa-plus"></i> Add File</button>
+                    </div>
+                    <div class="listing-container col-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>File</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Palitan ng insys-upload na control to
+                                        <input class="form-control" />
+                                    </td>
+                                    <td><input class="form-control" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn cancel" ng-click="Close()">Close</button>
+            <button type="button" class="btn emphasized" ng-click="Save()">Save</button>
+            <button type="button" class="btn emphasized" ng-click="Save(1)">Save & Post</button>
+        </div>
+    </form>
+</div>

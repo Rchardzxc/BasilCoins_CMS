@@ -1,0 +1,48 @@
+[
+  {
+    "outputFileName": "wwwroot/Base/Scripts/References/textAngular-sanitize.min.js",
+    "inputFiles": [
+      "wwwroot/Base/Scripts/References/textAngular-sanitize.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Base/Scripts/References/textAngular.min.js",
+    "inputFiles": [
+      "wwwroot/Base/Scripts/References/textAngular.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Base/Scripts/System/Out/corebundle.js",
+    "inputFiles": [
+      "wwwroot/Base/Scripts/System/app.js",
+      "wwwroot/Base/Scripts/System/Config.js",
+      "wwwroot/Base/Scripts/System/Controllers.js",
+      "wwwroot/Base/Scripts/System/DataServices.js",
+      "wwwroot/Base/Scripts/System/Directives.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Base/Scripts/References/angular-rb-grid.min.js",
+    "inputFiles": [
+      "wwwroot/Base/Scripts/References/angular-rb-grid.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Base/Scripts/References/ResizeSensor.min.js",
+    "inputFiles": [
+      "wwwroot/Base/Scripts/References/ResizeSensor.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Base/Scripts/References/ElementQueries.min.js",
+    "inputFiles": [
+      "wwwroot/Base/Scripts/References/ElementQueries.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Base/Scripts/References/contextMenu.min.js",
+    "inputFiles": [
+      "wwwroot/Base/Scripts/References/contextMenu.js"
+    ]
+  }
+]

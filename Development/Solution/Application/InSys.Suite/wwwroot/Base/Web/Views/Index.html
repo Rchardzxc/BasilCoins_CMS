@@ -1,0 +1,102 @@
+﻿<div class="main" ng-controller="Index">
+    <div data-wc-overlay="" data-wc-overlay-delay="300"></div>
+    <div class="main-left d-none d-sm-flex">
+        <div class="m-profile" ng-click="MyProfile()">
+            <div class="m-menu-sy"></div>
+            <div id="inner-wrap">
+                <svg class="waves" xmlns="http://www.w3.org/2000/svg" width="100vw" height="230" viewBox="0 0 960 214.5" preserveAspectRatio="xMinYMid meet">
+                    <path fill="rgba(245,245,245,0.2)" d="M2663.6 73.2S2577 92 2529 89c-130.7-8.5-209.5-56.3-286.7-62.4s-125.7 18-188.3 18c-5 0-10-.4-14.5-.7-52-5-149.2-43-220.7-39-31.7 2-64 14-96.4 30-160.4 80-230.2-5.6-340.4-18-110-12-146.6 20-274 36S820.4 0 605.8 0C450.8 0 356 71 225.2 62.2 128 56 60.7 28-.3 11.2V104c22 7.3 46 14.2 70.4 16.7 110 12.3 147-19.3 275-35.5s350 39.8 369 43c27 4.3 59 8 94 10 13 .5 26 1 39 1 156 2 250-70.3 381-62 130.5 8.2 209.5 56.3 286.7 62 77 6.4 125.8-18 188.3-17.5 5 0 10 .2 14.3.6 52 5 145 49.5 220.7 38.2 32-5 64-15 96.6-31 160.5-79.4 230.3 6 340 18.4 110 12 146.3-20 273.7-36l15.5-2V73l1-.5z" />
+                </svg>
+            </div>
+            <div class="m-image" ng-if="Session('Image') != null && Session('Image') != ''" lazy-load-image="{Image: Session('Image'), Container: 'Photos'}"></div>
+            <div class="m-initial" ng-if="Session('Image') == null || Session('Image') == ''" ng-bind="SetIcon(Session('Name'))"></div>
+            <div class="m-desc">
+                <p ng-bind="Session('Name')" title="{{ Session('Name') }}"></p>
+                <p class="m-designation" ng-if="Session('Designation') != null" ng-bind="Session('Designation')" title="{{ Session('Designation') }}"></p>
+            </div>
+        </div>
+        <div class="m-menu">
+            <label class="m-menu-title">Menu</label>
+            <div class="m-menu-holder" ng-class="{ 'custom-scroll' : isChrome }">
+                <insys-menu ng-if="CtrlReady == true" tree-data="tree"></insys-menu>
+            </div>
+        </div>
+    </div>
+    <div class="main-right">
+        <div class="m-header">
+            <div class="mh-system" ng-click="Home()">
+                <img src="{{HtmlTemplatePath}}Resources/Images/InSys Suite Logo v7.png" />
+                <p class="d-none d-md-block">InSys HRMS</p>
+            </div>
+            <div class="search">
+                <i class="fas fa-search"></i>
+                <input type="text" class="form-control" id="menu-search-input" placeholder="Find menu" autocomplete="off" ng-keyup="findMenu($event)" ng-click="findMenu($event)" />
+                <div class="menu-search-result" ng-if="ShowMenuSearch == true">
+                    <div class="menu-result">Found <span ng-bind="menuFound.length"></span> item(s)</div>
+                    <ul class="menu-result-container">
+                        <li class="mrc-li" ng-repeat="menu in menuFound" ng-click="ChangeChild(menu)" ng-bind-html="menu.Template"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mh-btn-grp">
+                <i class="fas fa-home d-none d-md-block" title="Dashboard" ng-click="Home()"></i>
+                <i id="notif-bell" class="fas fa-bell" title="Notification" ng-click="ShowNotif = !ShowNotif"><span ng-if="UnSeenNotification.length > 0" class="fas fa-circle"></span></i>
+                <div class="dropdown d-none d-md-block" title="Settings">
+                    <i class="fas fa-cog dropdown-toggle" data-toggle="dropdown"></i>
+                    <div class="dropdown-menu">
+                        <div class="dm-item" ng-click="SwitchTheme()"><span>Switch to {{ theme == 1 ? 'Dark Theme' : 'Light Theme' }}</span></div>
+                        <div class="dm-item" ng-click="ReloadSystem()"><span>Reload System</span></div>
+                    </div>
+                </div>
+                <i class="fas fa-sign-out-alt d-none d-md-block" title="Log-out" ng-click="Logoff()"></i>
+
+                <!--When Mobile-->
+                <div class="dropdown d-block d-md-none menu-bar">
+                    <i class="fas fa-bars dropdown-toggle" data-toggle="dropdown"></i>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <div class="dm-item" ng-click="Home()">Dashboard</div>
+                        <div class="dm-item" ng-click="OpenMenu()">HRMS Menu</div>
+                        <div class="dm-item" ng-click="MyProfile()" ng-if="ID_Employee != null">My Profile</div>
+                        <div class="dm-item" ng-click="Logoff()">Log-out</div>
+                        <div class="dm-item" ng-click="SwitchTheme()"><span>Switch to {{ theme == 1 ? 'Dark Theme' : 'Light Theme' }}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Notification-->
+        <div ng-if="ShowNotif == true" ng-include="HtmlTemplatePath + '/Web/Directives/notification.tmpl.html'"></div>
+        <!--UI View-->
+        <div class="ui-view-holder">
+            <div ng-if="CtrlReady == true" class="m-ui-view" ui-view></div>
+        </div>
+        <div class="m-status" ng-class="(SystemStatus.icon == 'loading' ? SystemStatus.icon + ' shining' : SystemStatus.icon)">
+            <!--Company Select-->
+            <div class="dropup">
+                <button class="dropdown-toggle" type="button" data-toggle="dropdown">
+                    <span ng-bind="Session('ID_Company') == 0 ? 'All Companies' : Session('Company')"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li ng-click="RestartSession(c.ID)" ng-class="{'active': Session('ID_Company') == c.ID}" ng-repeat="c in Companies"><a ng-bind="c.Name" title="{{ c.Name }}"></a></li>
+                </ul>
+            </div>
+
+            <!--Status-->
+            <div class="desc" ng-click="ViewMessage()" ng-if="!ShowMsg">
+                <div class="desc-lbl d-none d-sm-block" title="{{SystemStatus.message}}" ng-bind="SystemStatus.message"></div>
+                <i class="fas" ng-class="GetSystemIcon(SystemStatus.icon)"></i>
+            </div>
+        </div>
+        <!--Expanded Status-->
+        <div class="expanded-status" ng-if="ShowMsg" ng-class="SystemStatus.icon">
+            <i class="sys-icon fas" ng-class="GetSystemIcon(SystemStatus.icon)"></i>
+            <div class="es-content">
+                <div class="es-top">
+                    <h5 ng-bind="SystemStatus.icon"></h5>
+                    <i class="fas fa-times close-icon" ng-click="HideMessage()"></i>
+                </div>
+                <p ng-bind="SystemStatus.message"></p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="Base/Web/Controllers/Index.js"></script>

@@ -1,0 +1,10 @@
+﻿<div class="form-group lookup" ng-required="isRequired">
+    <label ng-if="!isGrid" class="control-label"><span ng-bind="lookupData.label"></span> <i title="{{lookupData.label}} is required" class="fa fa-exclamation-circle"></i></label>
+    <div class="input-group custom-ig-lu two-button" ng-required="isRequired">
+        <input type="text" class="form-control" c-label="{{lookupData.label}}" name="{{lookupData.valueContainer}}" ng-model="lookupData.model[lookupData.displayContainer]" ng-keydown="disable($event)" ng-required="isRequired" ng-disabled="isDisabled" placeholder="Click the icon" />
+        <span class="input-group-btn lu">
+            <button ng-if="!isDisabled" ng-click="openLookup($event)" title="Click to choose an item" class="btn btn-default lookup-btn" type="button"><i class="fas fa-caret-down"></i></button>
+            <button ng-if="!isDisabled" ng-click="clear()" title="Clear Field" class="btn btn-default lookup-btn" type="button"><i class="fas fa-times"></i></button>
+        </span>
+    </div>
+</div>

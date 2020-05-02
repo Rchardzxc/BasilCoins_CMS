@@ -1,0 +1,128 @@
+﻿.insys-filter {
+    width: 360px;
+    height: calc(100vh - 120px);
+    background-color: #fff;
+    position: absolute;
+    padding: 15px;
+    right: -5px;
+    z-index: 2;
+    border-radius: 10px;
+    top: 40px;
+    box-shadow: -2px -2px 6px rgba(0,0,0,0.15);
+
+    .if-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: -15px;
+        margin-bottom: 20px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 10px 20px;
+        background-color: #f1f1f1;
+
+        h5 {
+            color: #555;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        i {
+            cursor: pointer;
+            outline: none;
+            color: #aaa;
+
+            &:hover {
+                color: #555;
+            }
+        }
+    }
+
+    .if-body {
+        overflow-y: auto;
+        height: calc(100vh - 235px);
+    }
+
+    #insysDatePicker {
+        right: 0;
+        top: 30px;
+    }
+
+    .input-group {
+        z-index: auto;
+    }
+
+    .form-group.lookup {
+        display: flex;
+
+        .control-label {
+            margin: 0 5px 0 0 !important;
+            width: 30%;
+            align-items: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            font-size: 12px;
+            font-weight: 500;
+            color: #555;
+
+            i {
+                display: none !important;
+            }
+        }
+
+        .input-group {
+            &[required] {
+                input, .lookup-btn {
+                    border-color: rgba(231, 76, 60, 0.5) !important;
+                    background-color: rgba(231, 76, 60, 0.03) !important;
+                }
+            }
+
+            &[readonly] {
+                input, .lookup-btn {
+                    border-color: #ccc !important;
+                    background-color: #eee !important;
+                    cursor: not-allowed
+                }
+            }
+
+            &[required][readonly] {
+                input, .lookup-btn {
+                    cursor: not-allowed;
+                    border-color: rgba(231, 76, 60, 0.5) !important;
+                    background-color: rgba(231, 76, 60, 0.03) !important;
+                }
+            }
+        }
+    }
+
+    .lf-div {
+        display: flex;
+        margin-top: 10px;
+        justify-content: flex-end;
+
+        .load-filter, .reset-filter {
+            outline: none;
+            background-color: #3498db;
+            border: none;
+            box-shadow: none;
+            font-size: 13px;
+            font-weight: 500;
+            color: #fff;
+            padding: 5px 10px;
+            margin-left: 5px;
+
+            i {
+                margin-right: 5px;
+            }
+        }
+
+        .reset-filter {
+            background-color: #eee;
+            color: #555;
+        }
+    }
+}

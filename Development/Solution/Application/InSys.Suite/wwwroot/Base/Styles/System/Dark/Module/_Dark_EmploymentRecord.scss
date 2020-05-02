@@ -1,0 +1,645 @@
+﻿.employment-record {
+
+    .record > .record-body > form {
+        padding: 25px 15px;
+    }
+
+    .rf-header {
+        padding: 5px 10px;
+        border-radius: 5px;
+        border-bottom: none !important;
+        background-color: rgba(52, 152, 219, 0.1);
+    }
+
+    .rf-body {
+        height: calc(100vh - 250px) !important;
+    }
+
+    .lbl-grp {
+        margin-bottom: 10px;
+
+        label, p {
+            margin: 0;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        p {
+            padding: 5px 10px;
+            background-color: #222;
+            color: #aaa;
+            border-radius: 6px;
+            margin-top: 5px;
+        }
+    }
+
+    .er-title {
+        font-size: 12px;
+        color: #aaa;
+        font-weight: 500;
+        padding: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+        text-transform: uppercase;
+        border-bottom: 1px solid #777;
+    }
+
+    .er-readonly {
+        .form-check + label {
+            color: #aaa !important;
+            cursor: default !important;
+        }
+
+        .form-check:checked + label:before {
+            background: #3498db !important;
+            border: 2px solid #3498db !important;
+        }
+
+        .form-check + label:before {
+            background: transparent !important;
+            border-color: #ddd !important;
+        }
+    }
+
+    .er-banner {
+        display: flex;
+        color: #fff;
+        padding: 10px;
+        align-items: center;
+        margin: -25px -15px;
+        margin-bottom: 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background: #252526;
+        /*background: rgba(52,152,219,1);
+        background: -moz-linear-gradient(left, rgba(52,152,219,1) 0%, rgba(155,89,182,1) 100%);
+        background: -webkit-gradient(left top, right top, color-stop(0%, rgba(52,152,219,1)), color-stop(100%, rgba(155,89,182,1)));
+        background: -webkit-linear-gradient(left, rgba(52,152,219,1) 0%, rgba(155,89,182,1) 100%);
+        background: -o-linear-gradient(left, rgba(52,152,219,1) 0%, rgba(155,89,182,1) 100%);
+        background: -ms-linear-gradient(left, rgba(52,152,219,1) 0%, rgba(155,89,182,1) 100%);
+        background: linear-gradient(to right, rgba(52,152,219,1) 0%, rgba(155,89,182,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3498db', endColorstr='#9b59b6', GradientType=1 );*/
+        i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-right: 10px;
+            background-color: rgba(255,255,255,0.3);
+        }
+
+        .er-desc {
+            h5, label {
+                margin: 0;
+            }
+
+            h5 {
+                font-size: 15px;
+            }
+
+            label {
+                font-size: 13px;
+                opacity: .75;
+            }
+        }
+    }
+
+    #approver {
+        .power-check {
+            @extend %checkbox-tmpl;
+        }
+
+        .rf-header {
+            position: relative;
+
+            button {
+                position: absolute;
+                background-color: #27ae60;
+                border: 1px solid #27ae60;
+                color: #fff;
+                margin: 0 3px;
+                right: -10px;
+                top: -12px;
+                cursor: pointer;
+                padding: 3px 10px;
+                border-radius: 3px;
+            }
+        }
+
+        .rf-body {
+            display: flex;
+
+            .am-filing-container {
+                display: flex;
+                flex-direction: column;
+                border-right: 1px solid #777;
+                min-width: 220px;
+                max-width: 220px;
+                width: 220px;
+
+                .am-filing-head {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    height: 50px;
+                    padding: 0 20px 0 10px;
+
+                    label {
+                        font-size: 11px;
+                        font-weight: bold;
+                        color: #aaa;
+                        margin: 0;
+                        text-transform: uppercase;
+                    }
+
+                    i {
+                        cursor: pointer;
+                        outline: none;
+                        color: #3498db;
+                        font-size: 16px;
+                    }
+                }
+
+                .am-filing-body {
+                    height: calc(100vh - 255px);
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    padding-left: 10px;
+                    padding-right: 5px;
+
+                    .am-filing-norec {
+                        height: 100%;
+                        display: flex;
+                        justify-content: center;
+
+                        .norec {
+                            display: flex;
+                            align-items: center;
+                            flex-direction: column;
+                            width: 75%;
+                            margin: 20% auto;
+
+                            .fa-search {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-radius: 50%;
+                                background-color: rgba(0,0,0,0.3);
+                                margin-bottom: 15px;
+                                width: 50px;
+                                font-size: 22px;
+                                height: 50px;
+                                color: #333;
+                            }
+
+                            span {
+                                font-size: 12px;
+                                color: #777;
+                                text-align: center;
+                            }
+                        }
+                    }
+
+                    .am-filing-item {
+                        padding: 6px 13px;
+                        width: calc(100% - 15px);
+                        border-radius: 15px;
+                        cursor: pointer;
+                        color: #ddd;
+                        font-size: 13px;
+                        font-weight: 500;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        span {
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+
+                        i {
+                            display: none;
+                            cursor: pointer;
+                            outline: none;
+                            color: #aaa;
+
+                            &:hover {
+                                color: #ddd;
+                            }
+                        }
+
+                        &:hover {
+                            color: #fff;
+                            background-color: rgba(0, 0, 0, 0.1);
+
+                            i {
+                                display: block;
+                            }
+                        }
+
+                        &.selected {
+                            background-color: rgba(155, 89, 182, 0.1);
+                            color: #9b59b6;
+                        }
+                    }
+                }
+            }
+
+            .am-approver-container {
+                height: 100%;
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+
+                .am-filing-mobile {
+                    padding-bottom: 10px;
+                    border-bottom: 1px solid #777;
+
+                    .afm-head {
+                        display: flex;
+                        align-items: center;
+                        height: 50px;
+
+                        label {
+                            font-size: 11px;
+                            font-weight: bold;
+                            color: #aaa;
+                            margin: 0;
+                            text-transform: uppercase;
+                        }
+
+                        i {
+                            cursor: pointer;
+                            outline: none;
+                            color: #3498db;
+                            font-size: 16px;
+                            margin-left: 5px;
+                        }
+                    }
+
+                    .afm-body {
+                        display: flex;
+                        align-items: center;
+                        flex-wrap: wrap;
+
+                        .am-filing-item {
+                            padding: 6px 13px;
+                            border-radius: 15px;
+                            cursor: pointer;
+                            color: #aaa;
+                            font-size: 13px;
+                            font-weight: 500;
+                            display: flex;
+                            margin: 0 3px;
+                            margin-bottom: 10px;
+                            align-items: center;
+                            justify-content: space-between;
+                            background-color: rgba(0,0,0,.03);
+
+                            i {
+                                margin-top: 3px;
+                                margin-left: 5px;
+                                color: #777;
+                            }
+
+                            &.selected {
+                                background-color: rgba(155,89,182,.1);
+                                color: #9b59b6;
+                            }
+                        }
+
+                        .afm-no-rec {
+                            color: #aaa;
+                            width: 100%;
+                            height: 50px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                    }
+                }
+
+                .am-approver-head {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                    padding: 10px 5px;
+
+                    .am-approver-count {
+                        color: #aaa;
+
+                        span {
+                            font-weight: bold;
+                            color: #555;
+                        }
+
+                        &.hide {
+                            display: block !important;
+                            opacity: 0;
+                        }
+                    }
+
+                    .am-approver-btn-grp {
+                        display: flex;
+
+                        button {
+                            @extend %button-tmpl;
+                            background-color: transparent;
+                            border: 1px solid transparent !important;
+                            color: #3498DB;
+                            margin: 0 3px;
+
+                            &:hover {
+                                border: 1px solid #3498DB !important;
+                            }
+                        }
+                    }
+                }
+
+                .am-approver-body {
+                    height: calc(100vh - 255px);
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    border-radius: 10px;
+                    padding: 10px 5px;
+
+                    .am-approver-norec {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 100%;
+                        border-radius: 10px;
+                        color: #777;
+                        background-color: #292929;
+                        margin: 0 20px;
+
+                        span {
+                            width: 35%;
+                            text-align: center;
+
+                            a {
+                                color: #3498db;
+                                cursor: pointer;
+                                margin-left: 5px;
+                            }
+                        }
+                    }
+
+                    .row {
+                        margin: 0;
+                    }
+
+                    .cd-6 {
+                        padding: 0 5px;
+                        border-radius: 10px;
+                    }
+
+                    .am-approver-toggle {
+                        margin: auto;
+                        width: 100%;
+
+                        .am-toggle-head {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            padding: 10px;
+                            margin-bottom: 10px;
+                            border-bottom: 1px solid #777;
+
+                            .fa-ellipsis-v {
+                                margin-right: 5px;
+                                color: #777;
+                                outline: none;
+                                cursor: move;
+                            }
+
+                            a {
+                                font-weight: 500;
+                                cursor: pointer;
+                                color: #3498db;
+
+                                &[aria-expanded="true"] {
+                                    .fa-caret-down {
+                                        transform: rotateZ(180deg);
+                                    }
+                                }
+
+                                span {
+                                    color: #ddd;
+                                    font-weight: bold;
+                                }
+                            }
+
+                            .am-toggle-ctrl {
+                                i {
+                                    margin: 0 5px;
+                                    outline: none;
+                                    cursor: pointer;
+                                    color: #aaa;
+
+                                    &:hover {
+                                        color: #777;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .am-approver-item {
+                        display: flex;
+                        align-items: center;
+                        padding: 10px 15px;
+                        background-color: #252525;
+                        border: 1px solid #252525;
+                        border-radius: 10px;
+                        margin-bottom: 10px;
+
+                        .remove-approver {
+                            margin-left: auto;
+                            cursor: pointer;
+                            outline: none;
+                            color: #ccc;
+
+                            &:hover {
+                                color: #555;
+                            }
+                        }
+
+                        .am-approver-ctrl {
+                            display: flex;
+                            align-items: center;
+
+                            .am-approver-checkbox,
+                            .am-approver-pic,
+                            .am-pic {
+                                margin-right: 10px;
+                            }
+
+                            .am-approver-pic {
+                                min-width: 35px;
+                                max-width: 35px;
+                                height: 35px;
+                                background-color: #333;
+                                color: #aaa;
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 15px;
+                                text-transform: capitalize;
+
+                                .fa-plus {
+                                    cursor: pointer;
+                                }
+                            }
+
+                            .am-pic {
+                                background-size: cover !important;
+                                border-radius: 50%;
+                                min-width: 35px;
+                                max-width: 35px;
+                                height: 35px;
+                            }
+                        }
+
+                        .am-approver-desc {
+                            max-width: calc(100% - 75px);
+                            //overflow: hidden;
+                            h5, p {
+                                margin: 0;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                            }
+
+                            h5 {
+                                font-weight: 500;
+                                font-size: 13px
+                            }
+
+                            p {
+                                color: #777;
+                                font-weight: bold;
+                                font-size: 11px;
+
+                                &.req {
+                                    color: rgba(231, 76, 60,0.7);
+                                }
+                            }
+                        }
+
+                        &.no-approver {
+                            border: 1px dashed #777;
+                            background-color: transparent;
+
+                            .am-approver-pic {
+                                background-color: rgba(52, 152, 219,0.2);
+                                color: #3498db;
+                            }
+
+                            .am-approver-desc h5 {
+                                color: #ddd;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #trainingbond .detail-form .df-body.list,
+    #attachments .detail-form .df-body.list {
+        height: calc(100vh - 307px);
+
+        .tbl-holder {
+            width: calc(100vw - 545px);
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #trainingbond .detail-form .df-body.list,
+    #attachments .detail-form .df-body.list {
+        .tbl-holder {
+            width: calc(100vw - 295px) !important;
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .employment-record .am-approver-container .am-approver-body .am-approver-toggle {
+        width: calc(100vw - 320px) !important;
+    }
+
+    .employment-record .am-approver-container .am-approver-body {
+        height: auto !important;
+    }
+
+    .employment-record .am-approver-container .am-approver-body .am-approver-norec {
+        min-height: 100px;
+    }
+
+    .employment-record .am-approver-container {
+        height: calc(100vh - 250px) !important;
+        display: block !important;
+        overflow-y: auto;
+    }
+
+    .employment-record .am-approver-container .am-approver-body,
+    .employment-record #approver .rf-body {
+        overflow-y: hidden !important;
+        overflow-x: hidden !important;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    #trainingbond .detail-form .df-body.list,
+    #attachments .detail-form .df-body.list {
+        .tbl-holder {
+            width: calc(100vw - 295px) !important;
+        }
+    }
+
+    .employment-record .am-approver-container .am-approver-body .am-approver-toggle {
+        width: calc(100vw - 320px) !important;
+    }
+
+    .employment-record .am-approver-container .am-approver-body {
+        height: auto !important;
+    }
+
+    .employment-record .am-approver-container .am-approver-body .am-approver-norec {
+        min-height: 100px;
+    }
+
+    .employment-record #approver .rf-body .am-approver-container .am-approver-body .am-approver-norec span {
+        width: 90% !important;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    #trainingbond .detail-form .df-body.list,
+    #attachments .detail-form .df-body.list {
+        .tbl-holder {
+            width: calc(100vw - 40px) !important;
+        }
+    }
+    .employment-record .am-approver-container .am-approver-body .am-approver-toggle {
+        width: calc(100vw - 65px) !important;
+    }
+
+    .employment-record .am-approver-container .am-approver-body {
+        height: auto !important;
+    }
+
+    .employment-record .am-approver-container .am-approver-body .am-approver-norec {
+        min-height: 100px;
+    }
+}

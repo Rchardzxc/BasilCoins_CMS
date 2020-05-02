@@ -1,0 +1,389 @@
+﻿<div class="listing">
+    <insys-filter ng-show="tblOptions.FilterVisible == true"></insys-filter>
+    <div class="listing-header">
+        <div class="lh-btn-grp">
+            <button ng-if="tblOptions.HasNew" ng-click="newForm()" type="button" class="emphasized d-none d-sm-block"><i class="fas fa-plus"></i> New</button>
+            <button ng-if="tblOptions.HasDelete" ng-click="delete()" type="button" class="d-none d-sm-block"><i class="fas fa-trash"></i> Delete</button>
+            <button ng-if="btn.Show == undefined ? false : btn.Show" ng-repeat="btn in tblOptions.Buttons | filter: { Type: 1}" type="button" class="d-none d-sm-block" ng-click="btn.Action()"><i class="{{IsNull(btn.Icon, 'fas fa-ellipsis-h')}}"></i> <span ng-bind="btn.Label"></span></button>
+            <button ng-if="tblOptions.EnabledLoadButton" type="button" class="d-none d-sm-block" ng-click="LoadSelected()"><i class="fas fa-check-double"></i> Load</button>
+            <button ng-if="tblOptions.Filters.length > 0 " type="button" ng-click="ShowFilter()" class="d-none d-sm-block"><i class="fas fa-filter"></i> Filter</button>
+            <!--Actions When Mobile-->
+            <div class="dropdown mobile d-block d-sm-none">
+                <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" type="button" ng-if="tblOptions.HasNew" ng-click="newForm()">New</button>
+                    <button class="dropdown-item" type="button" ng-if="tblOptions.HasDelete" ng-click="delete()">Delete</button>
+                    <button ng-if="btn.Show == undefined ? false : btn.Show" ng-repeat="btn in tblOptions.Buttons | filter: { Type: 1}" type="button" class="dropdown-item" ng-bind="btn.Label" ng-click="btn.Action()"></button>
+                    <button ng-if="tblOptions.EnabledLoadButton" type="button" class="dropdown-item" ng-click="LoadSelected()"><i class="fas fa-check-double"></i> Load</button>
+                    <button class="dropdown-item" type="button" ng-if="tblOptions.Filters.length > 0 " ng-click="ShowFilter()">Filter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="listing-holder">
+        <div class="tbl-holder" ng-class="{ 'custom-scroll' : isChrome }">
+            <div ng-if="tblOptions.ShowTable == false">Loading...</div>
+            <div class="rbGrid" ng-if="tblOptions.ShowTable == true">
+                <div class="rbGrid-sticky-container" ng-if="tblOptions.ShowPinnedHeader==true">
+                    <div class="rbGrid-sticky-pinned">
+                        <div class="rbGrid-column toolBox" ng-class="{'hasTool': tblOptions.hasOpenIcon || tblOptions.HasDelete || tblOptions.HasMultiSelect, 'hasBothTool': tblOptions.hasOpenIcon && (tblOptions.HasDelete || tblOptions.HasMultiSelect)}" ng-if="tblOptions.PinnedColumns.length > 0 && (tblOptions.HasDelete || tblOptions.hasOpenIcon || tblOptions.HasMultiSelect)">
+                            <div class="rbGrid-column-label">
+                                <div class="tool" ng-if="tblOptions.HasDelete || tblOptions.HasMultiSelect">
+                                    <i ng-click="CheckAll()" class="fas" ng-class="{'fa-check-square' : SelectAllRows, 'fa-square' : !SelectAllRows}"></i>
+                                </div>
+                                <div class="tool" ng-if="tblOptions.hasOpenIcon">
+                                    &nbsp;
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rbGrid-column" set-sticky-pinned-min-width="{{$index}}" ng-repeat="pinned in tblOptions.PinnedColumns">
+                            <div class="rbGrid-column-label">
+                                <label ng-bind="pinned.Label || pinned.Name"></label>
+                                <div class="rbGrid-sort-indicator"><i class="fas" ng-class="setSortIcon(pinned.Name)" ng-click="sortData(pinned.Name, pinned.Label)"></i></div>
+                                <div class="rbGrid-resize-indicator" rb-grid-resize="1" col-idx="{{$index}}">&nbsp;</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rbGrid-sticky-column">
+                        <div class="rbGrid-sticky-filler" ng-if="tblOptions.PinnedColumns.length > 0"></div>
+                        <div class="rbGrid-column toolBox" ng-class="{'hasTool': tblOptions.hasOpenIcon || tblOptions.HasDelete || tblOptions.HasMultiSelect, 'hasBothTool': tblOptions.hasOpenIcon && (tblOptions.HasDelete || tblOptions.HasMultiSelect)}" ng-if="tblOptions.PinnedColumns.length == 0 && (tblOptions.HasDelete || tblOptions.hasOpenIcon || tblOptions.HasMultiSelect)">
+                            <div class="rbGrid-column-label">
+                                <div class="tool" ng-if="tblOptions.HasDelete || tblOptions.HasMultiSelect">
+                                    <i ng-click="CheckAll()" class="fas" ng-class="{'fa-check-square' : SelectAllRows, 'fa-square' : !SelectAllRows}"></i>
+                                </div>
+                                <div class="tool" ng-if="tblOptions.hasOpenIcon">
+                                    &nbsp;
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rbGrid-column" set-sticky-min-width="{{$index}}" ng-repeat="col in tblOptions.Columns" repeat-done="setStickyFillerWidth">
+                            <div class="rbGrid-column-label">
+                                <label ng-bind="col.Label || col.Name"></label>
+                                <div class="rbGrid-sort-indicator"><i class="fas" ng-class="setSortIcon(col.Name)" ng-click="sortData(col.Name, col.Label)"></i></div>
+                                <div class="rbGrid-resize-indicator" rb-grid-resize="2" col-idx="{{$index}}">&nbsp;</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rbGrid-pinned-container" ng-if="tblOptions.PinnedColumns.length > 0">
+                    <div class="rbGrid-column toolBox" ng-class="{'hasTool': tblOptions.hasOpenIcon || tblOptions.HasDelete || tblOptions.HasMultiSelect, 'hasBothTool': tblOptions.hasOpenIcon && (tblOptions.HasDelete || tblOptions.HasMultiSelect)}">
+                        <div class="rbGrid-column-label" ng-if="tblOptions.HasDelete || tblOptions.hasOpenIcon || tblOptions.HasMultiSelect">
+                            <div class="tool" ng-if="tblOptions.HasDelete || tblOptions.HasMultiSelect">
+                                <i ng-click="CheckAll()" class="fas" ng-class="{'fa-check-square' : SelectAllRows, 'fa-square' : !SelectAllRows}"></i>
+                            </div>
+                            <div class="tool" ng-if="tblOptions.hasOpenIcon">
+                                &nbsp;
+                            </div>
+                        </div>
+
+                        <div class="rbGrid-row">
+                            <div class="rbGrid-row-label" ng-repeat="pRow in tblOptions.Data.Rows">
+                                <div class="tool" ng-if="tblOptions.HasDelete || tblOptions.HasMultiSelect">
+                                    <i ng-click="CheckSelectedRow(pRow)" class="fas" ng-class="{'fa-check-square' : pRow.IsChecked, 'fa-square' : !pRow.IsChecked}"></i>
+                                </div>
+                                <div class="tool" ng-click="hasOpenIconClick(pRow)" ng-if="tblOptions.hasOpenIcon && pRow.ID > 0">
+                                    <i class="fas fa-folder-open"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rbGrid-column" ng-repeat="(colIdx, col) in tblOptions.PinnedColumns">
+                        <div class="rbGrid-column-label">
+                            <label ng-bind="col.Label || col.Name"></label>
+                            <div class="rbGrid-sort-indicator"><i class="fas" ng-class="setSortIcon(col.Name)" ng-click="sortData(col.Name, col.Label)"></i></div>
+                            <div class="rbGrid-resize-indicator" rb-grid-resize>&nbsp;</div>
+                        </div>
+                        <div class="rbGrid-row">
+                            <div ng-switch="(row.Control.Name == col.Name ? row.Control.Type : col.ControlType)" ng-repeat="(rowIdx, row) in tblOptions.Data.Rows" class="rbGrid-cell">
+                                <div ng-switch-when="text">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <input type="text" c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)" maxlength="{{GetMaxLength(col.Name, tblOptions.TableSchema)}}" ng-model="row[col.Name]" class="form-control" />
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="row[col.Name]"></label>
+                                </div>
+                                <div ng-switch-when="number">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <input type="text" c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)" maxlength="{{GetMaxLength(col.Name, tblOptions.TableSchema)}}" ng-model="row[col.Name]" class="form-control" ng-input text-type="'number'" />
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="row[col.Name]"></label>
+                                </div>
+                                <div ng-switch-when="decimal">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <input type="text" c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)" maxlength="{{GetMaxLength(col.Name, tblOptions.TableSchema)}}" ng-model="row[col.Name]" class="form-control" ng-input text-type="'decimal'" />
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="row[col.Name]"></label>
+                                </div>
+                                <div ng-switch-when="alphabet">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <input type="text" c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)" maxlength="{{GetMaxLength(col.Name, tblOptions.TableSchema)}}" ng-model="row[col.Name]" class="form-control" ng-input text-type="'alphabet'" />
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="row[col.Name]"></label>
+                                </div>
+                                <div ng-switch-when="alphanumeric">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <input type="text" c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)" maxlength="{{GetMaxLength(col.Name, tblOptions.TableSchema)}}" ng-model="row[col.Name]" class="form-control" ng-input text-type="'alphanumeric'" />
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="row[col.Name]"></label>
+                                </div>
+                                <div ng-switch-when="date">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <div class="input-group custom-ig-lu">
+                                            <input type="text" c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)" ng-model="row[col.Name]" ng-input text-type="'date'" placeholder="{{col.Label || col.Name}}" class="form-control" />
+                                            <span class="input-group-btn lu">
+                                                <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="FormatDate(row[col.Name], col.Format)"></label>
+                                </div>
+                                <div ng-switch-when="lookup">
+                                    <div ng-if="!col.IsReadOnly" is-grid="true" cascade="col.cascade(row, model)" is-required="GetIsRequired(col.Name, tblOptions.TableSchema)" insys-lookup lookup-options="col.Options" lookup-data="{'model': row,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': col.Name, 'displayContainer': col.DisplayContainer, 'label': IsNull(col.Label, col.Name)}"></div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="row[col.DisplayContainer]"></label>
+                                </div>
+                                <div ng-switch-when="select">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <select ng-change="col.cascade(row[col.Name], row, col.Name)" c-label="{{col.Label || col.Name}}" name="{{col.Name}}" class="form-control" ng-model="row[col.Name]" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)">
+                                            <option ng-value="undefined" ng-bind="'-Select one-'"></option>
+                                            <option ng-value="d.ID" ng-repeat="d in GetDropdownSource(col.Name)" ng-bind="d.Name"></option>
+                                        </select>
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="GetArrayValue(DropdownSource[col.Name], col.Name, row[col.Name]).Name"></label>
+                                </div>
+                                <div ng-switch-when="radio">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <div class="form-radio-grp">
+                                            <label class="form-radio">
+                                                Yes
+                                                <input c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)" type="radio" ng-model="row[col.Name]" ng-radio ng-value="1">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <label class="form-radio">
+                                                No
+                                                <input c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)" type="radio" ng-model="row[col.Name]" ng-radio ng-value="0">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="row[col.Name] == 1 ? 'Yes' : 'No'"></label>
+                                </div>
+                                <div ng-switch-when="time">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <input ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)" type="text" c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-model="row[col.Name]" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder="hh:mm" class="form-control" />
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="FormatDate(row[col.Name], 'hh:mm A')"></label>
+                                </div>
+                                <div ng-switch-when="checkbox">
+                                    <label ng-if="!col.IsReadOnly" class="rbGrid-row-label">
+                                        <i ng-click="row[col.Name] = !row[col.Name]" class="lbl-check fas" ng-class="{'fa-check-square' : row[col.Name], 'fa-square' : !row[col.Name]}"></i>
+                                    </label>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label">
+                                        <i class="lbl-check fas" ng-class="{'fa-check-square' : row[col.Name], 'fa-square' : !row[col.Name]}"></i>
+                                    </label>
+                                </div>
+                                <div ng-switch-default>
+                                    <label ng-dblclick="openForm(row)"
+                                           ng-if="!IsBoolean(row[col.Name])"
+                                           class="rbGrid-row-label"
+                                           ng-bind="FormatVal(IsNull(row[col.Name], '-'), col.Format)" repeat-done="setPinnedFillerWidth">
+                                    </label>
+                                    <label ng-dblclick="openForm(row)"
+                                           ng-if="IsBoolean(row[col.Name])"
+                                           class="rbGrid-row-label">
+                                        <i class="lbl-check fas" ng-class="{'fa-check-square' : row[col.Name] === true, 'fa-square' : row[col.Name] === false}"></i>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rbGrid-column-container">
+                    <div class="rbGrid-pinned-filler" ng-if="tblOptions.PinnedColumns.length > 0"></div>
+                    <!--Checkbox, OpenIcon-->
+                    <div class="rbGrid-column toolBox" ng-class="{'hasTool': tblOptions.hasOpenIcon || tblOptions.HasDelete || tblOptions.HasMultiSelect,
+                                                                'hasBothTool': tblOptions.hasOpenIcon && (tblOptions.HasDelete || tblOptions.HasMultiSelect)}"
+                         ng-if="tblOptions.PinnedColumns.length == 0 && (tblOptions.HasDelete || tblOptions.hasOpenIcon || tblOptions.HasMultiSelect)">
+                        <div class="rbGrid-column-label" ng-if="tblOptions.HasDelete || tblOptions.hasOpenIcon || tblOptions.HasMultiSelect">
+                            <div class="tool" ng-if="tblOptions.HasDelete || tblOptions.HasMultiSelect">
+                                <i ng-click="CheckAll()" class="fas" ng-class="{'fa-check-square' : SelectAllRows, 'fa-square' : !SelectAllRows}"></i>
+                            </div>
+                            <div class="tool" ng-if="tblOptions.hasOpenIcon">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="rbGrid-row">
+                            <div class="rbGrid-row-label" ng-repeat="row in tblOptions.Data.Rows">
+                                <div class="tool" ng-if="tblOptions.HasDelete || tblOptions.HasMultiSelect">
+                                    <i ng-click="CheckSelectedRow(row)" class="fas" ng-class="{'fa-check-square' : row.IsChecked, 'fa-square' : !row.IsChecked}"></i>
+                                </div>
+                                <div class="tool" ng-click="hasOpenIconClick(row)" ng-if="tblOptions.hasOpenIcon && row.ID > 0">
+                                    <i class="fas fa-folder-open"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Checkbox, OpenIcon-->
+                    <!--Data Column-->
+                    <div class="rbGrid-column" ng-repeat="(colIdx, col) in tblOptions.Columns">
+                        <div class="rbGrid-column-label">
+                            <label ng-bind="col.Label || col.Name"></label>
+                            <div class="rbGrid-sort-indicator"><i class="fas" ng-class="setSortIcon(col.Name)" ng-click="sortData(col.Name, col.Label)"></i></div>
+                            <div class="rbGrid-resize-indicator" rb-grid-resize>&nbsp;</div>
+                        </div>
+                        <div class="rbGrid-row">
+                            <div ng-switch="(row.Control.Name == col.Name ? row.Control.Type : col.ControlType)" ng-repeat="(rowIdx, row) in tblOptions.Data.Rows" class="rbGrid-cell">
+                                <div ng-switch-when="text">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <input type="text" ng-change="ValidateField.FieldChangeEvent(col.Name, row[col.Name])" ng-blur="ValidateField.FieldBlurEvent(col.Name, row[col.Name])"
+                                               c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)"
+                                               maxlength="{{GetMaxLength(col.Name, tblOptions.TableSchema)}}" ng-model="row[col.Name]" class="form-control" />
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="row[col.Name]"></label>
+                                </div>
+                                <div ng-switch-when="number">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <input type="text" ng-change="ValidateField.FieldChangeEvent(col.Name, row[col.Name])" ng-blur="ValidateField.FieldBlurEvent(col.Name, row[col.Name])"
+                                               c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)"
+                                               maxlength="{{GetMaxLength(col.Name, tblOptions.TableSchema)}}" ng-model="row[col.Name]" class="form-control" ng-input text-type="'number'" />
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="row[col.Name]"></label>
+                                </div>
+                                <div ng-switch-when="decimal">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <input type="text" ng-change="ValidateField.FieldChangeEvent(col.Name, row[col.Name])" ng-blur="ValidateField.FieldBlurEvent(col.Name, row[col.Name])"
+                                               c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)"
+                                               maxlength="{{GetMaxLength(col.Name, tblOptions.TableSchema)}}" ng-model="row[col.Name]" class="form-control" ng-input text-type="'decimal'" />
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="row[col.Name]"></label>
+                                </div>
+                                <div ng-switch-when="alphabet">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <input type="text" ng-change="ValidateField.FieldChangeEvent(col.Name, row[col.Name])" ng-blur="ValidateField.FieldBlurEvent(col.Name, row[col.Name])"
+                                               c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)"
+                                               maxlength="{{GetMaxLength(col.Name, tblOptions.TableSchema)}}" ng-model="row[col.Name]" class="form-control" ng-input text-type="'alphabet'" />
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="row[col.Name]"></label>
+                                </div>
+                                <div ng-switch-when="alphanumeric">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <input type="text" ng-change="ValidateField.FieldChangeEvent(col.Name, row[col.Name])" ng-blur="ValidateField.FieldBlurEvent(col.Name, row[col.Name])"
+                                               c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)"
+                                               maxlength="{{GetMaxLength(col.Name, tblOptions.TableSchema)}}" ng-model="row[col.Name]" class="form-control" ng-input text-type="'alphanumeric'" />
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="row[col.Name]">Test</label>
+                                </div>
+                                <div ng-switch-when="date">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <div class="input-group custom-ig-lu">
+                                            <input type="text" ng-change="ValidateField.FieldChangeEvent(col.Name, row[col.Name])" ng-blur="ValidateField.FieldBlurEvent(col.Name, row[col.Name])"
+                                                   c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)"
+                                                   ng-model="row[col.Name]" ng-input text-type="'date'" placeholder="{{col.Label || col.Name}}" class="form-control" />
+                                            <span class="input-group-btn lu">
+                                                <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="FormatDate(row[col.Name], col.Format)"></label>
+                                </div>
+                                <div ng-switch-when="lookup">
+                                    <div ng-if="!col.IsReadOnly" is-grid="true" cascade="col.cascade(row, model)" is-required="GetIsRequired(col.Name, tblOptions.TableSchema)" insys-lookup lookup-options="col.Options" lookup-data="{'model': row,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': col.Name, 'displayContainer': col.DisplayContainer, 'label': IsNull(col.Label, col.Name)}"></div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="row[col.DisplayContainer]"></label>
+                                </div>
+                                <div ng-switch-when="select">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <select ng-change="col.cascade(row[col.Name], row, col.Name)" c-label="{{col.Label || col.Name}}" name="{{col.Name}}" class="form-control" ng-model="row[col.Name]" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)">
+                                            <option ng-value="undefined" ng-bind="'-Select one-'"></option>
+                                            <option ng-value="d.ID" ng-repeat="d in GetDropdownSource(col.Name)" ng-bind="d.Name"></option>
+                                        </select>
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="GetArrayValue(DropdownSource[col.Name], col.Name, row[col.Name]).Name"></label>
+                                </div>
+                                <div ng-switch-when="radio">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <div class="form-radio-grp">
+                                            <label class="form-radio">
+                                                Yes
+                                                <input ng-change="ValidateField.FieldChangeEvent(col.Name, row[col.Name])" ng-blur="ValidateField.FieldBlurEvent(col.Name, row[col.Name])"
+                                                       c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)"
+                                                       type="radio" ng-model="row[col.Name]" ng-radio ng-value="1">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <label class="form-radio">
+                                                No
+                                                <input ng-change="ValidateField.FieldChangeEvent(col.Name, row[col.Name])" ng-blur="ValidateField.FieldBlurEvent(col.Name, row[col.Name])"
+                                                       c-label="{{col.Label || col.Name}}" name="{{col.Name}}" ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)"
+                                                       type="radio" ng-model="row[col.Name]" ng-radio ng-value="0">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="row[col.Name] == 1 ? 'Yes' : 'No'"></label>
+                                </div>
+                                <div ng-switch-when="time">
+                                    <div ng-if="!col.IsReadOnly" class="form-group d-h">
+                                        <input ng-change="ValidateField.FieldChangeEvent(col.Name, row[col.Name])" ng-blur="ValidateField.FieldBlurEvent(col.Name, row[col.Name])"
+                                               ng-required="GetIsRequired(col.Name, tblOptions.TableSchema)" type="text" c-label="{{col.Label || col.Name}}"
+                                               name="{{col.Name}}" ng-model="row[col.Name]" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder="hh:mm" class="form-control" />
+                                    </div>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label" ng-bind="FormatDate(row[col.Name], 'hh:mm A')"></label>
+                                </div>
+                                <div ng-switch-when="checkbox">
+                                    <label ng-if="!col.IsReadOnly" class="rbGrid-row-label">
+                                        <i ng-click="row[col.Name] = !row[col.Name]" class="lbl-check fas" ng-class="{'fa-check-square' : row[col.Name], 'fa-square' : !row[col.Name]}"></i>
+                                    </label>
+                                    <label ng-if="col.IsReadOnly" class="rbGrid-row-label">
+                                        <i class="lbl-check fas" ng-class="{'fa-check-square' : row[col.Name], 'fa-square' : !row[col.Name]}"></i>
+                                    </label>
+                                </div>
+                                <div ng-switch-when="status">
+                                    
+                                    <label class="rbGrid-row-label" value ="{{row[col.Name]}}" ng-bind="row[col.Name]"></label>
+                                </div>
+                                <div ng-switch-default>
+                                    <label ng-dblclick="openForm(row)"
+                                           ng-click="TestClick()"
+                                           ng-if="!IsBoolean(row[col.Name])"
+                                           class="rbGrid-row-label"
+                                           ng-bind="FormatVal(IsNull(row[col.Name], '-'), col.Format)" repeat-done="setPinnedFillerWidth">
+                                    </label>
+                                    <label ng-dblclick="openForm(row)"
+                                           ng-if="IsBoolean(row[col.Name])"
+                                           class="rbGrid-row-label">
+                                        <i class="lbl-check fas" ng-class="{'fa-check-square' : row[col.Name] === true, 'fa-square' : row[col.Name] === false}"></i>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Data Column-->
+                    <!--No record found UI-->
+                    <div class="rbGrid-norec" ng-if="tblOptions.Data.Rows.length == 0">
+                        <div class="no-rec-ico">
+                            <i class="fas fa-file-alt"></i>
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <p>No record found.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="listing-footer">
+            <div class="lp-count d-none d-sm-block"><span ng-bind="tblOptions.Data.Rows.length"></span> record(s) found</div>
+            <div class="lp-pagination">
+                <label>Show</label>
+                <select ng-options="cnt as cnt for cnt in tblOptions.CountPerPage"
+                        ng-model="tblOptions.SelectedCount"
+                        ng-change="ChangeCount()"></select>
+                <label>of Page</label>
+                <select ng-options="page as page for page in tblOptions.Pages"
+                        ng-model="tblOptions.SelectedPage"
+                        ng-change="ChangePage()"></select>
+                <label>/</label>
+                <label ng-bind="tblOptions.Pages.length"></label>
+                <button ng-click="prev()" type="button" class="fas fa-angle-double-left" title="previous page"></button>
+                <button ng-click="next()" type="button" class="fas fa-angle-double-right" title="next page"></button>
+            </div>
+        </div>
+    </div>
+</div>

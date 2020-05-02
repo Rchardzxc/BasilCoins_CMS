@@ -1,0 +1,89 @@
+﻿<div class="ions-dashboard main-container">
+    <div class="m-title">
+        <h5>Dashboard</h5>
+    </div>
+    <div class="d-container">
+        <!--Timekeeping Section-->
+        <div class="d-tk-holder">
+            <!--Leave Credits-->
+            <div class="d-title" ng-if="LeaveItem.length > 0">Leave Credits</div>
+            <div class="d-leave-item" ng-if="LeaveItem.length > 0" ng-repeat="li in LeaveItem | limitTo: (IsLimit ? 3 : LeaveItem.length)">
+                <div class="d-li-code" ng-bind="SetIcon(li.Code)"></div>
+                <div class="d-li-detail">
+                    <div class="detail-item">
+                        <h5 ng-bind="li.Alloted"></h5>
+                        <label>Alloted</label>
+                    </div>
+                    <div class="detail-item">
+                        <h5 ng-bind="li.Used"></h5>
+                        <label>Used</label>
+                    </div>
+                    <div class="detail-item">
+                        <h5 ng-bind="li.EndBalance"></h5>
+                        <label>Balance</label>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="LeaveItem.length > 4" class="show-toggle" ng-click="ShowToggle()" ng-bind="IsLimit ? 'Show more' : 'Show less'"></div>
+            <!--Timekeeping-->
+            <div class="d-title">Timekeeping</div>
+            <div class="d-tk-container">
+                <div class="d-tk-header">
+                    <i class="fas fa-calendar"></i>
+                    <div class="header-desc">
+                        <h5>Sept 31, 2019</h5>
+                        <label>2nd Cut-off</label>
+                    </div>
+                </div>
+                <div class="d-tk-item">
+                    <label>Leave</label>
+                    <span ng-bind="TimeKeepingSummary[0].Leave"></span>
+                </div>
+                <div class="d-tk-item">
+                    <label>Absent</label>
+                    <span ng-bind="TimeKeepingSummary[0].Absent"></span>
+                </div>
+                <div class="d-tk-item">
+                    <label>Tardy</label>
+                    <span ng-bind="TimeKeepingSummary[0].Tardy"></span>
+                </div>
+                <div class="d-tk-item">
+                    <label>Undertime</label>
+                    <span ng-bind="TimeKeepingSummary[0].Undertime"></span>
+                </div>
+                <div class="d-tk-item">
+                    <label>Overtime</label>
+                    <span ng-bind="TimeKeepingSummary[0].Overtime"></span>
+                </div>
+            </div>
+        </div>
+        <!--Tabs-->
+        <div class="d-right-holder">
+            <ul class="nav nav-tabs ions-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" data-target="#whatsnew" role="tab">What's New</a>
+                </li>
+                <li class="nav-item">
+                    <a ng-click="LoadFilingApplication()" class="nav-link" data-toggle="tab" data-target="#filing_app" role="tab">Filing Applications</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" data-target="#payroll" role="tab">Payroll</a>
+                </li>
+            </ul>
+            <div class="tab-content ions-tab-content">
+                <!--What's New-->
+                <div class="tab-pane show active" id="whatsnew" role="tabpanel">
+                    <div ng-include="HtmlTemplatePath + '/Web/Directives/IONS_WhatsNew.tmpl.html'"></div>
+                </div>
+                <!--Filing Applications-->
+                <div class="tab-pane" id="filing_app" role="tabpanel">
+                    <div ng-include="HtmlTemplatePath + '/Web/Directives/IONS_FilingApplication.tmpl.html'"></div>
+                </div>
+                <!--Payroll-->
+                <div class="tab-pane" id="payroll" role="tabpanel">
+                    <div ng-include="HtmlTemplatePath + '/Web/Directives/IONS_Payroll.tmpl.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

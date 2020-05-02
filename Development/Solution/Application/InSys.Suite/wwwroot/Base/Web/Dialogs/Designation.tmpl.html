@@ -1,0 +1,62 @@
+﻿<div class="panel">
+    <div class="panel-heading">
+        <label><i class="fas fa-tasks"></i> Select Designation(s)</label>
+        <i class="fas fa-times" ng-click="close()"></i>
+    </div>
+    <div class="panel-body">
+        <div class="listing">
+            <div class="tbl-holder" ng-class="{ 'custom-scroll' : isChrome }">
+                <table class="table table-striped table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th ng-if="tblOptions.HasDelete" class="tbl-ctrl">
+                                <input type="checkbox" class="tbl-check" id="selectAll" ng-model="SelectAllRows" ng-click="CheckAll()" />
+                                <label for="selectAll"></label>
+                            </th>
+                            <th ng-repeat="(col_idx, col) in tblOptions.Columns" ng-bind="col.Label || col.Name"></th>
+                            <!--<th> Plantilla </th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(row_idx, row) in tblOptions.Data.Rows">
+                            <td ng-if="tblOptions.HasDelete" class="tbl-ctrl">
+                                <input type="checkbox" class="tbl-check" id="c-{{ $index }}" ng-model="row.IsChecked" />
+                                <label for="c-{{ $index }}"></label>
+                            </td>
+                            <td ng-repeat="(row_col_idx, row_col) in tblOptions.Columns" ng-bind="row[row_col.Name]"></td>
+                            <!--<td><input class="form-control" id="{{ row.ID }}" type="number" value="0" /></td>-->
+                        </tr>
+                        <tr class="no_record" ng-if="tblOptions.Data.Rows.length == 0">
+                            <td>
+                                <div class="no-rec-ico">
+                                    <i class="fas fa-file-alt"></i>
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <p>No record found.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="listing-footer">
+                <div class="lp-count"><span ng-bind="tblOptions.Data.Rows.length"></span> record(s) found</div>
+                <div class="lp-pagination">
+                    <label>Show</label>
+                    <select ng-options="cnt as cnt for cnt in tblOptions.CountPerPage"
+                            ng-model="tblOptions.SelectedCount"
+                            ng-change="ChangeCount()"></select>
+                    <label>of Page</label>
+                    <select ng-options="page as page for page in tblOptions.Pages"
+                            ng-model="tblOptions.SelectedPage"
+                            ng-change="ChangePage()"></select>
+                    <button ng-click="prev()" type="button" class="fas fa-angle-double-left" title="previous page"></button>
+                    <button ng-click="next()" type="button" class="fas fa-angle-double-right" title="next page"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <button ng-click="close()" type="button" class="btn cancel">Cancel</button>
+        <button ng-click="Select()" type="button" class="btn emphasized"><i class="fas fa-plus"></i> Load</button>
+    </div>
+</div>

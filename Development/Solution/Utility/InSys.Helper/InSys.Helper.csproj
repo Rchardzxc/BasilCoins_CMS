@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="jsreport.AspNetCore" Version="2.0.2" />
+    <PackageReference Include="jsreport.Binary" Version="2.5.0" />
+    <PackageReference Include="jsreport.Client" Version="3.0.1" />
+    <PackageReference Include="jsreport.Local" Version="2.1.1" />
+    <PackageReference Include="jsreport.Shared" Version="2.0.1" />
+    <PackageReference Include="LigerShark.WebOptimizer.Core" Version="1.0.236" />
+    <PackageReference Include="LZStringCSharp" Version="1.3.0.26157" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.sqlserver" Version="2.2.3" />
+    <PackageReference Include="z.Data.Standard" Version="1.2.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Module\InSys.ITI.Models\InSys.ITI.Models.csproj" />
+    <ProjectReference Include="..\InSys.Context\InSys.Context.csproj" />
+    <ProjectReference Include="..\InSys.Storage\InSys.Storage\InSys.Storage.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.http.abstractions\2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

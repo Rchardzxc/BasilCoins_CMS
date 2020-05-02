@@ -1,0 +1,148 @@
+﻿<div class="panel" ng-init="Init()">
+    <div class="panel-heading">
+        <label><i class="fas fa-plus"></i> New Missed Log</label>
+    </div>
+    <form  name="missedLogForm">
+
+        <div class="panel-body">
+            <div class="computed-panel">
+                <div class="cp-title">General</div>
+                <div class="cp-item">
+                    <label>Reference No.:</label>
+                    <span ng-bind="Data.RefNum"></span>
+                </div>
+                <!--<div class="cp-item">
+                    <label>Employee:</label>
+                    <span ng-bind="Data.EmployeeName"></span>
+                </div>-->
+                <div class="cp-item">
+                    <label>Date Filed:</label>
+                    <span ng-bind="FormatDate(Data.FiledDate)"></span>
+                </div>
+                <div class="cp-item">
+                    <label>Posted:</label>
+                    <span ng-bind="Data.IsPosted ? 'Yes' : 'No'"></span>
+                </div>
+                <div class="cp-item">
+                    <label>Status:</label>
+                    <span ng-bind="Data.FilingStatus"></span>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-12">
+
+                        <label class="control-label">Work Date</label>
+                        <div class="input-group custom-ig-lu">
+                            <input type="text" name="WorkDate" ng-model="Data.WorkDate" ng-input cascade="ChangeDate(DateSelected)" text-type="'date'" text-format="'MM/DD/YYYY'" placeholder="mm/dd/yyyy" class="form-control" />
+
+                            <span class="input-group-btn lu">
+                                <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-12">
+                        <label class="control-label">Reason</label>
+                        <textarea name="Reasons" class="form-control" ng-model="Data.Reasons"></textarea>
+                    </div>
+
+                </div>
+
+
+                <div class="cp-title">Approval History</div>
+
+                <div class="filing-status">
+                    <i class="status-icon fas fa-check-circle"></i>
+                    <div class="filing-right">
+                        <div class="filing-top">
+                            <h5>John Doe</h5>
+                            <label>10/08/2019 at 4:00 PM</label>
+                        </div>
+                        <div class="approver-lvl">Approver 1</div>
+                    </div>
+                </div>
+                <div class="filing-status">
+                    <i class="status-icon fas fa-times-circle"></i>
+                    <div class="filing-right">
+                        <div class="filing-top">
+                            <h5>Jane Doe</h5>
+                            <label>10/08/2019 at 4:03 PM</label>
+                        </div>
+                        <div class="approver-lvl">Approver 2</div>
+                        <div class="approver-reason">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="field-panel">
+                <div class="row">
+
+                    <!--Attachments-->
+                    <div class="filing-title col-12">Attachments</div>
+                    <!--<div class="filing-listing-btngroup col-12">
+                        <button><i class="fas fa-plus"></i> Add File</button>
+                    </div>-->
+                    <div class="listing-container col-12"  style="min-height: 80px;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>File</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <insys-upload readonly="false" required="false" target-model="Data.Attachment" name="Attachment" options="UploadOptions"></insys-upload>
+                                    </td>
+                                    <td><input name="AttachmentRemarks" ng-model="Data.AttachmentRemarks" class="form-control" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <!--Missed Detail-->
+                    <div class="filing-title col-12">Detail</div>
+                    <div class="listing-container col-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Log Time</th>
+                                    <th>Log Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="d in Details">
+                                    <td>
+                                       <input type="text" name="LogTime" ng-model="d.LogTime" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder="hh:mm" class="form-control" />
+                                    </td>
+                                    <td>
+                                        <select name="ID_MissedLogType" class="form-control" ng-options="lt.Id as lt.Name for lt in LogType" ng-model="d.ID_MissedLogType">   
+                                        </select>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    
+                </div>
+            </div>
+
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn cancel" ng-click="Close()">Close</button>
+            <div ng-if="Data.IsPosted">
+                <button type="button" class="btn emphasized" ng-click="UnPost()">Unpost</button>
+
+            </div>
+            <div ng-if="!Data.IsPosted">
+                <button type="button" class="btn emphasized" ng-click="Save()">Save</button>
+                <button type="button" class="btn emphasized" ng-click="Save(1)">Save & Post</button>
+            </div>
+        </div>
+    </form>
+</div>

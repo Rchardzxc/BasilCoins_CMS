@@ -1,0 +1,22 @@
+################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Development/Solution/Application/InSys.Suite/wwwroot/Base/ErrorLogs
+/Development/Solution/Application/InSys.Suite/wwwroot/ErrorLogs
+/Development/Solution/Application/InSys.Suite/Contents/Files
+Development/Solution/Application/Resources/
+/Development/Solution/Application/InSys.Suite/wwwroot/Base/Web/Controllers/TestModule.js
+/Development/Solution/Application/InSys.Suite/wwwroot/Base/Web/Views/TestModule.html
+/Development/Solution/Application/InSys.Suite/wwwroot/Base/Web/Views/TestModuleRecord.html
+/Development/Solution/InSys.ITI.TestModule/TestModule.cs
+/Development/Solution/InSys.ITI.TestModule/TestModuleController.cs
+/Development/Solution/Module/InSys.ITI.Models/Models/tTestModule.cs
+/Development/Solution/Module/InSys.ITI.Models/Models/tTestModule_Dependent.cs
+/Development/Solution/InSys.ITI.TestModule/InSys.ITI.TestModule.csproj
+/Development/Solution/Application/InSys.Suite/wwwroot/Base/Web/Controllers/MyCRUD.js
+/Development/Solution/Application/InSys.Suite/wwwroot/Base/Web/Views/MyCRUD.html
+/Development/Solution/Application/InSys.Suite/wwwroot/Base/Web/Views/MyCRUDRecord.html
+/Development/Solution/InSys.ITI.MyCRUD
+/Development/Solution/Module/InSys.ITI.Models/Models
+/Development/INSYS.SUITE CONTENTS/Files

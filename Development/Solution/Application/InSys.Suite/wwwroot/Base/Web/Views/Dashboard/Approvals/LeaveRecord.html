@@ -1,0 +1,137 @@
+﻿<div class="record">
+    <div class="record-header"></div>
+    <div class="record-body">
+        <!--Tabs-->
+        <div class="record-tab d-none d-md-block">
+            <div class="record-tab-header">
+                <span>Tabs</span>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                </li>
+                <li class="nav-item">
+                    <a data-target="#detail" class="nav-link" data-toggle="tab" role="tab">Detail</a>
+                </li>
+            </ul>
+        </div>
+
+        <form ng-submit="saveForm()" name="form.leave" novalidate autocomplete="off" spellcheck="false" class="tab-content" method="post">
+            <div class="rh-btn-grp">
+
+                <button class="emphasized d-none d-md-block" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()" type="button"><i class="fas fa-plus"></i> New</button>
+                <button class="emphasized d-none d-md-block" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0"><i class="fas fa-save"></i> Save</button>
+
+                <!--These dropdowns will display when mobile-->
+                <!--Actions-->
+                <div class="dropdown mobile d-block d-md-none">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()">New</button>
+                        <button class="dropdown-item" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0">Save</button>
+                    </div>
+                </div>
+                <!--Tabs-->
+                <div class="dropdown mobile d-block d-md-none" role="tablist">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Tabs</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-target="#detail" class="nav-link" data-toggle="tab" role="tab">Detail</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--General Tab-->
+            <div id="general" role="tabpanel" class="tab-pane fade show active">
+                <!--Form Header-->
+                <div class="rf-header">
+                    <h5>General</h5>
+                </div>
+
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('ID_Employee')">
+                                <div insys-lookup is-required="GetIsRequired('ID_Employee')" lookup-options="employeeLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Employee', 'displayContainer': 'Employee', 'label': 'Employee'}"></div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('LeaveItem')">
+                                <label class="control-label">Leave Item <i title="Start Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <select class="form-control"><option>Vacation Leave</option></select>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('StartDate')">
+                                <label class="control-label">Start Date <i title="Start Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" name="Star tDate" ng-required="GetIsRequired('StartDate')" ng-model="Schema.StartDate" ng-input text-type="'date'" class="form-control" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('EndDate')">
+                                <label class="control-label">End Date <i title="End Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" name="End Date" ng-required="GetIsRequired('EndDate')" ng-model="Schema.EndDate" ng-input text-type="'date'" class="form-control" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('DateFiled')">
+                                <label class="control-label">Date Filed <i title="Date Filed is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" name="DateFiled" ng-required="GetIsRequired('DateFiled')" ng-model="Schema.DateFiled" ng-input text-type="'date'" class="form-control" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('Reason')">
+                                <label class="control-label">Reason <i title="Reason is required" class="fa fa-exclamation-circle"></i></label>
+                                <textarea class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="lbl-grp">
+                                <label>Days</label>
+                                <p>1</p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Days with Pay</label>
+                                <p>1</p>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('FilingStatus')">
+                                <label class="control-label">Filing Status <i title="Filing Status is required" class="fa fa-exclamation-circle"></i></label>
+                                <select class="form-control"><option>Filed</option></select>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('ApproverComment')">
+                                <label class="control-label">ApproverComment <i title="Approver Comment is required" class="fa fa-exclamation-circle"></i></label>
+                                <textarea class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Detail Tab-->
+            <div id="detail" role="tabpanel" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Detail</h5>
+                </div>
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="detail-form">
+                        <div class="df-body list grid">
+                            <insys-table options="companyOrgOptions" get-load="companyOrgOptions.trigger"></insys-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

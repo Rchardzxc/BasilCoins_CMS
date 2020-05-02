@@ -1,0 +1,18 @@
+﻿<ul class="tree-ul">
+    <li id="tree-{{row.ID_Menus}}" ng-repeat="(rowIdx, row) in insysTree" ng-click="selectNode(row)" class="tree-li">
+        <span ng-if="row.Children.length > 0" class="pr">
+            <i class="fas" ng-class="getNodeState(row)" ng-click="ToggleChildren(row)"></i>
+            <input class="tree-check" ng-if="row.Children.length > 0 && allowCheck == true" type="checkbox" ng-model="row.IsChecked" />
+            <i class="fas" ng-if="row.Children.length > 0 && allowCheck == true" ng-class="{'fa-check-square' : row.IsChecked, 'fa-square': !row.IsChecked}"></i>
+            <i class="fas fa-folder" ng-class="{'fa-folder-open' : row.ShowChild}"></i>
+            <label ng-bind="row[displayColumn]"></label>
+        </span>
+        <div ng-if="row.Children.length > 0 && row.ShowChild == true" allow-check="allowCheck" get-selected="selectNode(data)" display-column="displayColumn" ng-transclude insys-tree="row.Children"></div>
+        <span ng-if="row.Children.length == 0">
+            <input ng-if="allowCheck == true" type="checkbox" class="tree-check" ng-model="row.IsChecked" />
+            <i ng-if="allowCheck == true" class="fas" ng-class="{'fa-check-square' : row.IsChecked, 'fa-square': !row.IsChecked}"></i>
+            <i class="fas fa-file"></i>
+            <label ng-bind="row[displayColumn]"></label>
+        </span>
+    </li>
+</ul>

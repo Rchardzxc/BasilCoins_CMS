@@ -1,0 +1,257 @@
+﻿.listing {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: calc(100vh - 85px);
+
+    .tbl-check {
+        @extend %checkbox-tmpl;
+    }
+
+    .listing-header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 5px;
+        margin-bottom: 5px;
+
+        .lh-btn-grp {
+            display: flex;
+            min-height: 25px;
+            max-height: 25px;
+
+            button {
+                @extend %button-tmpl;
+                background-color: #3498DB;
+                color: #FFF;
+                margin: 0 3px;
+
+                &.emphasized {
+                    background-color: #3498DB;
+                    color: #FFF;
+                }
+            }
+
+            .dropdown {
+                .dropdown-menu {
+                    background-color: #333;
+                    border: none;
+                    box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+
+                    button {
+                        background-color: transparent !important;
+                        color: #ddd !important;
+                        margin: 0 !important;
+                    }
+
+                    .nav-tabs {
+                        border: none;
+
+                        .nav-item {
+                            margin: 0;
+                            width: 100%;
+
+                            .nav-link {
+                                border: none;
+                                padding: 3px 10px;
+                                font-size: 13px;
+                                font-weight: 500;
+                                color: #ddd;
+                                background-color: transparent !important;
+
+                                &.active {
+                                    color: #3498db !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .listing-holder {
+        flex: 1;
+        padding: 20px;
+        background-color: #333;
+        max-height: calc(100vh - 120px);
+        border-radius: 10px;
+    }
+
+    .listing-footer {
+        display: flex;
+        align-items: center;
+        border-top: 1px solid #777;
+        justify-content: space-between;
+        padding: 10px 5px 0 5px;
+
+        .lp-count {
+            color: #aaa;
+
+            span {
+                font-weight: bold;
+                color: #ddd;
+            }
+        }
+
+        .lp-pagination {
+            display: flex;
+            align-items: center;
+
+            label {
+                margin: 0;
+                color: #aaa;
+            }
+
+            select {
+                border: none;
+                outline: none;
+                cursor: pointer;
+                color: #ddd;
+                background-color: transparent;
+
+                option {
+                    background-color: #333;
+                    color: #ddd;
+                }
+            }
+
+            button {
+                background-color: transparent;
+                cursor: pointer;
+                outline: none;
+                box-shadow: none;
+                border: none;
+                font-size: 16px;
+                color: #3498DB;
+            }
+
+            label, select, button {
+                margin-left: 5px;
+            }
+        }
+    }
+    //InSys Table UI
+    .tbl-holder {
+        width: calc(100vw - 305px);
+        height: calc(100% - 35px);
+        overflow: auto;
+
+        &.custom-scroll {
+            @extend %custom-scroll;
+        }
+    }
+
+    table {
+        thead {
+            background-color: #222;
+        }
+
+        th {
+            vertical-align: middle;
+            font-weight: 500;
+            border: none;
+        }
+
+        tbody {
+            tr {
+                cursor: pointer;
+                height: 30px;
+
+                &:nth-of-type(odd) {
+                    background-color: transparent;
+                }
+
+                &:nth-of-type(even) {
+                    background-color: rgba(0,0,0,0.1);
+                }
+
+                &:hover {
+                    background-color: rgba(0,0,0,.3) !important;
+                }
+
+                td {
+                    border: none;
+
+                    .lbl-check {
+                        &.fa-check-square {
+                            color: #3498db;
+                        }
+
+                        &.fa-square {
+                            color: transparent;
+                            border: 1px solid #aaa;
+                        }
+                    }
+                }
+
+                &.no_record {
+                    display: flex;
+                    overflow: hidden;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    position: absolute;
+                    width: calc(100vw - 305px);
+                    height: calc(100% - 145px);
+                    background-color: transparent !important;
+
+                    .no-rec-ico {
+                        position: relative;
+                        overflow: hidden;
+                        background-color: rgba(0,0,0,0.3);
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 50%;
+                        margin-bottom: 10px;
+
+                        i {
+                            &.fa-file-alt {
+                                color: rgba(255,255,255,0.1);
+                                position: absolute;
+                                left: 8px;
+                                top: 7px;
+                                font-size: 80px;
+                            }
+
+                            &.fa-search {
+                                color: #555;
+                                position: absolute;
+                                right: 11px;
+                                bottom: 13px;
+                                font-size: 60px;
+                            }
+                        }
+                    }
+
+                    p {
+                        color: #aaa;
+                        margin: 0;
+                    }
+                }
+            }
+        }
+
+        th, td {
+            white-space: nowrap;
+
+            &.tbl-ctrl {
+                width: 40px !important;
+                min-width: 40px !important;
+                max-width: 40px !important;
+
+                .tbl-check + label:before {
+                    margin-top: -3px;
+                    width: 13px;
+                    height: 13px;
+                }
+
+                .tbl-check + label:after {
+                    font-size: 12px;
+                    left: 3px;
+                    top: 1px;
+                }
+            }
+        }
+    }
+}

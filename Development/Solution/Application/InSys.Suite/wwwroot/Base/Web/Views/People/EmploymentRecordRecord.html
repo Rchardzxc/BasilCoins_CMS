@@ -1,0 +1,714 @@
+﻿<div class="record">
+    <div class="record-header"></div>
+    <div class="record-body">
+        <!--Tabs-->
+        <div class="record-tab d-none d-xl-block">
+            <div class="record-tab-header">
+                <span>Tabs</span>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                </li>
+                <li class="nav-item">
+                    <a data-target="#payroll" class="nav-link" data-toggle="tab" role="tab">Payroll</a>
+                </li>
+                <li class="nav-item">
+                    <a data-target="#organization" class="nav-link" data-toggle="tab" role="tab">Organization</a>
+                </li>
+                <li class="nav-item" ng-click="LoadEmployeeFilingModules()">
+                    <a data-target="#approver" class="nav-link" data-toggle="tab" role="tab">Approver</a>
+                </li>
+                <li class="nav-item" ng-click="LoadTrainingBond()">
+                    <a data-target="#trainingbond" class="nav-link" data-toggle="tab" role="tab">Training Bond</a>
+                </li>
+                <li class="nav-item" ng-click="LoadAttachments()">
+                    <a data-target="#attachments" class="nav-link" data-toggle="tab" role="tab">Attachments</a>
+                </li>
+            </ul>
+        </div>
+        <form ng-submit="saveForm()" autocomplete="off" spellcheck="false" class="tab-content" method="post" novalidate name="form.employmentrecord">
+            <!--Button Group-->
+            <div class="rh-btn-grp">
+                <button class="emphasized d-none d-md-block" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()" type="button"><i class="fas fa-plus"></i> New</button>
+                <button class="emphasized d-none d-md-block" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0"><i class="fas fa-save"></i> Save</button>
+
+                <!--These dropdowns will display when mobile-->
+                <!--Actions-->
+                <div class="dropdown mobile d-block d-xl-none">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()">New</button>
+                        <button class="dropdown-item" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0">Save</button>
+                    </div>
+                </div>
+                <!--Tabs-->
+                <div class="dropdown mobile d-block d-xl-none" role="tablist">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Tabs</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                                <a data-target="#payroll" class="nav-link" data-toggle="tab" role="tab">Payroll</a>
+                                <a data-target="#organization" class="nav-link" data-toggle="tab" role="tab">Organization</a>
+                            </li>
+                            <li class="nav-item" ng-click="LoadEmployeeFilingModules()">
+                                <a data-target="#approver" class="nav-link" data-toggle="tab" role="tab">Approver</a>
+                            </li>
+                            <li class="nav-item" ng-click="LoadTrainingBond()">
+                                <a data-target="#trainingbond" class="nav-link" data-toggle="tab" role="tab">Training Bond</a>
+                            </li>
+                            <li class="nav-item" ng-click="LoadAttachments()">
+                                <a data-target="#attachments" class="nav-link" data-toggle="tab" role="tab">Attachments</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--Banner-->
+            <div class="er-banner">
+                <i class="fas fa-user"></i>
+                <div class="er-desc">
+                    <h5 ng-bind="Schema.FirstName + ' ' + Schema.LastName"></h5>
+                    <label ng-bind="Schema.Designation" ng-if="Schema.Designation != null"></label>
+                </div>
+            </div>
+            <!--General Tab-->
+            <div id="general" role="tabpanel" class="tab-pane fade show active">
+                <!--Form Header-->
+                <div class="rf-header">
+                    <h5>General</h5>
+                </div>
+
+                <!--Form Content-->
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-6 col-md-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('Code')">
+                                <label class="control-label">Code <i title="Code is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" name="Code" ng-maxlength="GetMaxLength('Code')" ng-required="GetIsRequired('Code')" ng-model="Schema.Code" type="text" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('AccessNo')">
+                                <label class="control-label">Access No <i title="Access No is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" name="AccessNo" ng-maxlength="GetMaxLength('AccessNo')" ng-required="GetIsRequired('AccessNo')" ng-model="Schema.AccessNo" type="text" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('CardNo')">
+                                <label class="control-label">Card No <i title="Card No is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" name="CardNo" ng-maxlength="GetMaxLength('CardNo')" ng-required="GetIsRequired('CardNo')" ng-model="Schema.CardNo" type="text" />
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('CompanyEmail')">
+                                <label class="control-label">Company Email <i title="Company Email is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" name="CompanyEmail" ng-maxlength="GetMaxLength('CompanyEmail')" ng-required="GetIsRequired('CompanyEmail')" ng-model="Schema.CompanyEmail" type="text" />
+                            </div>
+                            <!--<div class="form-group" ng-required="GetIsRequired('ID_WeeklySchedule')">
+                                <div insys-lookup is-required="GetIsRequired('ID_WeeklySchedule')" lookup-options="WeeklyScheduleLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_WeeklySchedule', 'displayContainer': 'WeeklySchedule', 'label': 'Weekly Schedule'}"></div>
+                            </div>-->
+                            <div class="form-group" ng-required="GetIsRequired('ID_CostCenter')">
+                                <div insys-lookup is-required="GetIsRequired('ID_CostCenter')" lookup-options="CostCenterLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_CostCenter', 'displayContainer': 'CostCenter', 'label': 'Cost Center'}"></div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('ID_EmployeeStatus')">
+                                <div insys-lookup is-required="GetIsRequired('ID_EmployeeStatus')" lookup-options="EmployeeStatusLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_EmployeeStatus', 'displayContainer': 'EmployeeStatus', 'label': 'Employee Status'}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="er-title col-xl-10 col-lg-10 col-md-12">Date</div>
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-6 col-md-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('HiredDate')">
+                                <label class="control-label">Hired Date <i title="Hired Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" ng-model="Schema.HiredDate" name="HiredDate" ng-input text-type="'date'" class="form-control" ng-required="GetIsRequired('HiredDate')" ng-min="DateToday" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('StartDate')">
+                                <label class="control-label">Start Date <i title="Start Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" ng-model="Schema.StartDate" name="StartDate" ng-input text-type="'date'" class="form-control" ng-required="GetIsRequired('StartDate')" ng-min="DateToday" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('RegularizationDate')">
+                                <label class="control-label">Regularization Date <i title="Regularization Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" ng-model="Schema.RegularizationDate" name="RegularizationDate" ng-input text-type="'date'" class="form-control" ng-required="GetIsRequired('RegularizationDate')" ng-min="DateToday" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('EndDate')">
+                                <label class="control-label">End Date <i title="End Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" ng-model="Schema.EndDate" name="EndDate" ng-input text-type="'date'" class="form-control" ng-required="GetIsRequired('EndDate')" ng-min="DateToday" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="er-title col-xl-10 col-lg-10 col-md-12">Status</div>
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-6 col-md-10">
+                            <br />
+                            <div class="form-group">
+                                <span class="form-check-holder er-readonly">
+                                    <input id="ew-tc-check-1" class="form-check" ng-required="GetIsRequired('IsHired')" ng-model="Schema.IsHired" type="checkbox" />
+                                    <label for="ew-tc-check-1">Hired</label>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <span class="form-check-holder er-readonly">
+                                    <input id="ew-tc-check-2" class="form-check" ng-required="GetIsRequired('IsRequiredToLog')" ng-model="Schema.IsRequiredToLog" type="checkbox" />
+                                    <label for="ew-tc-check-2">Required To Log</label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-10">
+                            <br />
+                            <div class="form-group">
+                                <span class="form-check-holder er-readonly">
+                                    <input id="ew-tc-check-3" class="form-check" ng-required="GetIsRequired('IsActive')" ng-model="Schema.IsActive" type="checkbox" />
+                                    <label for="ew-tc-check-3">Active</label>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Payroll-->
+            <div id="payroll" role="tabpanel" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Payroll</h5>
+                </div>
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-6 col-md-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('MonthlyRate')">
+                                <label class="control-label">Monthly Rate <i title="Monthly Rate is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="MonthlyRate" ng-model="Schema.MonthlyRate" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('DailyRate')">
+                                <label class="control-label">Daily Rate <i title="Daily Rate is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="DailyRate" ng-model="Schema.DailyRate" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('HourlyRate')">
+                                <label class="control-label">Hourly Rate <i title="Hourly Rate is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="HourlyRate" ng-model="Schema.HourlyRate" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('DailySMW')">
+                                <label class="control-label">Daily SMW <i title="Daily SMW is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="DailySMW" ng-model="Schema.DailySMW" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('MonthlySMW')">
+                                <label class="control-label">Monthly SMW <i title="Monthly SMW is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="MonthlySMW" ng-model="Schema.MonthlySMW" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('DMonthlyRate')">
+                                <label class="control-label">DMonthly Rate <i title="DMonthly Rate is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="DMonthlyRate" ng-model="Schema.DMonthlyRate" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('DDailyRate')">
+                                <label class="control-label">DDaily Rate <i title="DDaily Rate is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="DDailyRate" ng-model="Schema.DDailyRate" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('DHourlyRate')">
+                                <label class="control-label">DHourly Rate <i title="DHourly Rate is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="DHourlyRate" ng-model="Schema.DHourlyRate" />
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-10"> <!-- SELECT -->
+                            <br />
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_Currency')">
+                                    <div insys-lookup is-required="GetIsRequired('ID_Currency')" lookup-options="CurrencyLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Currency', 'displayContainer': 'Currency', 'label': 'Currency'}"></div>
+                                </div>
+                            </div>
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_PayrollScheme')">
+                                    <div insys-lookup is-required="GetIsRequired('ID_PayrollScheme')" lookup-options="PayrollSchemeLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_PayrollScheme', 'displayContainer': 'PayrollScheme', 'label': 'Payroll Scheme'}"></div>
+                                </div>
+                            </div>
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_PayrollFrequency')">
+                                    <div insys-lookup is-required="GetIsRequired('ID_PayrollFrequency')" lookup-options="PayrollFrequencyLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_PayrollFrequency', 'displayContainer': 'PayrollFrequency', 'label': 'Payroll Frequency'}"></div>
+                                </div>
+                            </div>
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_PaymentMode')">
+                                    <div insys-lookup is-required="GetIsRequired('ID_PaymentMode')" lookup-options="PaymentModeLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_PaymentMode', 'displayContainer': 'PaymentMode', 'label': 'Payment Mode'}"></div>
+                                </div>
+                            </div>
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_Parameter')">
+                                    <div insys-lookup is-required="GetIsRequired('ID_Parameter')" lookup-options="ParameterLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Parameter', 'displayContainer': 'Parameter', 'label': 'Parameter'}"></div>
+                                </div>
+                            </div>
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_LeaveParameter')">
+                                    <div insys-lookup is-required="GetIsRequired('ID_LeaveParameter')" lookup-options="LeaveParameterLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_LeaveParameter', 'displayContainer': 'LeaveParameter', 'label': 'Leave Parameter'}"></div>
+                                </div>
+                            </div>
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_PayrollStatus')">
+                                    <div insys-lookup is-required="GetIsRequired('ID_PayrollStatus')" lookup-options="PayrollStatusLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_PayrollStatus', 'displayContainer': 'PayrollStatus', 'label': 'Payroll Status'}"></div>
+                                </div>
+                            </div>
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_PayrollClassification')">
+                                    <div insys-lookup is-required="GetIsRequired('ID_PayrollClassification')" lookup-options="PayrollClassificationLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_PayrollClassification', 'displayContainer': 'PayrollClassification', 'label': 'Payroll Classification'}"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <span class="form-check-holder er-readonly">
+                                    <input id="ew-tc-check-4" class="form-check" ng-model="Schema.MWE" type="checkbox" disabled />
+                                    <label for="ew-tc-check-4">MWE</label>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="er-title col-xl-10 col-lg-10 col-md-12">Bank</div>
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-6 col-md-10">
+                            <br />
+                            <div class="lbl-grp">
+
+                                <div class="form-group" ng-required="GetIsRequired('ID_AccountNumberType')">
+                                    <div insys-lookup is-required="GetIsRequired('ID_AccountNumberType')" lookup-options="AccountNumberTypeLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_AccountNumberType', 'displayContainer': 'AccountNumberType', 'label': 'Account Number Type'}"></div>
+                                </div>
+
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Bank Account No</label>
+                                <input class="form-control" type="text" name="BankAcctNo" ng-model="Schema.BankAcctNo" />
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-10">
+                            <br />
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_CompanyBankAcct')">
+                                    <div insys-lookup is-required="GetIsRequired('ID_CompanyBankAcct')" lookup-options="CompanyBankAcctLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_CompanyBankAcct', 'displayContainer': 'CompanyBankAcct', 'label': 'Company Bank Acct.'}"></div>
+                                </div>
+                            </div>
+                            <!--<div class="lbl-grp">
+                                <label>Alternative Bank Account No</label>
+                                <input class="form-control" type="text" name="" ng-model="Schema.BankAcctNo2" />
+                            </div>-->
+                        </div>
+                    </div>
+                    <div class="er-title col-xl-10 col-lg-10 col-md-12">Previous</div>
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-6 col-md-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('PrevEmpTaxableAmt')">
+                                <label class="control-label">Previous Taxable Amount <i title="Previous Taxable Amount is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="PrevEmpTaxableAmt" ng-model="Schema.PrevEmpTaxableAmt" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('PrevEmpWitholdingTax')">
+                                <label class="control-label">Previous Witholding Tax <i title="Previous Witholding Tax is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="PrevEmpWitholdingTax" ng-model="Schema.PrevEmpWitholdingTax" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('PrevEmpEndDate')">
+                                <label class="control-label">Previous Emp Date <i title="Previous Emp Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" ng-model="Schema.PrevEmpEndDate" name="PrevEmpEndDate" ng-input text-type="'date'" class="form-control" ng-required="GetIsRequired('PrevEmpEndDate')" ng-min="DateToday" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('Prev13thMonth')">
+                                <label class="control-label">Previous 13th Month<i title="Previous 13th Month is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="Prev13thMonth" ng-model="Schema.Prev13thMonth" />
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('PrevCompensation')">
+                                <label class="control-label">Previous Compensation<i title="Previous Compensation is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="PrevCompensation" ng-model="Schema.PrevCompensation" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('NonTaxPrevContribution')">
+                                <label class="control-label">Non Tax Previous Contribution<i title="Non Tax Previous Contribution is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="NonTaxPrevContribution" ng-model="Schema.NonTaxPrevContribution" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('NonTaxPrevCompensation')">
+                                <label class="control-label">Non Tax Previous Compensation<i title="Non Tax Previous Compensation is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="NonTaxPrevCompensation" ng-model="Schema.NonTaxPrevCompensation" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('NonTaxPrev13thMonth')">
+                                <label class="control-label">Non Tax Previous 13th Month<i title="Non Tax Previous 13th Month is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="NonTaxPrev13thMonth" ng-model="Schema.NonTaxPrev13thMonth" />
+                            </div>
+                        </div>
+                    </div>
+                <div class="er-title col-xl-10 col-lg-10 col-md-12">Tax</div>
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-6 col-md-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('TaxRate')">
+                                <label class="control-label">Tax Rate<i title="Tax Rate is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="TaxRate" ng-model="Schema.TaxRate" />
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-10">
+                            <br />
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_TaxExemption')">
+                                    <div insys-lookup is-required="GetIsRequired('ID_TaxExemption')" lookup-options="TaxExemptionLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_TaxExemption', 'displayContainer': 'TaxExemption', 'label': 'Tax Exemption'}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Organization-->
+            <div id="organization" role="tabpanel" class="tab-pane fade"> <!-- LOOK UP -->
+                <div class="rf-header">
+                    <h5>Organization</h5>
+                </div>
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-6 col-md-10">
+                            <br />
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_Company')">
+                                    <div insys-lookup is-required="GetIsRequired('ID_Company')" lookup-options="companyLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Company', 'displayContainer': 'Company', 'label': 'Company'}"></div>
+                                </div>
+                            </div>
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_Branch')">
+                                    <div insys-lookup cascade="getSchema(2, row)" is-required="GetIsRequired('ID_Branch')" lookup-options="branchLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Branch', 'displayContainer': 'Branch', 'label': 'Branch'}"></div>
+                                </div>
+                            </div>
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_Org_Division')">
+                                    <div insys-lookup cascade="getSchema(3, row)"  is-required="GetIsRequired('ID_Org_Division')" lookup-options="divisionLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Org_Division', 'displayContainer': 'Division', 'label': 'Division'}"></div>
+                                </div>
+                            </div>
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_Org_Department')">
+                                    <div insys-lookup cascade="getSchema(4, row)"  is-required="GetIsRequired('ID_Org_Department')" lookup-options="departmentLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Org_Department', 'displayContainer': 'Department', 'label': 'Department'}"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-10">
+                            <br />
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_Org_Section')">
+                                    <div insys-lookup cascade="getSchema(5, row)"  is-required="GetIsRequired('ID_Org_Section')" lookup-options="sectionLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Org_Section', 'displayContainer': 'Section', 'label': 'Section'}"></div>
+                                </div>
+                            </div>
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_Org_JobClassGroup')">
+                                    <div insys-lookup cascade="getSchema(6, row)"  is-required="GetIsRequired('ID_Org_JobClassGroup')" lookup-options="jobClassGroupLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Org_JobClassGroup', 'displayContainer': 'JobClassGroup', 'label': 'Job Class Group'}"></div>
+                                </div>
+                            </div>
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_Org_JobClass')">
+                                    <div insys-lookup cascade="getSchema(7, row)"  is-required="GetIsRequired('ID_Org_JobClass')" lookup-options="jobClassLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Org_JobClass', 'displayContainer': 'JobClass', 'label': 'Job Class'}"></div>
+                                </div>
+                            </div>
+                            <div class="lbl-grp">
+                                <div class="form-group" ng-required="GetIsRequired('ID_Org_Designation')">
+                                    <div insys-lookup cascade="getSchema(8, row)"  is-required="GetIsRequired('ID_Org_Designation')" lookup-options="designationLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Org_Designation', 'displayContainer': 'Designation', 'label': 'Designation'}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Approval Tab-->
+            <div id="approver" role="tabpanel" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Approver</h5>
+                </div>
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="am-filing-container d-none d-lg-block">
+                        <div class="am-filing-head">
+                            <label>Filing Type</label>
+                            <i class="fas fa-plus-circle" title="Click to add filing type" ng-click="openFilingModules()"></i>
+                        </div>
+                        <div class="am-filing-body" ng-class="{ 'custom-scroll' : isChrome }">
+                            <div ng-repeat="module in FilingModulesSelected" id="afi-{{ $index }}" class="am-filing-item" ng-click="loadApprovers(module, $index)" title="{{ module.Name }}">
+                                <span ng-bind="module.Name"></span>
+                                <i title="Remove this filing type" class="fas fa-times" ng-click="removeModule(module)"></i>
+                            </div>
+                            <!--If No Record Found-->
+                            <div class="am-filing-norec" ng-if="FilingModulesSelected.length == 0">
+                                <div class="norec">
+                                    <i class="fas fa-search"></i>
+                                    <span>No selected filing type found. Please click "<i class="fas fa-plus-circle"></i>" icon above</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="am-approver-container">
+                        <!--Filing module when mobile-->
+                        <div class="am-filing-mobile d-block d-lg-none">
+                            <div class="afm-head">
+                                <label>Filing Type</label>
+                                <i class="fas fa-plus-circle" title="Click to add filing type" ng-click="openFilingModules()"></i>
+                            </div>
+                            <div class="afm-body">
+                                <div ng-repeat="module in FilingModulesSelected" id="afim-{{ $index }}" class="am-filing-item" ng-click="loadApprovers(module, $index)" title="{{ module.Name }}">
+                                    <span ng-bind="module.Name"></span>
+                                    <i title="Remove this filing type" class="fas fa-times" ng-click="removeModule(module)"></i>
+                                </div>
+                                <div class="afm-no-rec" ng-if="FilingModulesSelected.length == 0">No Filing Type found</div>
+                            </div>
+                        </div>
+                        <div class="am-approver-head">
+                            <!--<div class="am-approver-count hide"><span ng-bind="CurrentFilingModule.Default.length"></span> approver(s) found</div>-->
+                            <div class="am-approver-btn-grp">
+                                <button type="button" ng-click="LoadApproverTemplate()"><i class="fas fa-redo-alt"></i> Load Template</button>
+                                <button type="button" ng-click="LoadApproverSchema()"><i class="fas fa-plus"></i> Add Level</button>
+                            </div>
+                        </div>
+                        <div class="am-approver-body" ng-class="{ 'custom-scroll' : isChrome }">
+                            <div class="am-approver-norec" ng-if="CurrentFilingModule.Default.length == 0"><span>No approver(s) found. Click "Add Approver Level" button above or click <a ng-click="LoadApproverSchema()">here</a>.</span></div>
+                            <div class="am-approver-norec" ng-if="CurrentFilingModule == null">Please select a Filing Type on the left.</div>
+                            <div class="am-approver-toggle" ng-repeat="approver in CurrentFilingModule.Default">
+                                <div class="am-toggle-head">
+                                    <div>
+                                        <i class="fas fa-ellipsis-v"></i>
+                                        <a data-toggle="collapse" data-target="#am-collapse-{{$index}}"><i class="fas fa-caret-down"></i>&nbsp;<span ng-bind="'Level ' + ($index + 1)"></span></a>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" class="power-check" id="powerapp-{{$index}}" ng-model="approver.IsPowerApprover" />
+                                        <label for="powerapp-{{$index}}">Power Approver</label>
+                                    </div>
+                                    <div class="am-toggle-ctrl">
+                                        <!--<i class="fas fa-user-cog" title="Set as Power Approver"></i>-->
+                                        <i class="fas fa-times" title="Remove" ng-click="RemoveDefaultApprover($index)"></i>
+                                    </div>
+                                </div>
+                                <div class="am-toggle-body collapse show" id="am-collapse-{{$index}}">
+                                    <div class="row">
+                                        <!--Approver 1 (Required)-->
+                                        <div class="col-md-4 cd-6">
+                                            <div class="am-approver-item" ng-class="{'no-approver': approver.ID_Employee == null || approver.ID_Employee == 0}">
+                                                <div class="am-approver-ctrl" title="Click to add approver" ng-if="approver.ID_Employee == null || approver.ID_Employee == 0" ng-click="AddApprover('ID_Employee', approver)">
+                                                    <div class="am-approver-pic"><i class="fas fa-plus"></i></div>
+                                                </div>
+                                                <div class="am-approver-ctrl" ng-if="approver.ID_Employee != null && approver.ID_Employee != 0">
+                                                    <div class="am-pic" ng-if="approver.Image != null && approver.Image != ''" lazy-load-image="{Image: approver.Image, Container: 'Photos'}"></div>
+                                                    <div class="am-approver-pic" ng-if="approver.Image == null || approver.Image == ''" ng-bind="SetIcon(approver.Employee)"></div>
+                                                </div>
+                                                <div class="am-approver-desc">
+                                                    <h5 ng-if="approver.ID_Employee == null || approver.ID_Employee == 0">Add Approver</h5>
+                                                    <h5 ng-if="approver.ID_Employee != null || approver.ID_Employee != 0" ng-bind="approver.Employee" title="{{ approver.Employee }}"></h5>
+                                                    <p ng-if="approver.ID_Employee == null || approver.ID_Employee == 0" class="req">Required atleast 1 approver</p>
+                                                    <p ng-if="approver.ID_Employee != null && approver.ID_Employee != 0">Approver 1</p>
+                                                </div>
+                                                <i ng-click="RemoveApprover('ID_Employee', approver)" class="fas fa-times remove-approver" title="Remove approver" ng-if="approver.ID_Employee != null && approver.ID_Employee != 0"></i>
+                                            </div>
+                                        </div>
+                                        <!--Approver 2 (Optional)-->
+                                        <div class="col-md-4 cd-6">
+                                            <div class="am-approver-item" ng-class="{'no-approver': approver.ID_Employee2 == null}">
+                                                <div class="am-approver-ctrl" title="Click to add approver" ng-click="AddApprover('ID_Employee2', approver)" ng-if="approver.ID_Employee2 == null">
+                                                    <div class="am-approver-pic"><i class="fas fa-plus"></i></div>
+                                                </div>
+                                                <div class="am-approver-ctrl" ng-if="approver.ID_Employee2 != null">
+                                                    <div class="am-pic" ng-if="approver.Image2 != null && approver.Image2 != ''" lazy-load-image="{Image: approver.Image2, Container: 'Photos'}"></div>
+                                                    <div class="am-approver-pic" ng-if="approver.Image2 == null || approver.Image2 == ''" ng-bind="SetIcon(approver.Employee2)"></div>
+                                                </div>
+                                                <div class="am-approver-desc">
+                                                    <h5 ng-if="approver.ID_Employee2 == null">Add Approver</h5>
+                                                    <h5 ng-if="approver.ID_Employee2 != null" ng-bind="approver.Employee2" title="{{ approver.Employee2 }}"></h5>
+                                                    <p ng-if="approver.ID_Employee2 != null">Approver 2</p>
+                                                    <p ng-if="approver.ID_Employee2 == null">(Optional)</p>
+                                                </div>
+                                                <i ng-click="RemoveApprover('ID_Employee2', approver)" class="fas fa-times remove-approver" title="Remove approver" ng-if="approver.ID_Employee2 != null"></i>
+                                            </div>
+                                        </div>
+                                        <!--Approver 3 (Optional)-->
+                                        <div class="col-md-4 cd-6">
+                                            <div class="am-approver-item" ng-class="{'no-approver': approver.ID_Employee3 == null}">
+                                                <div class="am-approver-ctrl" title="Click to add approver" ng-click="AddApprover('ID_Employee3', approver)" ng-if="approver.ID_Employee3 == null">
+                                                    <div class="am-approver-pic"><i class="fas fa-plus"></i></div>
+                                                </div>
+                                                <div class="am-approver-ctrl" ng-if="approver.ID_Employee3 != null">
+                                                    <div class="am-pic" ng-if="approver.Image3 != null && approver.Image3 != ''" lazy-load-image="{Image: approver.Image3, Container: 'Photos'}"></div>
+                                                    <div class="am-approver-pic" ng-if="approver.Image3 == null || approver.Image3 == ''" ng-bind="SetIcon(approver.Employee3)"></div>
+                                                </div>
+                                                <div class="am-approver-desc">
+                                                    <h5 ng-if="approver.ID_Employee3 == null">Add Approver</h5>
+                                                    <h5 ng-if="approver.ID_Employee3 != null" ng-bind="approver.Employee3" title="{{ approver.Employee3 }}"></h5>
+                                                    <p ng-if="approver.ID_Employee3 == null">(Optional)</p>
+                                                    <p ng-if="approver.ID_Employee3 != null">Approver 3</p>
+                                                </div>
+                                                <i ng-click="RemoveApprover('ID_Employee3', approver)" class="fas fa-times remove-approver" title="Remove approver" ng-if="approver.ID_Employee3 != null"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Training Bond Tab-->
+            <div id="trainingbond" role="tabpanel" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Training Bond</h5>
+                </div>
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="detail-form">
+                        
+                        <div class="df-head flex-end">
+                            <div class="df-btn-grp">
+                                <button ng-click="ViewEmployeeTrainingBond()" type="button"><i class="fas fa-print"></i> Print</button>
+                                <button ng-click="newTrainingBondRecord()" type="button"><i class="fas fa-plus"></i> Add</button>
+                                <button ng-click="delTrainingBondRecord()" type="button"><i class="fas fa-trash"></i> Remove</button>
+                            </div>
+                        </div>
+
+                        <div class="df-body list">
+                            <div class="tbl-holder no-paging" ng-class="{ 'custom-scroll' : isChrome }">
+                                <table id="trainingbond_details" class="table table-striped table-hover table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th class="tbl-ctrl">
+                                                <input type="checkbox" class="tbl-check" id="selectAllTrainingBondRecords" ng-model="SelectAllTrainingBondRows" ng-click="CheckAllTrainingBondRecord()" />
+                                                <label for="selectAllTrainingBondRecords"></label>
+                                            </th>
+                                            <th>Training</th>
+                                            <th>Notes</th>
+                                            <th># Of Months</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th>Is Active</th>
+                                            <th>Cancelled</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="tbr in TrainingBondRecord">
+                                            <td class="tbl-ctrl">
+                                                <input type="checkbox" class="tbl-check" id="dsd-sdc-{{$index}}" ng-model="tbr.IsChecked" />
+                                                <label for="dsd-sdc-{{$index}}"></label>
+                                            </td>
+
+                                            <td>
+                                                <select c-label="Training" ng-required="GetIsRequired('ID_Training', TrainingBondSchema)" name="ID_Training" ng-model="tbr.ID_Training" ng-options="tr.ID as tr.Name for tr in TrainingRecord " class="form-control"></select>
+                                            </td>
+                                            <td><input class="form-control" type="text" name="Notes" ng-model="tbr.Notes" maxlength="{{GetMaxLength('Notes', TrainingBondSchema)}}" ng-required="GetIsRequired('Notes', TrainingBondSchema)" /></td>
+                                            <td><input class="form-control" type="text" name="NumberOfMonths" ng-model="tbr.NumberOfMonths" /></td>
+                                            <td>
+                                                <div class="input-group custom-ig-lu">
+                                                    <input ng-change="CountNumberOfMonths(tbr.StartDate, tbr.EndDate, tbr)" type="text" name="StartDate" ng-model="tbr.StartDate" ng-input text-type="'date'" format="MM/DD/YYYY" placeholder="mm/dd/yyyy" class="form-control" required />
+                                                    <span class="input-group-btn lu">
+                                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <div class="input-group custom-ig-lu">
+                                                    <input ng-change="CountNumberOfMonths(tbr.StartDate, tbr.EndDate, tbr)" type="text" name="EndDate" ng-model="tbr.EndDate" ng-input text-type="'date'" format="MM/DD/YYYY" placeholder="mm/dd/yyyy" class="form-control" required />
+                                                    <span class="input-group-btn lu">
+                                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                            </td>
+
+                                            <td class="chck">
+                                                <input type="checkbox" name="IsActive" class="tbl-check tbl-check-dt" id="IsActive-eer-{{$index}}" ng-model="tbr.IsActive" />
+                                                <label for="IsActive-eer-{{$index}}"></label>
+                                            </td>
+                                            <td class="chck">
+                                                <input type="checkbox" name="IsCancelled" class="tbl-check tbl-check-dt" id="IsCancelled-eer-{{$index}}" ng-model="tbr.IsCancelled" />
+                                                <label for="IsCancelled-eer-{{$index}}"></label>
+                                            </td>
+                                        </tr>
+                                        <tr class="no_record" ng-if="TrainingBondRecord.length == 0">
+                                            <td>
+                                                <div class="no-rec-ico">
+                                                    <i class="fas fa-file-alt"></i>
+                                                    <i class="fas fa-search"></i>
+                                                </div>
+                                                <p>No record found.</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Emloyee Attachments Tab-->
+            <div id="attachments" role="tabpanel" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Attachments</h5>
+                </div>
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="detail-form">
+
+                        <div class="df-head flex-end">
+                            <div class="df-btn-grp">
+                                <button ng-click="newAttachmentRecord()" type="button"><i class="fas fa-plus"></i> Add</button>
+                                <button ng-click="delAttachmentRecord()" type="button"><i class="fas fa-trash"></i> Remove</button>
+                            </div>
+                        </div>
+
+                        <div class="df-body list">
+                            <div class="tbl-holder no-paging" ng-class="{ 'custom-scroll' : isChrome }">
+                                <table id="employee_attachments" class="table table-striped table-hover table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th class="tbl-ctrl">
+                                                <input type="checkbox" class="tbl-check" id="selectAllAttachmentRecords" ng-model="SelectAllAttachmentRows" ng-click="CheckAllAttachmentRows()" />
+                                                <label for="selectAllAttachmentRecords"></label>
+                                            </th>
+                                            <th>Name</th>
+                                            <th>Notes</th>
+                                            <th>Attachments</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="ear in EmployeeAttachmentRecord" >
+                                            <td class="tbl-ctrl">
+                                                <input type="checkbox" class="tbl-check" id="ear-sdc-{{$index}}" ng-model="ear.IsChecked" ng-disabled="(ear.Id < 0)"/>
+                                                <label for="ear-sdc-{{$index}}"></label>
+                                            </td>
+                                            <td><input type="text" name="Name" class="form-control" ng-model="ear.Name" ng-required="GetIsRequired('Name', AttachmentTabSchema)" ng-disabled="(ear.Id < 0)"/></td>
+                                            <td><input type="text" name="Notes" class="form-control" ng-model="ear.Notes" ng-required="GetIsRequired('Notes', AttachmentTabSchema)" ng-disabled="(ear.Id < 0)"/></td>
+                                            <td>
+                                                <insys-upload readonly="false" required="GetIsRequired('Attachment', AttachmentTabSchema)" target-model="ear.Attachment" name="Attachment" options="UploadOptions" ng-disable="(ear.Id < 0)"></insys-upload>
+                                            </td>
+                                        </tr>
+                                        <tr class="no_record" ng-if="EmployeeAttachmentRecord.length == 0">
+                                            <td>
+                                                <div class="no-rec-ico">
+                                                    <i class="fas fa-file-alt"></i>
+                                                    <i class="fas fa-search"></i>
+                                                </div>
+                                                <p>No record found.</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

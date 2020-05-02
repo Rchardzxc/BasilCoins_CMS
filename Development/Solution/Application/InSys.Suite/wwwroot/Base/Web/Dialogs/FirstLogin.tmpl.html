@@ -1,0 +1,32 @@
+﻿<div class="panel">
+    <div class="panel-heading"><label><i class="fas fa-users-cog"></i> Setup your account.</label></div>
+    <div class="panel-body">
+        <div>
+            <form name="AccountForm" ng-submit="SetupAccount()" autocomplete="off" method="post">
+                <div class="form-group" required="required">
+                    <label class="control-label">Old password <i title="This field is required" class="fas fa-exclamation-circle"></i></label>
+                    <input class="form-control" type="password" name="OldPassword" ng-model="UserData.OldPassword" required="required" min="6" />
+                </div>
+                <div class="form-group" required="required">
+                    <label class="control-label">New password <i title="This field is required" class="fas fa-exclamation-circle"></i></label>
+                    <input class="form-control" type="password" name="NewPassword" ng-model="UserData.NewPassword" required="required" min="6" />
+                </div>
+                <div class="form-group" required="required">
+                    <label class="control-label">Secret question <i title="This field is required" class="fas fa-exclamation-circle"></i></label>
+                    <select class="form-control" name="ID_SecretQuestion" ng-model="UserData.ID_SecretQuestion" required="required">
+                        <option value="">-Select one-</option>
+                        <option ng-repeat="d in SecretQuestions" value="{{d.ID}}">{{d.Name}}</option>
+                    </select>
+                </div>
+                <div class="form-group" required="required">
+                    <label class="control-label">Secret Answer <i title="This field is required" class="fas fa-exclamation-circle"></i></label>
+                    <input class="form-control" type="password" name="SecretAnswer" ng-model="UserData.SecretAnswer" required="required" />
+                </div>
+                
+                <div class="panel-footer">
+                    <button type="submit" class="btn emphasized">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

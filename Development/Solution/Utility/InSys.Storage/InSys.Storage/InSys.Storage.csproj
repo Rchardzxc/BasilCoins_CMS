@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp2.2;net45;netstandard2.0</TargetFrameworks>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Authors>LJ Gomez</Authors>
+    <Company>Intellismart Technology Inc.</Company>
+    <Description>Storage Wrapper for both Local and Azure</Description>
+    <Version>1.1.15</Version>
+    <PackageReleaseNotes>modified for .netstandard</PackageReleaseNotes>
+    <PackOnBuild>true</PackOnBuild>
+    <Owners>LJ Gomez</Owners>
+    <Title>InSys.Storage</Title>
+    <PackageId>InSys.Storage</PackageId>
+    <PackageVersion>1.1.15</PackageVersion>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
+    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <DefineConstants>NET45;NETFULL</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
+    <!--<PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />-->
+  </ItemGroup>
+
+  <!--<Target Name="DebugRedDung" AfterTargets="Build">
+    <Message Importance="high" Text="Red Dung Cli Started" />
+    <Exec Command="Reddung -w -d" ContinueOnError="true" />
+  </Target>-->
+
+
+</Project>

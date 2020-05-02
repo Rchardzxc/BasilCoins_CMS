@@ -1,0 +1,158 @@
+﻿<div class="record">
+    <div class="record-header"></div>
+    <div class="record-body">
+        <!--Tabs-->
+        <div class="record-tab d-none d-md-block">
+            <div class="record-tab-header">
+                <span>Tabs</span>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                </li>
+            </ul>
+        </div>
+
+        <form ng-submit="saveForm()" name="form.timekeeping" novalidate autocomplete="off" spellcheck="false" class="tab-content" method="post">
+            <div class="rh-btn-grp">
+
+                <button class="emphasized d-none d-md-block" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()" type="button"><i class="fas fa-plus"></i> New</button>
+                <button class="emphasized d-none d-md-block" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0"><i class="fas fa-save"></i> Save</button>
+
+                <!--These dropdowns will display when mobile-->
+                <!--Actions-->
+                <div class="dropdown mobile d-block d-md-none">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()">New</button>
+                        <button class="dropdown-item" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0">Save</button>
+                    </div>
+                </div>
+                <!--Tabs-->
+                <div class="dropdown mobile d-block d-md-none" role="tablist">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Tabs</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--General Tab-->
+            <div id="general" role="tabpanel" class="tab-pane fade show active">
+                <!--Form Header-->
+                <div class="rf-header">
+                    <h5>General</h5>
+                </div>
+
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="timekeeping-summary col-xl-10 col-lg-10 col-md-12" ng-if="IsProcessed">
+                        <div class="summary-content">
+                            <div class="summary-itm">
+                                <label>Total employees found:</label>
+                                <label class="val">270</label>
+                            </div>
+                            <div class="summary-itm">
+                                <label>Total record(s) processed:</label>
+                                <label class="val">267</label>
+                            </div>
+                            <div class="summary-itm">
+                                <label>Total record(s) unprocessed:</label>
+                                <label class="val">3</label>
+                            </div>
+                            <div class="summary-itm">
+                                <label>Posted:</label>
+                                <label class="val">Yes</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('StartDate')">
+                                <label class="control-label">Start Date <i title="Start Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" name="Star tDate" ng-required="GetIsRequired('StartDate')" ng-model="Schema.StartDate" ng-input text-type="'date'" class="form-control" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('EndDate')">
+                                <label class="control-label">End Date <i title="End Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" name="End Date" ng-required="GetIsRequired('EndDate')" ng-model="Schema.EndDate" ng-input text-type="'date'" class="form-control" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('PostingDate')">
+                                <label class="control-label">Posting Date <i title="Posting Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" name="Posting Date" ng-required="GetIsRequired('PostingDate')" ng-model="Schema.PostingDate" ng-input text-type="'date'" class="form-control" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('ID_PayFrequency')">
+                                <label class="control-label">Pay Frequency <i title="Pay Frequency is required" class="fa fa-exclamation-circle"></i></label>
+                                <select c-label="Pay Frequency" name="ID_PayFrequency" ng-required="GetIsRequired('ID_PayFrequency')" ng-options="nr.ID as nr.Name for nr in PayFrequency" class="form-control" ng-model="Schema.ID_PayFrequency"></select>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('ID_CostCenter')">
+                                <div insys-lookup is-required="GetIsRequired('ID_CostCenter')" lookup-options="costcenterLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_CostCenter', 'displayContainer': 'CostCenter', 'label': 'Cost Center'}"></div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('ID_PayrollClassification')">
+                                <div insys-lookup is-required="GetIsRequired('ID_PayrollClassification')" lookup-options="payrollclassificationLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_PayrollClassification', 'displayContainer': 'PayrollClassification', 'label': 'Payroll Classification'}"></div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('ID_Employee')">
+                                <div insys-lookup is-required="GetIsRequired('ID_Employee')" lookup-options="employeeLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Employee', 'displayContainer': 'Employee', 'label': 'Employee'}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rf-title col-xl-10 col-lg-10 col-md-12">Organization</div>
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('ID_Company')">
+                                <div insys-lookup is-required="GetIsRequired('ID_Company')" lookup-options="companyLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Company', 'displayContainer': 'Company', 'label': 'Company'}"></div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('ID_Branch')">
+                                <div insys-lookup is-required="GetIsRequired('ID_Branch')" lookup-options="branchLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Branch', 'displayContainer': 'Branch', 'label': 'Branch'}"></div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('ID_Division')">
+                                <div insys-lookup is-required="GetIsRequired('ID_Division')" lookup-options="divisionLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Division', 'displayContainer': 'Division', 'label': 'Division'}"></div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('ID_Department')">
+                                <div insys-lookup is-required="GetIsRequired('ID_Department')" lookup-options="departmentLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Department', 'displayContainer': 'Department', 'label': 'Department'}"></div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('ID_Section')">
+                                <div insys-lookup is-required="GetIsRequired('ID_Section')" lookup-options="sectionLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Section', 'displayContainer': 'Section', 'label': 'Section'}"></div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('ID_JobClassGroup')">
+                                <div insys-lookup is-required="GetIsRequired('ID_JobClassGroup')" lookup-options="jobclassgroupLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_JobClassGroup', 'displayContainer': 'JobClassGroup', 'label': 'Job Class Group'}"></div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('ID_JobClass')">
+                                <div insys-lookup is-required="GetIsRequired('ID_JobClass')" lookup-options="jobclassLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_JobClass', 'displayContainer': 'JobClass', 'label': 'Job Class'}"></div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('ID_Designation')">
+                                <div insys-lookup is-required="GetIsRequired('ID_Designation')" lookup-options="designationLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Designation', 'displayContainer': 'Designation', 'label': 'Designation'}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+</div>

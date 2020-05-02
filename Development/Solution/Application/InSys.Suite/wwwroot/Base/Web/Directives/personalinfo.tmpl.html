@@ -1,0 +1,163 @@
+﻿<div class="col-lg-10 col-md-12 row">
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="lbl-grp">
+            <label>Last name</label>
+            <p ng-bind="Schema.LastName"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Middlename</label>
+            <p ng-bind="IsNull(Schema.MiddleName, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Nickname</label>
+            <p ng-bind="IsNull(Schema.NickName, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Date of Birth</label>
+            <p ng-bind="FormatDate(Schema.BirthDate, 'MMM DD, YYYY')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Age</label>
+            <p ng-bind="GetAge(Schema.BirthDate)"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Civil Status</label>
+            <p ng-bind="IsNull(Schema.CivilStatus, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Weight (kg)</label>
+            <p ng-bind="IsNull(Schema.Weight, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Blood Type</label>
+            <p ng-bind="IsNull(Schema.BloodType, '-')"></p>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="lbl-grp">
+            <label>First name</label>
+            <p ng-bind="IsNull(Schema.FirstName, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Suffix</label>
+            <p ng-bind="IsNull(Schema.Suffix, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Gender</label>
+            <p ng-bind="IsNull(Schema.Gender, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Place of Birth</label>
+            <p ng-bind="IsNull(Schema.BirthPlace, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Religion</label>
+            <p ng-bind="IsNull(Schema.Religion, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Citizenship</label>
+            <p ng-bind="IsNull(Schema.Citizenship, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Height (cm)</label>
+            <p ng-bind="IsNull(Schema.Height, '-')"></p>
+        </div>
+    </div>
+    <div class="r-title col-12">Contact Info</div>
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="lbl-grp">
+            <label>Mobile No</label>
+            <p ng-bind="IsNull(Schema.MobileNo, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Phone No</label>
+            <p ng-bind="IsNull(Schema.PhoneNo, '-')"></p>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="lbl-grp">
+            <label>Email Address</label>
+            <p ng-bind="IsNull(Schema.EmailAddress, '-')"></p>
+        </div>
+    </div>
+    <div class="r-title col-12">Address</div>
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="rs-title" ng-bind="'Permanent' + (IsNull(PermanentPersonaAddress.AddressProperty, '') != '' ? '('+ PermanentPersonaAddress.AddressProperty +')' : '')"></div>
+        <div class="lbl-grp">
+            <label>No/Blk/Lot</label>
+            <p ng-bind="IsNull(PermanentPersonaAddress.HouseNo, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Street name/Subdivision</label>
+            <p ng-bind="IsNull(PermanentPersonaAddress.StreetName, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>province</label>
+            <p ng-bind="IsNull(PermanentPersonaAddress.Province, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>city</label>
+            <p ng-bind="IsNull(PermanentPersonaAddress.City, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>barangay</label>
+            <p ng-bind="IsNull(PermanentPersonaAddress.Barangay, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>zip code</label>
+            <p ng-bind="IsNull(PermanentPersonaAddress.ZipCode, '-')"></p>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="rs-title" ng-bind="'Present' + (IsNull(PresentPersonaAddress.AddressProperty, '') != '' ? '('+ PresentPersonaAddress.AddressProperty +')' : '')"></div>
+        <div class="lbl-grp">
+            <label>No/Blk/Lot</label>
+            <p ng-bind="IsNull(PresentPersonaAddress.HouseNo, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Street name/Subdivision</label>
+            <p ng-bind="IsNull(PresentPersonaAddress.StreetName, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Province</label>
+            <p ng-bind="IsNull(PresentPersonaAddress.Province, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>City</label>
+            <p ng-bind="IsNull(PresentPersonaAddress.City, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Barangay</label>
+            <p ng-bind="IsNull(PresentPersonaAddress.Barangay, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>Zip Code</label>
+            <p ng-bind="IsNull(PresentPersonaAddress.ZipCode, '-')"></p>
+        </div>
+    </div>
+    <div class="r-title col-12">Government ID</div>
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="lbl-grp">
+            <label>SSS No.</label>
+            <p ng-bind="IsNull(Schema.SSSNo, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>HDMF No.</label>
+            <p ng-bind="IsNull(Schema.HDMFNo, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>GSIS No.</label>
+            <p ng-bind="IsNull(Schema.GSISNo, '-')"></p>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="lbl-grp">
+            <label>PhilHealth No.</label>
+            <p ng-bind="IsNull(Schema.PhilHealthNo, '-')"></p>
+        </div>
+        <div class="lbl-grp">
+            <label>TIN No.</label>
+            <p ng-bind="IsNull(Schema.TINNo, '-')"></p>
+        </div>
+    </div>
+</div>

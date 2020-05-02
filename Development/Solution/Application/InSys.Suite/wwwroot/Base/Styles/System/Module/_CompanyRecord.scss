@@ -1,0 +1,199 @@
+﻿.company {
+
+    .org-menu-delete {
+        position: absolute;
+        right: 40px;
+        cursor: pointer;
+        box-shadow: none;
+        outline: none;
+        border: none;
+        padding: 5px 15px;
+        border-radius: 4px;
+        background-color: #3498db;
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .org-menu-holder {
+        .m-menu-ul {
+            margin: 0;
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .org-menu-add {
+            display: flex;
+            align-items: center;
+
+            .om-add {
+                padding: 5px 15px;
+                border: 1px dashed #2980b9;
+                margin-bottom: 5px;
+                margin-left: 19px;
+                color: #2980b9;
+                cursor: pointer;
+
+                label {
+                    cursor: pointer;
+                    margin: 0;
+                }
+            }
+        }
+
+        .org-menu-itm {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+
+            .org-menu-type {
+                font-size: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2px 7px;
+                margin-left: 5px;
+                background-color: #e67e22;
+                color: #fff !important;
+                border-radius: 4px;
+                opacity: 0;
+            }
+
+            &:hover {
+                .org-menu-type {
+                    opacity: 1;
+                }
+            }
+
+
+
+            label {
+                margin: 0;
+                font-weight: 500;
+                color: #777;
+
+                &.open {
+                    color: #555;
+                    font-weight: bold;
+                }
+            }
+
+            i {
+                cursor: pointer;
+                font-size: 16px;
+                margin-right: 5px;
+
+                &.fa-square {
+                    color: transparent;
+                    border: 2px solid #aaa;
+                    height: 14px;
+                    width: 14px;
+                    font-size: 14px;
+                }
+
+                &.fa-check-square {
+                    color: #2980b9;
+                }
+
+                &.org-menu-toggle {
+                    color: #555;
+                }
+            }
+        }
+    }
+
+    .record-tab {
+        &.hideInfoTab {
+            display: none !important;
+        }
+
+        ul {
+            li {
+                a {
+                    &.m-initial {
+                        display: flex;
+                        color: #fff;
+                        font-size: 15px;
+                        align-items: center;
+                        justify-content: center;
+                        text-transform: capitalize;
+                    }
+                }
+            }
+        }
+    }
+
+    .record-body {
+        .pinnedTab {
+            height: 100px;
+            width: 15px;
+            writing-mode: vertical-rl;
+            text-align: center;
+            background-color: #e67e22;
+            margin-top: 10px;
+            margin-left: -4px;
+            padding-left: 20px;
+            font-weight: 500;
+            color: #fff;
+            cursor: pointer;
+        }
+    }
+
+    .df-body.tree {
+        flex: 1;
+    }
+
+    .detail-form {
+        display: flex;
+        position: relative;
+    }
+
+    .tree-prop, .tree-prop-mobile {
+        max-width: 300px;
+        padding: 5px 20px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        h5 {
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        label.sub {
+            font-size: 12px;
+            line-height: 15px;
+            margin-bottom: 20px;
+        }
+
+        .tree-form {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        &.toggle {
+            position: absolute;
+            display: flex;
+        }
+    }
+
+    .details-pin {
+        background-color: #2980b9;
+        color: #fff;
+        position: absolute;
+        padding: 3px 10px;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        cursor: pointer; 
+        z-index: 1;
+    }
+
+    .tree-prop-mobile {
+        display: none;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        max-width: none;
+        background-color: #fff;
+    }
+}

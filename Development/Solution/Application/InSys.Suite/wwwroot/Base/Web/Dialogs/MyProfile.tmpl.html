@@ -1,0 +1,70 @@
+﻿<div class="mp-container">
+    <div class="mp-head">
+        <div class="mp-pic" ng-if="Persona.ImageFile != null && Persona.ImageFile != ''" lazy-load-image="{Image: Profile.Image, Container: 'Photos'}"></div>
+        <div class="mp-initial" ng-if="Persona.ImageFile == null || Persona.ImageFile == ''" ng-bind="SetIcon(Employee.Persona)"></div>
+        <div class="mp-desc d-none d-sm-block">
+            <h5 ng-bind="Employee.Persona"></h5>
+            <label ng-bind="Employee.Designation"></label>
+        </div>
+    </div>
+    <div class="mp-body">
+        <div class="mp-left-info">
+            <div class="mpli-title">Main Info</div>
+            <div class="mpli-item">
+                <i class="fas fa-mobile"></i>
+                <label ng-bind="Val(Persona.MobileNo)"></label>
+            </div>
+            <div class="mpli-item">
+                <i class="fas fa-phone"></i>
+                <label ng-bind="Val(Persona.PhoneNo)"></label>
+            </div>
+            <div class="mpli-item">
+                <i class="fas fa-envelope"></i>
+                <label ng-bind="Val(Persona.EmailAddress)"></label>
+            </div>
+            <div class="mpli-item">
+                <i class="fas fa-hashtag"></i>
+                <label ng-bind="Val(Employee.AccessNo)"></label>
+            </div>
+            <div class="mpli-item">
+                <i class="fas fa-user-tie"></i>
+                <label ng-bind="Val(Employee.EmployeeStatus)"></label>
+            </div>
+            <div class="mpli-item">
+                <i class="fas fa-calendar-check"></i>
+                <label ng-bind="Val(FormatDate(Employee.StartDate, 'LL'))"></label>
+            </div>
+            <div class="mpli-item">
+                <i class="fas fa-building"></i>
+                <label ng-bind="Val(Employee.Department)"></label>
+            </div>
+        </div>
+        <div class="mp-right-info">
+            <ul class="nav nav-tabs custom-navtab">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#personal_info">Personal Info</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#employment_record">Employment Record</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane container active" id="personal_info">
+                    <div ng-include="HtmlTemplatePath + '/Web/Directives/MyProfile_PersonalInfo.tmpl.html'"></div>
+                </div>
+                <div class="tab-pane container fade" id="employment_record">
+                    <div ng-include="HtmlTemplatePath + '/Web/Directives/MyProfile_EmploymentRecord.tmpl.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mp-close" ng-click="close()">
+    <i class="fas fa-times"></i>
+    <span>Close</span>
+</div>
+<div id="inner-wrap">
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" width="100vw" height="300" viewBox="0 0 960 214.5" preserveAspectRatio="xMinYMid meet">
+        <path fill="rgba(255, 255, 255, 0.1)" d="M2663.6 73.2S2577 92 2529 89c-130.7-8.5-209.5-56.3-286.7-62.4s-125.7 18-188.3 18c-5 0-10-.4-14.5-.7-52-5-149.2-43-220.7-39-31.7 2-64 14-96.4 30-160.4 80-230.2-5.6-340.4-18-110-12-146.6 20-274 36S820.4 0 605.8 0C450.8 0 356 71 225.2 62.2 128 56 60.7 28-.3 11.2V104c22 7.3 46 14.2 70.4 16.7 110 12.3 147-19.3 275-35.5s350 39.8 369 43c27 4.3 59 8 94 10 13 .5 26 1 39 1 156 2 250-70.3 381-62 130.5 8.2 209.5 56.3 286.7 62 77 6.4 125.8-18 188.3-17.5 5 0 10 .2 14.3.6 52 5 145 49.5 220.7 38.2 32-5 64-15 96.6-31 160.5-79.4 230.3 6 340 18.4 110 12 146.3-20 273.7-36l15.5-2V73l1-.5z" />
+    </svg>
+</div>

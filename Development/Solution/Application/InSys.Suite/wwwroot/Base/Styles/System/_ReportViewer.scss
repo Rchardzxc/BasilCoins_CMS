@@ -1,0 +1,68 @@
+﻿.rpt-viewer {
+    form {
+        padding: 0 !important;
+        border-radius: 0 !important;
+        background-color: transparent !important;
+    }
+
+    .pdf-btn-grp {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        display: flex;
+
+        button {
+            @extend %button-tmpl;
+            background-color: #3498DB;
+            color: #FFF;
+            margin: 0 3px;
+
+            &.emphasized {
+                background-color: #3498DB;
+                color: #FFF;
+            }
+        }
+
+        .dropdown {
+            .dropdown-menu {
+                border: none;
+                box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+
+                button {
+                    background-color: transparent !important;
+                    color: #555 !important;
+                    margin: 0 !important;
+                }
+
+                .nav-tabs {
+                    border: none;
+
+                    .nav-item {
+                        margin: 0;
+                        width: 100%;
+
+                        .nav-link {
+                            border: none;
+                            padding: 3px 10px;
+                            font-size: 13px;
+                            font-weight: 500;
+                            background-color: transparent !important;
+
+                            &.active {
+                                color: #3498db !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.pdfViewer {
+    iframe {
+        width: 100%;
+        height: calc(100vh - 125px);
+        border: none;
+        border-radius: 10px;
+    }
+}

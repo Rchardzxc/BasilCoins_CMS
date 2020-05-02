@@ -1,0 +1,95 @@
+﻿<div class="panel" ng-init="Init()">
+    <div class="panel-heading">
+        <label><i class="fas fa-plus"></i> Overtime</label>
+    </div>
+    <form name="overtimeFrm">
+        <div class="panel-body">
+            <div class="computed-panel">
+                <div class="cp-title">Details</div>
+                <div class="cp-item">
+                    <label>Reference No.:</label>
+                    <span ng-bind="Data.ReferenceNo"></span>
+                </div>
+                <div class="cp-item">
+                    <label>Date Filed:</label>
+                    <span ng-bind="FormatDate(Data.FilingDate)"></span>
+                </div>
+                <div class="cp-item">
+                    <label>Computed Hours:</label>
+                    <span ng-bind="Data.ComputedHours"></span>
+                </div>
+                <div class="cp-item">
+                    <label>Considered Hours:</label>
+                    <span ng-bind="Data.ConsideredHours"></span>
+                </div>
+                <div class="cp-item">
+                    <label>Posted:</label>
+                    <span ng-bind="Data.IsPosted ? 'Yes' : 'No'"></span>
+                </div>
+                <div class="cp-item">
+                    <label>Status:</label>
+                    <span ng-bind="Data.FilingStatus"></span>
+                </div>
+                <div class="cp-item" ng-if="Data.ApprovalDate">
+                    <label>Date Approved:</label>
+                    <span ng-bind="Data.ApprovalDate"></span>
+                </div>
+                <div class="cp-title">Approval History</div>
+                <span ng-if="ApprovalHistories.length == 0">No Approvals</span>
+                <div class="filing-status" ng-repeat="history in ApprovalHistories">
+                    <i class="status-icon fas fa-check-circle" ng-class="{'fas fa-check-circle' : history.ApprovalAction == 'Approve','fas fa-times-circle' : history.ApprovalAction == 'Disapprove'}"></i>
+                    <div class="filing-right">
+                        <div class="filing-top">
+                            <h5 ng-bind="history.Approver"></h5>
+                            <label ng-bind="history.DateTimeCreated | date:'MM/dd/yyyy hh:mm a'"></label>
+                        </div>
+                        <div class="approver-lvl" ng-bind="'Approver ' + history.ApprovalLevel"></div>
+                        <div class="approver-reason" ng-bind="history.ApproverComment || 'No Approver comment'"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="field-panel">
+                <div class="row">
+                    <!--General-->
+                    <div class="filing-title col-12">General</div>
+
+                    <div class="form-group col-lg-6 col-12">
+                        <label class="control-label">Work Credit</label>
+                        <select name="ID_WorkCredit" class="form-control" ng-options="wc.ID as wc.Name for wc in WorkCredits" ng-model="Data.ID_WorkCredit">
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-6 col-12">
+                        <label class="control-label">Work Date</label>
+                        <div class="input-group custom-ig-lu">
+                            <input type="text" name="WorkDate" ng-model="Data.WorkDate" ng-input text-type="'date'" format="MM/DD/YYYY" placeholder="mm/dd/yyyy" class="form-control" />
+                            <span class="input-group-btn lu">
+                                <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-6 col-12">
+                        <label class="control-label">Start Time</label>
+                        <input type="text" name="StartTime" ng-model="Data.StartTime" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder="hh:mm" class="form-control" />
+                    </div>
+                    <div class="form-group col-lg-6 col-12">
+                        <label class="control-label">End Time</label>
+                        <input type="text" name="EndTime" ng-model="Data.EndTime" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder="hh:mm" class="form-control" />
+                    </div>
+                    <div class="form-group col-12">
+                        <label class="control-label">Reason</label>
+                        <textarea name="Reason" ng-model="Data.Reason" placeholder="Your comment here..." class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn cancel" ng-click="Close()">Close</button>
+            <button type="button" class="btn emphasized" ng-if="!Data.IsPosted" ng-click="Save(false)">Save</button>
+            <!--<button type="button" class="btn emphasized" ng-if="Data.ID > 0 && !Data.IsPosted" ng-click="Post(false)">Post</button>-->
+            <button type="button" class="btn emphasized" ng-if="!Data.IsPosted" ng-click="Save(true)">Save & Post</button>
+            <!--<button type="button" class="btn emphasized" ng-if="Data.IsPosted && Data.ID_FilingStatus == 2" ng-click="Cancel()">Cancel Overtime</button>-->
+            <button type="button" class="btn emphasized" ng-if="Data.IsPosted && Data.ID_FilingStatus == 1" ng-click="Unpost()">Unpost</button>
+        </div>
+    </form>
+</div>

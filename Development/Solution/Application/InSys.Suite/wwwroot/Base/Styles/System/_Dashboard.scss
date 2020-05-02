@@ -1,0 +1,115 @@
+﻿.dashboard {
+    //Delete this later
+    .m-holder {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .l-dash {
+        min-width: 250px;
+        padding: 0 10px;
+
+        ul {
+            list-style: none;
+
+            li {
+                font-size: 13px;
+                color: #555;
+                margin-bottom: 10px;
+
+                &.ul-title {
+                    font-size: 16px;
+                    color: #3498DB;
+                    margin-left: -20px;
+                }
+            }
+        }
+
+        .lsd {
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+
+            li {
+                cursor: pointer;
+                padding: 10px;
+                margin: 0;
+                border-radius: 6px;
+                border-bottom: 1px solid #eee;
+
+                &.ul-title {
+                    padding: 0;
+                    margin-left: 0;
+                    margin-bottom: 5px;
+                    font-size: 15px;
+                    cursor: default;
+                    border: none !important;
+                    background-color: transparent !important;
+                }
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                &:hover {
+                    background-color: rgba(0,0,0,0.05);
+                }
+            }
+        }
+    }
+
+    .r-dash {
+        flex: 1;
+        background-color: #fff;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 20px;
+        min-width: 500px;
+        position: relative;
+
+        #inner-wrap {
+            opacity: 0.65;
+            bottom: auto;
+            top: -130px;
+        }
+
+        .r-dash-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+
+            img {
+                width: 290px;
+                height: 290px;
+                object-fit: contain;
+                margin-bottom: 10px;
+            }
+
+            .r-btn-grp {
+                display: flex;
+                margin-top: 20px;
+
+                button {
+                    font-size: 14px;
+                    padding: 3px 15px;
+                    margin: 0 5px;
+                    color: #fff;
+                    background-color: #3498DB;
+
+                    &.outlined {
+                        color: #3498DB;
+                        background-color: transparent;
+                        border: 1px solid #3498DB;
+                    }
+                }
+            }
+        }
+    }
+    //Delete this later
+}

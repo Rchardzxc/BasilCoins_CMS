@@ -1,0 +1,39 @@
+﻿<div class="notification">
+    <div class="n-holder">
+        <!--<div class="n-disabled" ng-if="Session('IsNotificationEnabled') == false" ng-bind="'Notification is disabled.'"></div>-->
+        <div>
+            <!-- ng-if="Session('IsNotificationEnabled') == true"-->
+            <div class="n-title" ng-if="ProcessNotifications.length > 0">Current in progress</div>
+            <div ng-if="(d.Current_Process < d.Total_Process) && d.IsStop == false" class="n-item process" ng-repeat="d in ProcessNotifications">
+                <h5 ng-bind="d.Title"></h5>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" ng-style="{'width': RemoveDecimal((d.Current_Process/d.Total_Process) * 100) + '%'}" aria-valuenow="{{RemoveDecimal((d.Current_Process/d.Total_Process) * 100)}}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="progress-status">
+                    <p ng-bind="d.Content"></p>
+                    <p ng-bind="RemoveDecimal((d.Current_Process/d.Total_Process) * 100) + '%'"></p>
+                </div>
+                <span class="n-time" ng-bind="FormatDate(d.DateTimeCreated, 'lll')"></span>
+            </div>
+        </div>
+        <div>
+            <!-- ng-if="Session('IsNotificationEnabled') == true"-->
+            <div class="n-no-notif" ng-if="Notifications.length == 0" ng-bind="'No new notifications.'"></div>
+            <div class="n-title" ng-if="UnSeenNotification.length > 0">New</div>
+            <div class="n-item recent" ng-repeat="d in UnSeenNotification" ng-click="UpdateNotification(d, NotificationOnClickEvent, d.LinkOnClick)">
+                <h5 ng-bind="d.Title"></h5>
+                <p ng-bind="d.Content"></p>
+                <span class="n-time" ng-bind="FormatDate(d.DateTimeCreated, 'lll')"></span>
+            </div>
+        </div>
+        <div>
+            <!-- ng-if="Session('IsNotificationEnabled') == true"-->
+            <div class="n-title" ng-if="SeenNotification.length > 0">Earlier</div>
+            <div class="n-item" ng-repeat="d in SeenNotification" ng-click="UpdateNotification(d, NotificationOnClickEvent, d.LinkOnClick)">
+                <h5 ng-bind="d.Title"></h5>
+                <p ng-bind="d.Content"></p>
+                <span class="n-time" ng-bind="FormatDate(d.DateTimeCreated, 'lll')"></span>
+            </div>
+        </div>
+    </div>
+</div>

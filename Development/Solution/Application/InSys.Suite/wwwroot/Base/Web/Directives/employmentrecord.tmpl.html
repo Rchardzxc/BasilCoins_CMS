@@ -1,0 +1,313 @@
+﻿<div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a data-target="#ov-emprec-1" class="nav-link active" data-toggle="tab" role="tab">Payroll</a>
+        </li>
+        <li class="nav-item">
+            <a data-target="#ov-emprec-2" class="nav-link" data-toggle="tab" role="tab">Organization</a>
+        </li>
+        <li class="nav-item">
+            <a data-target="#ov-emprec-3" class="nav-link" data-toggle="tab" role="tab">Approver</a>
+        </li>
+        <li class="nav-item">
+            <a data-target="#ov-emprec-4" class="nav-link" data-toggle="tab" role="tab">Training Bond</a>
+        </li>
+        <li class="nav-item">
+            <a data-target="#ov-emprec-5" class="nav-link" data-toggle="tab" role="tab">Attachments</a>
+        </li>
+    </ul>
+    <div class="tab-content ov-tab-content">
+        <!--Payroll Tab-->
+        <div id="ov-emprec-1" role="tabpanel" class="tab-pane fade show active">
+            <div class="col-lg-10 col-md-12 row">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Monthly Rate</label>
+                        <p ng-bind="IsNull(EmployeeRecord.MonthlyRate, 0)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Daily Rate</label>
+                        <p ng-bind="IsNull(EmployeeRecord.DailyRate, 0)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Hourly Rate</label>
+                        <p ng-bind="IsNull(EmployeeRecord.HourlyRate, 0)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Daily SMW</label>
+                        <p ng-bind="IsNull(EmployeeRecord.DailySMW, 0)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Monthly SMW</label>
+                        <p ng-bind="IsNull(EmployeeRecord.MonthlySMW, 0)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Currency</label>
+                        <p ng-bind="IsNull(EmployeeRecord.Currency, '-')"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Payroll Scheme</label>
+                        <p ng-bind="IsNull(EmployeeRecord.PayrollScheme, '-')"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Payroll Frequency</label>
+                        <p ng-bind="IsNull(EmployeeRecord.PayrollFrequency, '-')"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Payment Mode</label>
+                        <p ng-bind="IsNull(EmployeeRecord.PaymentMode, '-')"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Parameter</label>
+                        <p ng-bind="IsNull(EmployeeRecord.Parameter, '-')"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Leave Parameter</label>
+                        <p ng-bind="IsNull(EmployeeRecord.LeaveParameter, '-')"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Payroll Status</label>
+                        <p ng-bind="IsNull(EmployeeRecord.PayrollStatus, '-')"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Payroll Classification</label>
+                        <p ng-bind="IsNull(EmployeeRecord.PayrollClassification, '-')"></p>
+                    </div>
+                    <div class="form-group">
+                        <span class="form-check-holder er-readonly">
+                            <input id="ov-payroll-check-1" class="form-check" ng-model="EmployeeRecord.MWE" type="checkbox" disabled />
+                            <label for="ov-payroll-check-1">MWE</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-12 ov-form-title">Bank</div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Account No. Type</label>
+                        <p ng-bind="IsNull(EmployeeRecord.AccountNumberType, '-')"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Bank Account No.</label>
+                        <p ng-bind="IsNull(EmployeeRecord.BankAcctNo, '-')"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Company Bank Acct.</label>
+                        <p ng-bind="IsNull(EmployeeRecord.CompanyBankAcct, '-')"></p>
+                    </div>
+                    <!--<div class="lbl-grp">
+                        <label>2nd Bank Account No.</label>
+                        <p ng-bind="IsNull(EmployeeRecord.BankAcctNo2, '-')"></p>
+                    </div>-->
+                </div>
+                <div class="col-12 ov-form-title">Previous</div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Previous Taxable Amt.</label>
+                        <p ng-bind="IsNull(EmployeeRecord.PrevEmpTaxableAmt, 0)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Previous Withholding Tax</label>
+                        <p ng-bind="IsNull(EmployeeRecord.PrevEmpWitholdingTax, 0)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Previous Emp Date</label>
+                        <p ng-bind="IsNull(FormatDate(EmployeeRecord.PrevEmpEndDate, 'MMM DD, YYYY'), '-')"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Previous 13th Month</label>
+                        <p ng-bind="IsNull(EmployeeRecord.Prev13thMonth, 0)"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Previous Compensation</label>
+                        <p ng-bind="IsNull(EmployeeRecord.PrevCompensation, 0)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Non Tax Prev Contribution</label>
+                        <p ng-bind="IsNull(EmployeeRecord.NonTaxPrevContribution, 0)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Non Tax Prev Compensation</label>
+                        <p ng-bind="IsNull(EmployeeRecord.NonTaxPrevCompensation, 0)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Non Tax Prev 13th Month</label>
+                        <p ng-bind="IsNull(EmployeeRecord.NonTaxPrev13thMonth, 0)"></p>
+                    </div>
+                </div>
+                <div class="col-12 ov-form-title">Tax</div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Tax Rate</label>
+                        <p ng-bind="IsNull(EmployeeRecord.TaxRate, 0)"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Tax Exemption</label>
+                        <p ng-bind="IsNull(EmployeeRecord.TaxExemption, '-')"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Organization Tab-->
+        <div id="ov-emprec-2" role="tabpanel" class="tab-pane fade">
+            <div class="col-lg-10 col-md-12 row">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Company</label>
+                        <p ng-bind="IsNull(EmployeeRecord.Company, '-')"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Branch</label>
+                        <p ng-bind="IsNull(EmployeeRecord.Branch, '-')"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Division</label>
+                        <p ng-bind="IsNull(EmployeeRecord.Division, '-')"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Department</label>
+                        <p ng-bind="IsNull(EmployeeRecord.Department, '-')"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Section</label>
+                        <p ng-bind="IsNull(EmployeeRecord.Section, '-')"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Job Class Group</label>
+                        <p ng-bind="IsNull(EmployeeRecord.JobClassGroup, '-')"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Job Class</label>
+                        <p ng-bind="IsNull(EmployeeRecord.JobClass, '-')"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Designation</label>
+                        <p ng-bind="IsNull(EmployeeRecord.Designation, '-')"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Approver-->
+        <div id="ov-emprec-3" role="tabpanel" class="tab-pane fade">
+            <div class="ov-approver-panel">
+                <div class="ov-approver-filing">
+                    <div class="ov-filing-itm active">Leave</div>
+                    <div class="ov-filing-itm">Official Business</div>
+                </div>
+                <div class="ov-approver-holder">
+                    <div class="ov-approver-item">
+                        <h5>Level 1 <span>(Power Approver)</span></h5>
+                        <div class="ov-approver">
+                            <i class="fas fa-user-circle"></i>
+                            <div class="ov-approver-desc">
+                                <h4>John Doe</h4>
+                                <label>Approver 1</label>
+                            </div>
+                        </div>
+                        <div class="ov-approver">
+                            <i class="fas fa-user-circle"></i>
+                            <div class="ov-approver-desc">
+                                <h4>Jane Doe</h4>
+                                <label>Approver 2</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ov-approver-item">
+                        <h5>Level 2</h5>
+                        <div class="ov-approver">
+                            <i class="fas fa-user-circle"></i>
+                            <div class="ov-approver-desc">
+                                <h4>John Doe</h4>
+                                <label>Approver 1</label>
+                            </div>
+                        </div>
+                        <div class="ov-approver">
+                            <i class="fas fa-user-circle"></i>
+                            <div class="ov-approver-desc">
+                                <h4>Jane Doe</h4>
+                                <label>Approver 2</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Training Bond-->
+        <div id="ov-emprec-4" role="tabpanel" class="tab-pane fade">
+            <div class="tbl-holder">
+                <table class="table table-striped table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>Training</th>
+                            <th>Notes</th>
+                            <th>No. Of Months</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Active</th>
+                            <th>Cancelled</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span>-</span></td>
+                            <td><span>-</span></td>
+                            <td><span>-</span></td>
+                            <td><span>-</span></td>
+                            <td><span>-</span></td>
+                            <td><span>-</span></td>
+                            <td><span>-</span></td>
+                        </tr>
+                        <!--<tr class="no_record">
+                        <td>
+                            <div class="no-rec-ico">
+                                <i class="fas fa-file-alt"></i>
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <p>No record found.</p>
+                        </td>
+                    </tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--Attachments-->
+        <div id="ov-emprec-5" role="tabpanel" class="tab-pane fade">
+            <div class="tbl-holder">
+                <table class="table table-striped table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Notes</th>
+                            <th>Attachments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span>-</span></td>
+                            <td><span>-</span></td>
+                            <td><span>-</span></td>
+                        </tr>
+                        <!--<tr class="no_record">
+                        <td>
+                            <div class="no-rec-ico">
+                                <i class="fas fa-file-alt"></i>
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <p>No record found.</p>
+                        </td>
+                    </tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

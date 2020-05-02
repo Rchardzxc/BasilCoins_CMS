@@ -1,0 +1,312 @@
+﻿.training-summary {
+    #eligibletrainees {
+        .dropdown {
+            button {
+                @extend %button-tmpl;
+                background-color: #3498DB;
+                color: #FFF;
+                margin: 0 3px;
+
+                &.emphasized {
+                    background-color: #3498DB;
+                    color: #FFF;
+                }
+            }
+
+            .dropdown-menu {
+                background-color: #333;
+                border: none;
+                box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+
+                button {
+                    background-color: transparent !important;
+                    color: #ddd !important;
+                    margin: 0 !important;
+                }
+
+                .nav-tabs {
+                    border: none;
+                    flex-wrap: wrap !important;
+
+                    .nav-item {
+                        margin: 0;
+                        width: 100%;
+
+                        .nav-link {
+                            border: none;
+                            padding: 3px 10px;
+                            font-size: 13px;
+                            font-weight: 500;
+                            color: #ddd;
+                            background-color: transparent !important;
+
+                            &.active {
+                                color: #3498db !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #approvalhistory {
+        .app-hist {
+            width: 100%;
+            display: flex;
+            padding: 10px;
+            background-color: #252525;
+            margin-bottom: 10px;
+            border-radius: 10px;
+
+            i {
+                font-size: 20px;
+                margin-right: 10px;
+                margin-top: 5px;
+
+                &.fa-check-circle {
+                    color: #2ecc71;
+                }
+
+                &.fa-times-circle,
+                &.fa-ban {
+                    color: #e74c3c;
+                }
+            }
+
+            .ah-desc {
+                h5 {
+                    font-size: 15px;
+                    margin: 0;
+                }
+
+                label {
+                    font-weight: 500;
+                    color: #777;
+                }
+
+                p {
+                    color: #aaa;
+                    margin-bottom: 10px;
+                }
+            }
+
+            &:first-child {
+                margin-top: 10px;
+            }
+        }
+    }
+
+    .list-tab {
+        top: 60px;
+        left: 20px;
+        position: absolute;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #777;
+        width: calc(100vw - 305px);
+
+        .lt-holder {
+            display: flex;
+            align-items: center;
+        }
+
+        .lt-item {
+            margin-bottom: -1px;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            max-width: 160px;
+            min-width: 100px;
+            justify-content: space-between;
+
+            label {
+                margin: 0;
+                color: #aaa;
+                cursor: pointer;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            span {
+                background-color: #222;
+                color: #aaa;
+                padding: 1px 8px;
+                font-size: 11px;
+                font-weight: 500;
+                border-radius: 9px;
+                margin-left: 5px;
+
+                &.invi {
+                    /*opacity: 0;*/
+                }
+            }
+
+            &.active {
+                border: 1px solid #777;
+                border-bottom: 1px solid #333;
+
+                label {
+                    color: #ddd;
+                }
+
+                span {
+                    background-color: #e74c3c;
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    .dp-tab-btn, .dp-tab-grp {
+        position: absolute;
+        z-index: 1;
+        right: 20px;
+        font-size: 20px;
+        top: 60px;
+        cursor: pointer;
+        color: #3498db;
+
+        .dropdown-menu {
+            border: none;
+            padding: 0;
+            min-width: 185px;
+            max-width: 250px;
+            background-color: #333;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+
+            .dp-item {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 5px 10px;
+                font-size: 14px;
+
+                label {
+                    margin: 0;
+                    color: #aaa;
+                    cursor: pointer;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                span {
+                    background-color: #222;
+                    color: #aaa;
+                    padding: 1px 8px;
+                    font-size: 11px;
+                    font-weight: 500;
+                    border-radius: 9px;
+                    margin-left: 5px;
+                }
+
+                &:hover {
+                    background-color: rgba(0,0,0,0.07);
+                }
+
+                &.active {
+                    label {
+                        color: #ddd;
+                    }
+
+                    span {
+                        background-color: #e74c3c;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+
+    .dp-tab-btn {
+        top: 55px;
+
+        button.dropdown-toggle {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 2px 10px;
+            font-size: 14px;
+            outline: none;
+
+            &:after {
+                display: none;
+            }
+        }
+    }
+
+    .dp-tab-grp {
+        button {
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 4px;
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 3px 10px;
+        }
+    }
+
+    .content-tab {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+
+    .listing .tbl-holder {
+        margin-top: 45px;
+        height: calc(100% - 85px);
+    }
+
+    .listing table tbody tr.no_record {
+        width: 100%;
+        height: calc(100% - 200px);
+    }
+
+    &.not-approver {
+        .listing .tbl-holder {
+            margin-top: 0;
+            height: calc(100% - 35px);
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+}
+
+@media screen and (max-width: 992px) {
+    .training-summary {
+        #eligibletrainees {
+            .df-body.list .tbl-holder {
+                width: calc(100vw - 325px) !important;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 576px) {
+    .training-summary {
+        #eligibletrainees {
+            .df-body.list .tbl-holder {
+                width: calc(100vw - 70px) !important;
+            }
+        }
+    }
+}

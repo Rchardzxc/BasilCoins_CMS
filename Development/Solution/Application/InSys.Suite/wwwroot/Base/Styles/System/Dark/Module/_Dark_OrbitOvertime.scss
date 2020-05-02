@@ -1,0 +1,61 @@
+﻿.orbit-overtime {
+    .rf-body {
+        &.with-banner {
+            height: calc(100vh - 240px);
+        }
+    }
+
+    #approvalHistory {
+        .app-hist {
+            width: 100%;
+            display: flex;
+            padding: 10px;
+            background-color: #252525;
+            margin-bottom: 10px;
+            border-radius: 10px;
+
+            i {
+                font-size: 20px;
+                margin-right: 10px;
+                margin-top: 5px;
+
+                &.fa-check-circle {
+                    color: #2ecc71;
+                }
+
+                &.fa-times-circle,
+                &.fa-ban {
+                    color: #e74c3c;
+                }
+            }
+
+            .ah-desc {
+                h5 {
+                    font-size: 15px;
+                    margin: 0;
+                    padding-top: 5px;
+                }
+
+                label {
+                    font-weight: 500;
+                    color: #777;
+                }
+
+                p {
+                    color: #aaa;
+                    margin-bottom: 10px;
+                }
+
+                .status {
+                    display: flex;
+                    margin-right: 10px;
+                    flex-direction: row;
+                }
+            }
+
+            &:first-child {
+                margin-top: 10px;
+            }
+        }
+    }
+}

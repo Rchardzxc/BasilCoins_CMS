@@ -1,0 +1,199 @@
+﻿@media screen and (max-width: 1200px) {
+}
+
+@media screen and (max-width: 992px) {
+    .my-profile-dlg .mp-container {
+        width: 70% !important;
+    }
+
+    .record .detail-form .df-body.tree {
+        flex-wrap: wrap;
+    }
+
+    .record .detail-form .df-body.tree .tree-panel {
+        min-width: 100% !important;
+        max-width: 100% !important;
+        margin: 1px !important;
+        margin-top: 20px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .my-profile-dlg .mp-container {
+        width: 70% !important;
+    }
+
+    .notification {
+        right: 40px !important;
+    }
+
+    .record .detail-form .df-body.tree {
+        flex-wrap: wrap;
+    }
+
+    .record .detail-form .df-body.list .tbl-holder {
+        width: calc(100vw - 325px) !important;
+    }
+
+    .record .detail-form .df-body.tree .tree-panel {
+        min-width: 100% !important;
+        max-width: 100% !important;
+        margin: 1px !important;
+        margin-top: 20px !important;
+    }
+
+    .ta-bind {
+        max-width: calc(100vw - 390px) !important;
+    }
+
+    .employee-wizard-dlg .ew-body .ew-tab-content {
+        padding: 20px 20px 20px 20px !important;
+    }
+
+    .employee-wizard-dlg .ew-body .ew-tab-content .col-lg-10.col-12.row {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .employee-wizard-dlg .list .tbl-holder {
+        width: calc((100vw * 0.8) - 42px) !important;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    #insysDatePicker {
+        top: calc(50% - 150px) !important;
+        left: calc(50% - 150px) !important;
+    }
+
+    .login .login-holder {
+        width: 100% !important;
+    }
+
+    .login .login-holder .login-panel {
+        margin: 0 !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .login.show .login-card-holder {
+        padding: 0 !important;
+    }
+
+    .notification {
+        right: 5px !important;
+    }
+
+    .my-profile-dlg .mp-container {
+        width: 95% !important;
+    }
+
+    .my-profile-dlg .mp-head .mp-pic,
+    .my-profile-dlg .mp-head .mp-initial {
+        margin: auto !important;
+    }
+
+    .my-profile-dlg .mp-head {
+        border-bottom: none !important;
+    }
+
+    .employee-wizard-dlg .modal-content {
+        width: 100% !important;
+    }
+
+    .employee-wizard-dlg .list .tbl-holder {
+        width: calc((100vw) - 42px) !important;
+    }
+
+    .dashboard .r-dash {
+        min-width: 0 !important;
+
+        .r-dash-content p {
+            text-align: center;
+        }
+
+        .r-dash-content img {
+            width: 245px !important;
+            height: 245px !important;
+        }
+    }
+
+    #menu-search-input {
+        width: calc(100vw - 150px) !important;
+    }
+
+    .m-header .search .menu-search-result {
+        top: 50px !important;
+        position: fixed !important;
+        left: 0;
+    }
+
+    .main-right, .main-right .m-header {
+        padding: 0 !important;
+    }
+
+    .listing .tbl-holder {
+        width: calc(100vw - 50px) !important;
+    }
+
+    .listing .listing-footer {
+        justify-content: flex-end !important;
+    }
+
+    .insys-filter {
+        width: 320px !important;
+    }
+
+    .lookup-table {
+        width: 320px !important;
+        min-width: 320px !important;
+        top: auto !important;
+        bottom: 0;
+        left: calc(50% - 160px) !important;
+        height: calc(100% - 130px);
+
+        .tbl-holder {
+            width: 100% !important;
+        }
+    }
+
+    .record .detail-form .df-body.list .tbl-holder {
+        width: calc(100vw - 70px) !important;
+    }
+
+    .record .detail-form .df-body.list .listing-footer {
+        justify-content: flex-end !important;
+    }
+
+    .record .detail-form .df-body.tree {
+        flex-wrap: wrap;
+    }
+
+    .record .detail-form .df-body.tree .tree-panel {
+        min-width: 100% !important;
+        max-width: 100% !important;
+        margin: 1px !important;
+        margin-top: 20px !important;
+    }
+
+    .error-page .ico-bg {
+        font-size: 175px !important;
+    }
+
+    .error-page .error-404 {
+        font-size: 95px !important;
+    }
+
+    .error-page .error-detail h2 {
+        font-size: 20px !important;
+    }
+
+    .error-page .error-detail p {
+        font-size: 15px !important;
+    }
+
+    .ta-bind {
+        max-width: calc(100vw - 135px) !important;
+    }
+}
+
+

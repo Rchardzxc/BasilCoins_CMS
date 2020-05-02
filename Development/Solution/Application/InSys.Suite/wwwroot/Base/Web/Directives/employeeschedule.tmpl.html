@@ -1,0 +1,43 @@
+﻿<div class="ov-schedule">
+    <div class="col-lg-10 col-md-12 row">
+        <div ng-if="isEditable" class="lbl-grp col-lg-12 col-md-12 col-12">
+            <div is-required="GetIsRequired('ID_WeeklySchedule')" cascade="GetShiftSched(row)" insys-lookup lookup-options="WeeklyScheduleLookup" lookup-data="{'model': EmployeeRecord,'targetValue': 'ID', 'targetDisplay': 'Name' , 'valueContainer': 'ID_WeeklySchedule', 'displayContainer': 'WeeklySchedule', 'label': 'Weekly Schedule'}"></div>
+        </div>
+        <div ng-if="!isEditable" class="lbl-grp col-lg-12 col-md-12 col-12">
+            <label>Weekly Schedule</label>
+            <p ng-bind="IsNull(EmployeeRecord.WeeklySchedule, '-')">-</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+            <div class="lbl-grp">
+                <label>Monday</label>
+                <p ng-bind="IsNull(ShiftSchedule.Monday, '-')">-</p>
+            </div>
+            <div class="lbl-grp">
+                <label>Tuesday</label>
+                <p ng-bind="IsNull(ShiftSchedule.Tuesday, '-')">-</p>
+            </div>
+            <div class="lbl-grp">
+                <label>Wednesday</label>
+                <p ng-bind="IsNull(ShiftSchedule.Wednesday, '-')">-</p>
+            </div>
+            <div class="lbl-grp">
+                <label>Thursday</label>
+                <p ng-bind="IsNull(ShiftSchedule.Thursday, '-')">-</p>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+            <div class="lbl-grp">
+                <label>Friday</label>
+                <p ng-bind="IsNull(ShiftSchedule.Friday, '-')">-</p>
+            </div>
+            <div class="lbl-grp">
+                <label>Saturday</label>
+                <p ng-bind="IsNull(ShiftSchedule.Saturday, '-')">-</p>
+            </div>
+            <div class="lbl-grp">
+                <label>Sunday</label>
+                <p ng-bind="IsNull(ShiftSchedule.Sunday, '-')">-</p>
+            </div>
+        </div>
+    </div>
+</div>

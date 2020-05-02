@@ -1,0 +1,37 @@
+﻿.timekeeping-summary {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+
+    .summary-content {
+        padding: 10px;
+        width: 100%;
+        background-color: rgba(41, 128, 185, .05);
+        border: 1px solid rgba(41, 128, 185, .5);
+        border-radius: 10px;
+    }
+
+    .summary-itm {
+        display: flex;
+        align-items: center;
+        padding: 5px 0;
+        border-bottom: 1px solid rgba(41, 128, 185,.3);
+        justify-content: space-between;
+
+        label {
+            margin: 0;
+            color: rgb(41, 128, 185);
+            font-weight: 500;
+
+            &.val {
+                font-weight: bold;
+            }
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}

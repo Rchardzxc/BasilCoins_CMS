@@ -1,0 +1,92 @@
+﻿<div class="rf-header">
+        <h5>Examiners</h5>
+    </div>
+<div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+        <div class="detail-form">
+            <div class="df-head flex-end">
+                <div class="df-btn-grp">
+                    <button ng-disabled="DisableExaminationAndInterviewButtons()" ng-click="newExaminationRecord()" type="button" ng-if="Schema.IsHired == false"><i class="fas fa-plus"></i> New</button>
+                    <button ng-disabled="DisableExaminationAndInterviewButtons()" ng-click="delExaminationRecord()" type="button" ng-if="Schema.IsHired == false"><i class="fas fa-trash"></i> Delete</button>
+                </div>
+            </div>
+            <div class="df-body list">
+                <div class="tbl-holder" ng-class="{ 'custom-scroll' : isChrome }">
+                    <table id="examination_details" class="table table-striped table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th class="tbl-ctrl">
+                                    <input type="checkbox" class="tbl-check" id="selectAllExaminationRecords" ng-model="SelectAllExaminationRows" ng-click="CheckAllExaminationRecords()" />
+                                    <label for="selectAllExaminationRecords"></label>
+                                </th>
+                                <th>Examiner</th>
+                                <th>Schedule</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Status</th>
+                                <th>Numerical Score</th>
+                                <th>Percentage Based</th>
+                                <th>Remarks</th>
+                                <!--<th>Attachment</th>-->
+                                <th>Notified</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="er in ExaminationRecords">
+                                <td class="tbl-ctrl">
+                                    <input ng-disabled="disableDetail(er)" type="checkbox" class="tbl-check" id="examination-sdc-{{$index}}" ng-model="er.IsChecked" />
+                                    <label for="examination-sdc-{{$index}}"></label>
+                                    <i ng-if="er.ID > 0 && Schema.IsHired == false" ng-click="sendExaminerNotification(er)" title="{{er.IsNotify == true ? 'Resend notification' : 'Send notification'}}" class="fas fa-bell"></i>
+                                </td>
+                                <td>
+                                    <div is-disabled="disableDetail(er)" insys-lookup is-required="GetIsRequired('ID_AssignedEmployee',ExaminersTableSchema)" lookup-options="employeeLookup" lookup-data="{'model': er,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_AssignedEmployee', 'displayContainer': 'AssignedEmployee', 'label': 'Examiner'}"></div>
+                                </td>
+                                <td>
+                                    <div class="input-group custom-ig-lu">
+                                        <input ng-disabled="disableDetail(er)" type="text" name="ScheduledDate" ng-min="Today" ng-model="er.ScheduledDate" ng-input text-type="'date'" format="MM/DD/YYYY" placeholder="mm/dd/yyyy" class="form-control" ng-required="GetIsRequired('ScheduledDate',ExaminersTableSchema)" />
+                                        <span class="input-group-btn lu">
+                                            <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input ng-disabled="disableDetail(er)" type="text" name="ExpectedStartTime" ng-model="er.ExpectedStartTime" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder="hh:mm" class="form-control" ng-required="GetIsRequired('ExpectedStartTime',ExaminersTableSchema)" />
+                                </td>
+                                <td>
+                                    <input ng-disabled="disableDetail(er)" type="text" name="ExpectedEndTime" ng-model="er.ExpectedEndTime" ng-min="er.ExpectedStartTime" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder="hh:mm" class="form-control" ng-required="GetIsRequired('ExpectedEndTime',ExaminersTableSchema)" />
+                                </td>
+                                <td><select name="ID_ExamAndInterviewStatus" ng-model="er.ID_ExamAndInterviewStatus" ng-options="es.ID as es.Name for es in ExaminationStatus " class="form-control" ng-required="GetIsRequired('ID_ExamAndInterviewStatus',ExaminersTableSchema)"></select></td>
+                                <td><input ng-disabled="disableDetail(er)" class="form-control" name="TotalScore" type="number" ng-model="er.TotalScore" ng-required="GetIsRequired('TotalScore',ExaminersTableSchema)" /></td>
+                                <td><input ng-disabled="disableDetail(er)" class="form-control" name="PercentageBased" type="number" ng-model="er.PercentageBased" ng-required="GetIsRequired('PercentageBased',ExaminersTableSchema)" /></td>
+                                <td><input ng-disabled="disableDetail(er)" name="Notes" class="form-control long" ng-model="er.Notes" ng-required="GetIsRequired('Notes',ExaminersTableSchema)" /></td>
+                                <td class="chck">
+                                    <input ng-disabled="disableDetail(er)" type="checkbox" name="IsNotify" class="tbl-check tbl-check-dt" id="eer-{{$index}}" ng-model="er.IsNotify" />
+                                    <label for="eer-{{$index}}"></label>
+                                </td>
+                            </tr>
+                            <tr class="no_record" ng-if="ExaminationRecords.length == 0">
+                                <td>
+                                    <div class="no-rec-ico">
+                                        <i class="fas fa-file-alt"></i>
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <p>No record found.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="listing-footer">
+                    <div class="lp-count d-none d-sm-block"><span ng-bind="ExaminationRecords.length"></span> record(s) found</div>
+                    <div class="lp-pagination">
+                        <label>Show</label>
+                        <select><option>1</option></select>
+                        <label>of Page</label>
+                        <select><option>1</option></select>
+                        <button type="button" class="fas fa-angle-double-left" title="previous page"></button>
+                        <button type="button" class="fas fa-angle-double-right" title="next page"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

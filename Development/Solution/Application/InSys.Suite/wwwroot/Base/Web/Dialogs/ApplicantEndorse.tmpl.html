@@ -1,0 +1,22 @@
+﻿<div class="panel">
+    <div class="panel-heading">
+        <label><i class="fas fa-clipboard-check"></i> Endorse Applicant</label>
+        <i class="fas fa-times" ng-click="close()"></i>
+    </div>
+
+    <div class="panel-body">
+        <div class="col-md-12">
+            <div insys-lookup lookup-options="mrfLookup" cascade="getSchema(row)" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Designation', 'displayContainer': 'Designation', 'label': 'Job Opening'}"></div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label">MRF No.</label>
+                <div class="mrf-num" ng-bind="Schema.MRFNumber"></div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <button type="button" class="btn cancel" ng-click="close()">Cancel</button>
+        <button type="button" class="btn emphasized" ng-click="endorse()">Endorse</button>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>InSys - Integrated System</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="style-src 'self' 'unsafe-inline'; script-src
+          'sha256-kbEzXv+kCUxis7VD6+g/C0GEYbdEDv0P+sOusu5rTjc=' 'sha256-FUM63QMfo+q5n98MWV7rtJTPylOr/jcELsK/Tkv7m7Y=' 'self'; img-src 'self' data:; font-src 'self';" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta charset="UTF-8" />
+    <meta name="description" content="InSys, Integrated System" />
+    <meta name="keywords" content="InSys,HRMS,Intellismart,Rossu,Belmonte,Aron,Consuelo,Raymart,Entuna,Geormin,Guian,Salanguit">
+    <meta name="author" content="Rossu M. Belmonte,Aron Jay L. Consuelo,Raymart B. Entuna,Geormin Guian T. Salanguit">
+    <link rel="icon" href="../favicon.ico" />
+    <link href="Base/Styles/System/Default.min.css" rel="stylesheet" />
+    [[ReferenceStyles]]
+
+    [[GenericScripts]]
+    <script src="Base/Scripts/References/vcl.js"></script>
+    [[AngularScripts]]
+    <!--<script src="/bundles/independent-scripts"></script>-->
+    <script src="../Base/Scripts/References/slick.core.js"></script>
+    [[RenderDependency]]
+    [[RenderController]]
+</head>
+<body ng-app="app">
+    <div class="app-view">
+        <insys>[[EncryptionString]]</insys>
+        [[RenderBody]]
+    </div>
+    <environment prod="[[env]]"
+                 sessionTimeOut="[[timeOut]]"
+                 showSystemError="[[showSystemError]]"
+                 sessionID="[[SessionID]]"
+                 tmpPath="[[TemplatePath]]" />
+    <script id="autoremove">
+        var env = $('environment');
+        var t = (env.attr("tmpPath") == null || env.attr("tmpPath") == undefined ? "" : env.attr("tmpPath"));
+        localStorage.setItem("HtmlTemplatePath", t);
+        $("#autoremove").remove();
+    </script>
+    [[RenderRoutes]]
+    <script src="../Base/Scripts/References/Chart.bundle.js"></script>
+</body>
+</html>

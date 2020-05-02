@@ -1,0 +1,84 @@
+﻿<!--<div class="listing">
+    <insys-filter ng-show="tblOptions.FilterVisible == true"></insys-filter>
+    <div class="listing-header">
+        <div class="lh-btn-grp">
+            <button ng-if="tblOptions.HasNew" ng-click="newForm()" type="button" class="emphasized d-none d-sm-block"><i class="fas fa-plus"></i> New</button>
+            <button ng-if="tblOptions.HasDelete" ng-click="delete()" type="button" class="d-none d-sm-block"><i class="fas fa-trash"></i> Delete</button>
+            <button ng-if="tblOptions.Filters.length > 0 " type="button" ng-click="ShowFilter()" class="d-none d-sm-block"><i class="fas fa-filter"></i> Filter</button>
+
+            <div class="dropdown mobile d-block d-sm-none">
+                <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" type="button" ng-if="tblOptions.HasNew == true" ng-click="newForm()">New</button>
+                    <button class="dropdown-item" type="button" ng-if="tblOptions.HasDelete" ng-click="delete()">Delete</button>
+                    <button class="dropdown-item" type="button" ng-if="tblOptions.Filters.length > 0 " ng-click="ShowFilter()">Filter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="listing-holder">
+        <div class="tbl-holder" ng-class="{ 'custom-scroll' : isChrome }">
+
+            <div class="rbGrid">
+                <div class="rbGrid-sticky-container" ng-if="ShowPinnedHeader==true">
+                    <div class="rbGrid-sticky-pinned">
+                        <div class="rbGrid-column" set-sticky-pinned-min-width="{{$index}}" ng-repeat="pinned in tblOptions.PinnedColumns">
+                            <div class="rbGrid-column-label">
+                                <label ng-bind="pinned"></label>
+                                <div class="rbGrid-resize-indicator" rb-grid-resize="1" col-idx="{{$index}}">&nbsp;</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rbGrid-sticky-column">
+                        <div class="rbGrid-sticky-filler" ng-if="tblOptions.PinnedColumns.length > 0"></div>
+                        <div class="rbGrid-column" set-sticky-min-width="{{$index}}" ng-repeat="col in tblOptions.Columns" repeat-done="setStickyFillerWidth">
+                            <div class="rbGrid-column-label">
+                                <label ng-bind="col.Label || col.Name"></label>
+                                <div class="rbGrid-resize-indicator" rb-grid-resize="2" col-idx="{{$index}}">&nbsp;</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rbGrid-pinned-container" ng-if="tblOptions.PinnedColumns.length > 0">
+                    <div class="rbGrid-column" ng-repeat="(pIdx, pinned) in tblOptions.PinnedColumns">
+                        <div class="rbGrid-column-label">
+                            <label ng-bind="pinned"></label><div class="rbGrid-resize-indicator" rb-grid-resize>&nbsp;</div>
+                        </div>
+                        <div class="rbGrid-row">
+                            <label class="rbGrid-row-label" ng-repeat="pRow in tblOptions.Data.Rows" ng-bind="pRow[pinned]" repeat-done="setPinnedFillerWidth"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="rbGrid-column-container">
+                    <div class="rbGrid-pinned-filler" ng-if="tblOptions.PinnedColumns.length > 0"></div>
+                    <div class="rbGrid-column" ng-repeat="col in tblOptions.Columns">
+                        <div class="rbGrid-column-label">
+                            <label ng-bind="col.Label || col.Name"></label>
+                            <div class="rbGrid-resize-indicator" rb-grid-resize>&nbsp;</div>
+                        </div><div class="rbGrid-row">
+                            <label class="rbGrid-row-label" ng-repeat="row in tblOptions.Data.Rows" ng-bind="row[col.Name]"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="listing-footer">
+            <div class="lp-count d-none d-sm-block"><span ng-bind="tblOptions.Data.Rows.length"></span> record(s) found</div>
+            <div class="lp-pagination">
+                <label>Show</label>
+                <select ng-options="cnt as cnt for cnt in tblOptions.CountPerPage"
+                        ng-model="tblOptions.SelectedCount"
+                        ng-change="ChangeCount()"></select>
+                <label>of Page</label>
+                <select ng-options="page as page for page in tblOptions.Pages"
+                        ng-model="tblOptions.SelectedPage"
+                        ng-change="ChangePage()"></select>
+                <label>/</label>
+                <label ng-bind="tblOptions.Pages.length"></label>
+                <button ng-click="prev()" type="button" class="fas fa-angle-double-left" title="previous page"></button>
+                <button ng-click="next()" type="button" class="fas fa-angle-double-right" title="next page"></button>
+            </div>
+        </div>
+    </div>
+</div>-->

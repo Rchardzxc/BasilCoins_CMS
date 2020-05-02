@@ -1,0 +1,35 @@
+﻿<div class="whats-new">
+    <div class="announcement-container">
+        <div class="announcement-item" ng-repeat="a in Announcements">
+            <div class="announcement-header">
+                <div class="announcement-left">
+                    <div class="initials" ng-bind="SetIcon(a.CreatedBy)"></div>
+                    <div class="desc">
+                        <h5 ng-bind="a.CreatedBy"></h5>
+                        <label ng-bind="a.Designation"></label>
+                    </div>
+                </div>
+                <div class="date-created" ng-bind="a.DateCreated"></div>
+            </div>
+            <div class="announcement-subject" ng-bind="a.Subject"></div>
+            <p class="announcement-desc" ng-bind="a.Description"></p>
+        </div>
+        <div class="no-news" ng-if="Announcements.length == 0">
+            No news today
+        </div>
+    </div>
+    <div class="announcement-right-panel" ng-if="UpcomingEvent.length > 0">
+        <!--Upcoming Events-->
+        <h5 class="events-title">Upcoming Events</h5>
+        <div class="events-item" ng-repeat="ue in UpcomingEvent">
+            <div class="events-date">
+                <h5 ng-bind="ue.Day"></h5>
+                <label ng-bind="ue.Month"></label>
+            </div>
+            <div class="events-desc">
+                <h5 ng-bind="ue.Title"></h5>
+                <label ng-bind="FormatDate(ue.TimeStart, 'll') + ' - ' + FormatDate(ue.TimeEnd, 'll')"></label>
+            </div>
+        </div>
+    </div>
+</div>

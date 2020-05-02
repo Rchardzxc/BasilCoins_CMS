@@ -1,0 +1,87 @@
+﻿<div class="record">
+    <div class="record-header"></div>
+    <div class="record-body">
+        <!--Tabs-->
+        <div class="record-tab d-none d-xl-block">
+            <div class="record-tab-header">
+                <span>Tabs</span>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a data-target="#resume" class="nav-link active" data-toggle="tab" role="tab">Resume</a>
+                </li>
+                <li ng-if="!DisableExaminationAndInterviewButtons()" class="nav-item">
+                    <a data-target="#interviews" class="nav-link" data-toggle="tab" role="tab" ng-click="loadTab(2)">Interviewers</a>
+                </li>
+
+                <li ng-if="!DisableExaminationAndInterviewButtons()" class="nav-item">
+                    <a data-target="#examination" class="nav-link" data-toggle="tab" role="tab" ng-click="loadTab(3)">Examiners</a>
+                </li>
+
+                <li class="nav-item" ng-if="Schema.ID_RecruitmentStatus == 20 || Schema.ID_RecruitmentStatus == 5">
+                    <a data-target="#joboffer" class="nav-link" data-toggle="tab" role="tab" ng-click="loadTab(4)">Job Offer</a>
+                </li>
+            </ul>
+        </div>
+
+        <form ng-submit="saveForm()" name="form.resumeBankAndSearch" autocomplete="off" class="tab-content" novalidate method="post">
+            <!--Button Group-->
+            <div class="rh-btn-grp">
+                <button class="emphasized d-none d-xl-block" type="button" ng-click="TransferToOtherMRF()" ng-if="Schema.IsHired == false && MenuPrivileges.HasEdit"><i class="fas fa-clipboard-check"></i> Transfer to Other MRF</button>
+                <button class="d-none d-xl-block" type="submit" ng-if="Schema.IsHired == false && MenuPrivileges.HasEdit"><i class="fas fa-save"></i> Save</button>
+                <button class="emphasized d-none d-xl-block" type="button" ng-click="ViewPDF()"><i class="fas fa-file-pdf"></i> View PDF</button>
+
+                <!--These dropdowns will display when mobile-->
+                <!--Actions-->
+                <div class="dropdown mobile d-block d-xl-none">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button" ng-click="TransferToOtherMRF()" ng-if="Schema.IsHired == false && MenuPrivileges.HasEdit">Transfer to Other MRF</button>
+                        <button class="dropdown-item" type="submit" ng-if="Schema.IsHired == false && MenuPrivileges.HasEdit">Save</button>
+                        <button class="dropdown-item" type="button" ng-click="ViewPDF()">View PDF</button>
+                    </div>
+                </div>
+                <!--Tabs-->
+                <div class="dropdown mobile d-block d-xl-none" role="tablist">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Tabs</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a data-target="#resume" class="nav-link active" data-toggle="tab" role="tab">Resume</a>
+                            </li>
+                            <li ng-if="!DisableExaminationAndInterviewButtons()" class="nav-item">
+                                <a data-target="#interviews" class="nav-link" data-toggle="tab" role="tab" ng-click="loadTab(2)">Interviews</a>
+                            </li>
+
+                            <li ng-if="!DisableExaminationAndInterviewButtons()" class="nav-item">
+                                <a data-target="#examination" class="nav-link" data-toggle="tab" role="tab" ng-click="loadTab(3)">Examinations</a>
+                            </li>
+
+                            <li class="nav-item" ng-if="Schema.ID_RecruitmentStatus == 20">
+                                <a data-target="#joboffer" class="nav-link" data-toggle="tab" role="tab" ng-click="loadTab(4)">Job Offer</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--Resume Tab-->
+            <div id="resume" role="tabpanel" class="tab-pane fade show active">
+                <div ng-include="HtmlTemplatePath + '/Web/Directives/resume.tmpl.html'"></div>
+            </div>
+            <!--Interviews Tab-->
+            <div id="interviews" role="tabpanel" class="tab-pane fade">
+                <div ng-include="HtmlTemplatePath + '/Web/Directives/interviews.tmpl.html'"></div>
+            </div>
+            <!--Examination Tab-->
+            <div id="examination" role="tabpanel" class="tab-pane fade">
+                <div ng-include="HtmlTemplatePath + '/Web/Directives/examination.tmpl.html'"></div>
+            </div>
+            <!--For Job Offer-->
+            <div id="joboffer" role="tabpanel" class="tab-pane fade" ng-if="Schema.ID_RecruitmentStatus == 20 || Schema.ID_RecruitmentStatus == 5">
+                <div ng-include="HtmlTemplatePath + '/Web/Directives/joboffer.tmpl.html'"></div>
+            </div>
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,272 @@
+﻿<div class="record">
+    <div class="record-header"></div>
+    <div class="record-body">
+        <!--Tabs-->
+        <div class="record-tab d-none d-md-block">
+            <div class="record-tab-header">
+                <span>Tabs</span>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                    <a data-target="#others" class="nav-link" data-toggle="tab" role="tab">Others</a>
+                    <a data-target="#approvalhistory" ng-click="GetApprovalHistory(Schema.ID, Schema.ID_Employee)" class="nav-link" data-toggle="tab" role="tab">Approval History</a>
+                </li>
+            </ul>
+        </div>
+
+        <form ng-submit="saveForm()" name="form.trainingsummary" novalidate autocomplete="off" class="tab-content" method="post">
+            <!--Button Group-->
+            <div class="rh-btn-grp">
+                <button class="emphasized d-none d-md-block" type="button" ng-click="Approve()"><i class="fas fa-check"></i> Approve</button>
+                <button class="d-none d-md-block" type="button" ng-click="Disapprove()"><i class="fas fa-trash"></i> Disapprove</button>
+                <!--These dropdowns will display when mobile-->
+                <!--Actions-->
+                <div class="dropdown mobile d-block d-md-none">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button" ng-click="Approve()">Approve</button>
+                        <button class="dropdown-item" type="submit" ng-click="Disapprove()">Disapprove</button>
+                    </div>
+                </div>
+                <!--Tabs-->
+                <div class="dropdown mobile d-block d-md-none" role="tablist">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Tabs</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                                <a data-target="#others" class="nav-link" data-toggle="tab" role="tab">Others</a>
+                                <a data-target="#approvalhistory" ng-click="GetApprovalHistory(73, Schema.ID, Schema.ID_Employee)" class="nav-link" data-toggle="tab" role="tab">Approval History</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--General Tab-->
+            <div id="general" role="tabpanel" class="tab-pane fade show active">
+                <!--Form Header-->
+                <div class="rf-header">
+                    <h5>General</h5>
+                </div>
+
+                <!--Form Content-->
+                <div class="rf-body with-banner" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" readonly>
+                                <label class="control-label">Ref#</label>
+                                <input class="form-control" type="text" name="MRFNumber" ng-model="Schema.ReferenceNumber" readonly />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('Title')">
+                                <label class="control-label">Title <i title="Title is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="Title" ng-model="Schema.Title" ng-required="GetIsRequired('Code')" maxlength="{{GetMaxLength('Code')}}" />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('Location')">
+                                <label class="control-label">Description <i title="Description is required" class="fa fa-exclamation-circle"></i></label>
+                                <textarea class="form-control" name="Description" ng-model="Schema.Description" ng-required="GetIsRequired('Location')" maxlength="{{GetMaxLength('Location')}}"></textarea>
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('Location')">
+                                <label class="control-label">Location <i title="Location is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="Location" ng-model="Schema.Location" ng-required="GetIsRequired('Location')" maxlength="{{GetMaxLength('Location')}}" />
+                            </div>
+
+                            <div class="form-group">
+                                <span class="form-check-holder">
+                                    <input id="Posted-ur-check-0" name="Posted" class="form-check" ng-model="Schema.Posted" type="checkbox" disabled />
+                                    <label for="Posted-ur-check-0">Posted</label>
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+
+                            <div class="form-group" ng-required="GetIsRequired('ID_FilingStatus')">
+                                <label class="control-label">Status <i title="Status is required" class="fa fa-exclamation-circle"></i></label>
+                                <select c-label="Status" name="ID_FilingStatus" ng-options="fs.ID as fs.Name for fs in FilingStatusList" class="form-control" ng-model="Schema.ID_FilingStatus" ng-required="GetIsRequired('ID_FilingStatus')"></select>
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('ExpectedAttendees')">
+                                <label class="control-label">Expected Attendees <i title="Expected Attendees is required" class="fa fa-exclamation-circle"></i></label>
+                                <input c-label="Expected Attendees" class="form-control" type="text" name="RequestHeadCount" ng-model="Schema.ExpectedAttendees" ng-required="GetIsRequired('ExpectedAttendees')" maxlength="{{GetMaxLength('ExpectedAttendees')}}" />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('Price')">
+                                <label class="control-label">Price <i title="Price is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="Price" ng-model="Schema.Price" ng-required="GetIsRequired('Price')" maxlength="{{GetMaxLength('Price')}}" />
+                            </div>
+
+                            <div class="form-group">
+                                <insys-upload readonly="false" required="false" target-model="Schema.Attachments" name="Attachment" options="UploadOptions"></insys-upload>
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('Provider')">
+                                <label class="control-label">Provider <i title="Provider is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="Provider" ng-model="Schema.Provider" ng-required="GetIsRequired('Provider')" maxlength="{{GetMaxLength('Provider')}}" />
+                            </div>
+
+                            <div class="form-group">
+                                <span class="form-check-holder">
+                                    <input id="WithCertification-ur-check-0" name="WithCertification" class="form-check" ng-model="Schema.WithCertification" type="checkbox" />
+                                    <label for="WithCertification-ur-check-0">W/ Certification</label>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="rf-title col-xl-10 col-lg-10 col-md-12">Schedule</div>
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('StartDate')">
+                                <label class="control-label">Start Date <i title="Start Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" c-label="Start Date" name="StartDate" ng-model="Schema.StartDate" ng-input text-type="'date'" class="form-control" ng-required="GetIsRequired('StartDate')" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('EndDate')">
+                                <label class="control-label">End Date <i title="End Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" c-label="End Date" name="EndDate" ng-model="Schema.EndDate" ng-min="Schema.StartDate" ng-input text-type="'date'" class="form-control" ng-required="GetIsRequired('EndDate')"/>
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('StartTime')">
+                                <label class="control-label">Start Time <i title="Start Time is required" class="fa fa-exclamation-circle"></i></label>
+                                <input c-label="Start Time" type="text" name="StartTime" ng-model="Schema.StartTime" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder="hh:mm" class="form-control" ng-required="GetIsRequired('StartTime')" />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('EndTime')">
+                                <label class="control-label">End Time <i title="End Time is required" class="fa fa-exclamation-circle"></i></label>
+                                <input c-label="End Time" type="text" name="EndTime" ng-model="Schema.EndTime" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder="hh:mm" class="form-control" ng-required="GetIsRequired('EndTime')" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rf-title col-xl-10 col-lg-10 col-md-12">Other info</div>
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('ApplicationExpirationDate')">
+                                <label class="control-label">Application Closed Date <i title="Application Closed Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" c-label="Application Closed Date" name="ApplicationExpirationDate" ng-model="Schema.ApplicationExpirationDate" ng-input text-type="'date'" class="form-control" ng-required="GetIsRequired('ApplicationExpirationDate')" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('CourseRating')">
+                                <label class="control-label">Course Rating <i title="Course Rating is required" class="fa fa-exclamation-circle"></i></label>
+                                <input c-label="Course Rating" class="form-control" type="text" name="CourseRating" ng-model="Schema.CourseRating" ng-required="GetIsRequired('CourseRating')" maxlength="{{GetMaxLength('CourseRating')}}"/>
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('PreRequisite')">
+                                <label class="control-label">Pre Requisite <i title="Pre Requisite is required" class="fa fa-exclamation-circle"></i></label>
+                                <input c-label="Pre Requisite" class="form-control" type="text" name="PreRequisite" ng-model="Schema.PreRequisite" ng-required="GetIsRequired('PreRequisite')" maxlength="{{GetMaxLength('PreRequisite')}}" />
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('PenaltyForWithdrawal')">
+                                <label class="control-label">Penalty For Withdrawal <i title="Penalty For Widthdrawal is required" class="fa fa-exclamation-circle"></i></label>
+                                <input c-label="Penalty For Withdrawal" class="form-control" type="text" name="PenaltyForWithdrawal" ng-model="Schema.PenaltyForWithdrawal" ng-required="GetIsRequired('PenaltyForWithdrawal')" maxlength="{{GetMaxLength('PenaltyForWithdrawal')}}"/>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('PenaltyForWithdrawal')">
+                                <label class="control-label">Penalty For No Show <i title="Penalty For No Show is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="PenaltyForNoShow" ng-model="Schema.PenaltyForNoShow" ng-required="GetIsRequired('PenaltyForWithdrawal')" maxlength="{{GetMaxLength('PenaltyForWithdrawal')}}"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rf-title col-xl-10 col-lg-10 col-md-12">Bond Details</div>
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('BondInMonths')">
+                                <label class="control-label">Bond (In months) <i title="Bond (In months) is required" class="fa fa-exclamation-circle"></i> <i title="Training Bond will start at the end of training" class="fas fa-question-circle"></i></label>
+                                <input class="form-control" c-label="Bond (In months)" type="number" name="BondInMonths" ng-model="Schema.BondInMonths" ng-required="GetIsRequired('BondInMonths')" maxlength="{{GetMaxLength('BondInMonths')}}" />
+                            </div>
+                            <div class="form-group">
+                                <span class="form-check-holder">
+                                    <input id="HideTrainingBond-ur-check-0" name="HideTrainingBond" class="form-check" ng-model="Schema.HideTrainingBond" type="checkbox" />
+                                    <label for="HideTrainingBond-ur-check-0">Hide Training Bond</label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group">
+                                <label class="control-label">Bond Rate</label>
+                                <div class="form-radio-grp">
+                                    <label class="form-radio">
+                                        Fixed
+                                        <input type="radio" ng-model="Schema.ID_PaymentTerms" name="ID_PaymentTerms" ng-value="1" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="form-radio">
+                                        Pro-Rate
+                                        <input type="radio" ng-model="Schema.ID_PaymentTerms" name="ID_PaymentTerms" ng-value="2" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="others" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Others</h5>
+                </div>
+
+                <div class="rf-body with-banner">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-12">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('Comment')">
+                                <label class="control-label">Approver Comment <i title="Maximum of 500 characters." class="fa fa-question-circle" style="font-size: 10px"></i> <i title="Reason is required" class="fa fa-exclamation-circle"></i></label>
+                                <textarea maxlength="500" c-label="Approver Comment" class="form-control" name="Comment" ng-model="Approver.Comment" ng-required="GetIsRequired('Comment')"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="approvalhistory" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Approval History</h5>
+                </div>
+                <div class="rf-body with-banner">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="app-hist" ng-repeat="d in ApprovalHistory">
+                            <i class="fas" ng-class="getFilingStatusIcon(d.ApprovalAction)"></i>
+                            <div class="ah-desc">
+                                <h5 ng-bind="d.ApprovalAction + ' by ' + d.Approver"></h5>
+                                <label ng-bind="FormatDate(d.DateTimeCreated, 'MMM DD, YYYY hh:mm A')"></label>
+                                <p ng-bind="IsNull(d.ApproverComment, 'No comment')"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿<div class="rf-header">
+    <h5>Interviewers</h5>
+</div>
+<div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+    <div class="detail-form">
+        <div class="df-head flex-end">
+            <div class="df-btn-grp">
+                <button ng-disabled="DisableExaminationAndInterviewButtons()" ng-click="newInterviewRecord()" type="button" ng-if="Schema.IsHired == false"><i class="fas fa-plus"></i> New</button>
+                <button ng-disabled="DisableExaminationAndInterviewButtons()" ng-click="delInterviewRecord()" type="button" ng-if="Schema.IsHired == false"><i class="fas fa-trash"></i> Delete</button>
+            </div>
+        </div>
+        <div class="df-body list">
+            <div class="tbl-holder" ng-class="{ 'custom-scroll' : isChrome }">
+                <table id="interview_details" class="table table-striped table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th class="tbl-ctrl">
+                                <input type="checkbox" class="tbl-check" id="selectAllInterviewRecords" ng-model="SelectAllInterviewRows" ng-click="CheckAllInterviewRecords()" />
+                                <label for="selectAllInterviewRecords"></label>
+                            </th>
+                            <th>Interviewer</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Findings</th>
+                            <th>Remarks</th>
+                            <th>Interviewer Status</th>
+                            <th>Notified</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="er in InterviewRecords">
+                            <td class="tbl-ctrl">
+                                <input ng-disabled="disableDetail(er)" type="checkbox" class="tbl-check" id="interview-sdc-{{$index}}" ng-model="er.IsChecked" />
+                                <label for="interview-sdc-{{$index}}"></label>
+                                <i ng-if="er.ID > 0 && Schema.IsHired == false" ng-click="sendInterviewerNotification(er)" title="{{er.IsNotify == true ? 'Resend notification' : 'Send notification'}}" class="fas fa-bell"></i>
+                            </td>
+                            <td>
+                                <div is-disabled="disableDetail(er)" insys-lookup is-required="GetIsRequired('ID_AssignedEmployee',InterviewersTableSchema)" lookup-options="employeeLookup" lookup-data="{'model': er,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_AssignedEmployee', 'displayContainer': 'AssignedEmployee', 'label': 'Interviewer'}"></div>
+                            </td>
+                            <td>
+                                <div class="input-group custom-ig-lu">
+                                    <input ng-disabled="disableDetail(er)" type="text" name="ScheduledDate" ng-model="er.ScheduledDate" ng-min="Today" ng-input text-type="'date'" format="MM/DD/YYYY" placeholder="mm/dd/yyyy" class="form-control" ng-required="GetIsRequired('ScheduledDate',InterviewersTableSchema)" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <input ng-disabled="disableDetail(er)" type="text" name="ScheduledTime" ng-model="er.ScheduledTime" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder="hh:mm" class="form-control" ng-required="GetIsRequired('ScheduledTime',InterviewersTableSchema)" />
+                            </td>
+                            <td><select ng-change="UpdateInterviewerStatus(er)" name="ID_ExamAndInterviewStatus" ng-model="er.ID_ExamAndInterviewStatus" ng-options="es.ID as es.Name for es in InterviewFindings" class="form-control" ng-required="GetIsRequired('ID_ExamAndInterviewStatus',InterviewersTableSchema)"></select></td>
+                            <td><input ng-disabled="disableDetail(er)" name="Notes" class="form-control long" ng-model="er.Notes" /></td>
+                            <td><select ng-disabled="disableDetail(er)" name="ID_InterviewerStatus" ng-model="er.ID_InterviewerStatus" ng-options="es.ID as es.Name for es in InterviewStatusRecords " class="form-control" ng-required="GetIsRequired('ID_InterviewerStatus',InterviewersTableSchema)"></select></td>
+                            <td class="chck">
+                                <input disabled="disabled" type="checkbox" class="tbl-check tbl-check-dt" id="eis-{{$index}}" name="IsNotify" ng-model="er.IsNotify" />
+                                <label for="eis-{{$index}}"></label>
+                            </td>
+
+                        </tr>
+                        <tr class="no_record" ng-if="InterviewRecords.length == 0">
+                            <td>
+                                <div class="no-rec-ico">
+                                    <i class="fas fa-file-alt"></i>
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <p>No record found.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="listing-footer">
+                <div class="lp-count d-none d-sm-block"><span ng-bind="InterviewRecords.length"></span> record(s) found</div>
+                <div class="lp-pagination">
+                    <label>Show</label>
+                    <select><option>1</option></select>
+                    <label>of Page</label>
+                    <select><option>1</option></select>
+                    <button type="button" class="fas fa-angle-double-left" title="previous page"></button>
+                    <button type="button" class="fas fa-angle-double-right" title="next page"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

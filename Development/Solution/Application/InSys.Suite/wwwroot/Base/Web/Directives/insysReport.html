@@ -1,0 +1,7 @@
+﻿<div class="pdfViewer">
+    <div class="pdf-btn-grp">
+        <button ng-if="options.hasLoadPdf == true" type="button" class="pdf-btn" ng-click="RefreshReport()">Load</button>
+        <button ng-if="options.hasExportXls == true" type="button" class="pdf-btn" ng-click="DownloadExcel()">Export to Excel</button>
+    </div>
+    <iframe src="{{webReportUrl}}" allowfullscreen="" webkitallowfullscreen=""></iframe>
+</div>

@@ -1,0 +1,22 @@
+﻿<!--show if element is varchar-->
+<input ng-if="inputType == 'varchar'" type="text" name="NewValue" class="form-control"/>
+
+<!--show if element is varchar-->
+<div ng-if="(inputType == 'datetime')" class="input-group custom-ig-lu">
+    <input type="text" name="EffectivityDate" ng-model="emd.NewValue" ng-change="console.log('TEST')" ng-input text-type="'date'" class="form-control" />
+    <span class="input-group-btn lu">
+        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+    </span>
+</div>
+
+<!--show if element is varchar-->
+<input ng-if="(inputType == 'decimal')" ng-input text-type="'decimal'" name="NewValue" class="form-control" ng-model="emd.NewValue" />
+
+<!--show if element is varchar-->
+<div ng-if="(inputType == 'int' && fieldName == 'id_' )"
+     insys-lookup lookup-options="DataLookUp(emd.LookUpName)"
+     lookup-data="{'model': emd,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'emd.NewValue', 'displayContainer': 'Name', 'label': 'Name'}">
+</div>
+
+<!--show if element is varchar-->
+<input ng-if="(inputType == 'int' && fieldName != 'id_')" type="text" name="NewValue" class="form-control"/>

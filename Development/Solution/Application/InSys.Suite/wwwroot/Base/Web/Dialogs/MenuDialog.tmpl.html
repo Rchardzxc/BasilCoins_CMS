@@ -1,0 +1,13 @@
+﻿<div class="panel">
+    <div class="panel-heading">
+        <label><i class="fas fa-bars"></i> HRMS Menu</label>
+        <i class="fas fa-times" ng-click="close()"></i>
+    </div>
+    <div class="panel-body row">
+        <div class="m-menu">
+            <div class="m-menu-holder" ng-class="{ 'custom-scroll' : isChrome }">
+                <insys-menu ng-if="CtrlReady == true" tree-data="tree"></insys-menu>
+            </div>
+        </div>
+    </div>
+</div>

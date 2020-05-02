@@ -1,0 +1,363 @@
+﻿<div class="record">
+    <div class="record-header"></div>
+    <div class="record-body">
+        <!--Tabs-->
+        <div class="record-tab d-none d-md-block">
+            <div class="record-tab-header">
+                <span>Tabs</span>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                </li>
+                <li class="nav-item">
+                    <a data-target="#description" class="nav-link" data-toggle="tab" role="tab">Descriptions</a>
+                </li>
+                <li class="nav-item" ng-if="(Schema.ID > 0)">
+                    <a data-target="#report" class="nav-link" data-toggle="tab" role="tab">Report</a>
+                </li>
+                <li class="nav-item">
+                    <a data-target="#approvercomment" class="nav-link" data-toggle="tab" role="tab">Approver Comment</a>
+                </li>
+                <li class="nav-item">
+                    <a data-target="#approvalHistory" ng-click="GetApprovalHistory(Schema.ID, Schema.ID_RequestedBy)" class="nav-link" data-toggle="tab" role="tab">Approval History</a>
+                </li>
+            </ul>
+        </div>
+
+        
+        <form ng-submit="saveForm()" name="form.mrf" novalidate autocomplete="off" spellcheck="false" class="tab-content" method="post">
+            <div class="rh-btn-grp">
+                <button class="emphasized d-none d-md-block" type="button" ng-click="SetRecruitmentStatus(1)"><i class="fas fa-check"></i> Approve</button>
+                <button class="d-none d-md-block" type="button" ng-click="SetRecruitmentStatus(2)"><i class="fas fa-trash"></i> Disapprove</button>
+                <button class="d-none d-md-block" type="button" ng-click="SetRecruitmentStatus(3)"><i class="fas fa-hand-paper"></i> On-Hold</button>
+                <!--These dropdowns will display when mobile-->
+                <!--Actions-->
+                <div class="dropdown mobile d-block d-md-none">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button" ng-click="SetRecruitmentStatus(1)">Approve</button>
+                        <button class="dropdown-item" type="button" ng-click="SetRecruitmentStatus(2)">Disapprove</button>
+                        <button class="dropdown-item" type="button" ng-click="SetRecruitmentStatus(3)">On-Hold</button>
+                    </div>
+                </div>
+                <!--These dropdowns will display when mobile-->
+                <!--Tabs-->
+                <div class="dropdown mobile d-block d-md-none" role="tablist">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Tabs</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-target="#description" class="nav-link" data-toggle="tab" role="tab">Descriptions</a>
+                            </li>
+                            <li ng-if="(Schema.ID > 0)" class="nav-item">
+                                <a data-target="#report" class="nav-link" data-toggle="tab" role="tab">Report</a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-target="#approvercomment" class="nav-link" data-toggle="tab" role="tab">Approver Comment</a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-target="#approvalHistory" ng-click="GetApprovalHistory(Schema.ID, Schema.ID_RequestedBy)" class="nav-link" data-toggle="tab" role="tab">Approval History</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--General Tab-->
+            <div id="general" role="tabpanel" class="tab-pane fade show active">
+                <!--Form Header-->
+                <div class="rf-header">
+                    <h5>General</h5>
+                </div>
+
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-12 col-lg-10">
+                            <div class="mrf-itm-holder" ng-if="GetPositionDetails.ID_Designation > 0">
+                                <div class="mrf-itm">
+                                    <i class="fas fa-user-tie"></i>
+                                    <div class="mrf-desc">
+                                        <label>Position</label>
+                                        <p ng-bind="GetPositionDetails.Position"></p>
+                                    </div>
+                                </div>
+                                <div class="mrf-itm">
+                                    <i class="fas fa-sitemap"></i>
+                                    <div class="mrf-desc">
+                                        <label>Plantilla</label>
+                                        <p ng-bind="GetPositionDetails.Plantilla"></p>
+                                    </div>
+                                </div>
+                                <div class="mrf-itm">
+                                    <i class="fas fa-users"></i>
+                                    <div class="mrf-desc">
+                                        <label>Headcount</label>
+                                        <p ng-bind="GetPositionDetails.HeadCount"></p>
+                                    </div>
+                                </div>
+                                <div class="mrf-itm">
+                                    <i class="fas fa-chair"></i>
+                                    <div class="mrf-desc">
+                                        <label>Vacancy</label>
+                                        <p ng-bind="GetPositionDetails.Vacancy"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div ng-if="IsAllCompany" class="form-group" ng-required="GetIsRequired('ID_Company')" ng-disabled="!(RecordID == 0)">
+                                <label class="control-label">Company <i title="Company is required" class="fa fa-exclamation-circle"></i></label>
+                                <select ng-change="SelectCompany()" c-label="Company" ng-required="GetIsRequired('ID_Company')" ng-disabled="!(RecordID == 0)" name="ID_Company" ng-options="cl.ID as cl.Name for cl in CompanyList" class="form-control" ng-model="Schema.ID_Company"></select>
+                            </div>
+                            <div class="form-group" readonly>
+                                <label class="control-label">MRF#</label>
+                                <input class="form-control" type="text" name="MRFNumber" ng-model="Schema.MRFNumber" readonly />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('PostingDate')">
+                                <label class="control-label">Posting Date <i title="Posting Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" name="PostingDate" c-label="Posting Date" ng-required="GetIsRequired('PostingDate')" ng-model="Schema.PostingDate" ng-change="getManPowerPlanDetails(Schema.ID_Designation, Schema.FiledDate)" ng-input text-type="'date'" class="form-control" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!--<div class="form-group" required>
+                            <label class="control-label">Request Status <i title="Request Status is required" class="fa fa-exclamation-circle"></i></label>
+                            <select ng-options="r.ID as r.Name for r in RecruitmentList" class="form-control" ng-model="Schema.ID_RecruitmentStatus"></select>
+                        </div>-->
+
+                            <div class="form-group" ng-required="GetIsRequired('ID_Designation')">
+                                <!--<label class="control-label">Position <i title="Position is required" class="fa fa-exclamation-circle"></i></label>
+                            <select ng-options="p.ID as p.Name for p in PositionList" class="form-control" ng-model="Schema.ID_Designation" ng-change="getManPowerPlanDetails(Schema.ID_Designation, Schema.FiledDate)"></select>-->
+                                <div insys-lookup is-required="GetIsRequired('ID_Designation')" lookup-options="desginationLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Designation', 'displayContainer': 'Designation', 'label': 'Position'}"></div>
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('ID_NatureOfRequests')">
+                                <label class="control-label">Nature of Request <i title="Nature of Request is required" class="fa fa-exclamation-circle"></i></label>
+                                <select c-label="Nature of Request" ng-change="LoadReplacementResources(Schema.ID_NatureOfRequests)" name="ID_NatureOfRequests" ng-required="GetIsRequired('ID_NatureOfRequests')" ng-options="nr.ID as nr.Name for nr in NatureOfRequestList" class="form-control" ng-model="Schema.ID_NatureOfRequests"></select>
+                            </div>
+
+                            <div class="form-group">
+                                <span class="form-check-holder">
+                                    <input id="ur-check-0" name="Posted" class="form-check" ng-model="Schema.Posted" type="checkbox" disabled />
+                                    <label for="ur-check-0">Posted  (For Approval)</label>
+                                </span>
+                            </div>
+
+                            <div class="form-group">
+                                <span class="form-check-holder">
+                                    <input id="PostForJobPosting-check-0" name="PostForJobPosting" class="form-check" ng-model="Schema.PostForJobPosting" type="checkbox" disabled />
+                                    <label for="PostForJobPosting-check-0">Posted  (For Job Posting)</label>
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('ID_RequestedBy')">
+                                <div insys-lookup is-required="GetIsRequired('ID_RequestedBy')" lookup-options="employeeLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_RequestedBy', 'displayContainer': 'RequestedBy', 'label': 'Requested By'}"></div>
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('ID_EmployeeStatus')">
+                                <label class="control-label">Employee Status <i title="Employee Status is required" class="fa fa-exclamation-circle"></i></label>
+                                <select c-label="Employee Status" ng-options="es.ID as es.Name for es in EmployeeStatusList" name="ID_EmployeeStatus" class="form-control" ng-model="Schema.ID_EmployeeStatus" ng-required="GetIsRequired('ID_EmployeeStatus')"></select>
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('ID_JobClass')">
+                                <!--<label class="control-label">Job Level</label>
+                            <select ng-options="jl.ID as jl.Name for jl in JobLevelList" class="form-control" ng-model="Schema.ID_JobClass"></select>-->
+
+                                <div insys-lookup is-required="GetIsRequired('ID_JobClass')" lookup-options="jobClassLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_JobClass', 'displayContainer': 'JobClass', 'label': 'Job Class'}"></div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <insys-upload readonly="false" required="IsAttachmentRequired(Schema.ID_NatureOfRequests)" name="Attachment" target-model="Schema.Attachment" options="UploadOptions"></insys-upload>
+                            </div>
+
+                            <div ng-if="Schema.ID_NatureOfRequests == 2">
+                                <div class="form-group" ng-required="GetIsRequired('ReplacementReason')">
+                                    <label class="control-label">Replacement due to<i title="Replacement is required" class="fa fa-exclamation-circle"></i></label>
+                                    <select c-label="Replacement" ng-options="rr.ID as rr.Name for rr in ReplacementReasonsList" ng-required="GetIsRequired('ReplacementReason')" name="ReplacementReason" class="form-control" ng-model="Schema.ReplacementReason"></select>
+                                </div>
+                                <div class="form-group" ng-required="GetIsRequired('ID_PersonToBeReplaced')">
+                                    <div insys-lookup is-required="GetIsRequired('ID_PersonToBeReplaced')" lookup-options="employeeLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_PersonToBeReplaced', 'displayContainer': 'PersonToBeReplaced', 'label': 'Person to be replaced'}"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <span class="form-check-holder">
+                                    <input id="isbudgeted-check-0" name="IsBudgeted" class="form-check" ng-model="Schema.IsBudgeted" type="checkbox" />
+                                    <label for="isbudgeted-check-0">Is Budgeted</label>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rf-title col-xl-10 col-lg-10 col-md-12">Headcount and Salary Range</div>
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+
+                        <div class="col-xl-6 col-lg-10">
+                            <div class="form-group" ng-required="GetIsRequired('MaleCount')">
+                                <label class="control-label">Male Head Count <i title="Male Head Count is required" class="fa fa-exclamation-circle"></i></label>
+                                <input c-label="Male Count" ng-blur="ComputeTotalHeadCount()" class="form-control" ng-required="GetIsRequired('MaleCount')"  maxlength="{{GetMaxLength('MaleCount')}}" type="number" name="MaleCount" ng-model="Schema.MaleCount" required />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('FemaleCount')">
+                                <label class="control-label">Female Head Count <i title="Female Head Count is required" class="fa fa-exclamation-circle"></i></label>
+                                <input c-label="Female Count" ng-blur="ComputeTotalHeadCount()" class="form-control" type="number" name="FemaleCount" ng-model="Schema.FemaleCount" ng-required="GetIsRequired('FemaleCount')" maxlength="{{GetMaxLength('FemaleCount')}}"/>
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('NoGenderPreference')">
+                                <label class="control-label">No Gender Preference Head Count <i title="No Gender Preference Head Count is required" class="fa fa-exclamation-circle"></i></label>
+                                <input c-label="No Gender Preference Head Count" ng-required="GetIsRequired('NoGenderPreference')" maxlength="{{GetMaxLength('NoGenderPreference')}}" ng-blur="ComputeTotalHeadCount()" class="form-control" type="number" name="NoGenderPreference" ng-model="Schema.NoGenderPreference"  />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('RequestHeadCount')">
+                                <label class="control-label">Total Head Count <i title="Head Count is required" class="fa fa-exclamation-circle"></i></label>
+                                <input c-label="Head Count" class="form-control" type="number" name="RequestHeadCount" ng-model="Schema.RequestHeadCount" maxlength="{{GetMaxLength('RequestHeadCount')}}" ng-required="GetIsRequired('RequestHeadCount')" readonly />
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('MinSalary')">
+                                <label class="control-label">Minimum Salary <i title="Minimum Salary is required" class="fa fa-exclamation-circle"></i></label>
+                                <input c-label="Minimum Salary" class="form-control" type="text" ng-required="GetIsRequired('MinSalary')" maxlength="{{GetMaxLength('MinSalary')}}" name="MinSalary" ng-model="Schema.MinSalary" required />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('MaxSalary')">
+                                <label class="control-label">Maximum Salary <i title="Maximum Salary is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="number" c-label="Maximum Salary" ng-required="GetIsRequired('MaxSalary')" maxlength="{{GetMaxLength('MaxSalary')}}" name="MaxSalary" ng-model="Schema.MaxSalary" required />
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="rf-title col-xl-10 col-lg-10 col-md-12">Location Of Assignment (For Promodizer Only)</div>
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+
+                        <div class="col-xl-6 col-lg-10">
+                            <div class="form-group" ng-required="GetIsRequired('LocationStoreName')">
+                                <label class="control-label">Store Name <i title="Store Name is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" c-label="Store Name" ng-required="GetIsRequired('LocationStoreName')" maxlength="{{GetMaxLength('LocationStoreName')}}" name="LocationStoreName" ng-model="Schema.LocationStoreName" />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('LocationStoreCode_CostCenter')">
+                                <label class="control-label">Store Code / Cost Center <i title="Store Code / Cost Center is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" c-label="Store Code / Cost Center" ng-required="GetIsRequired('LocationStoreCode_CostCenter')" maxlength="{{GetMaxLength('LocationStoreCode_CostCenter')}}" name="LocationStoreCode_CostCenter" ng-model="Schema.LocationStoreCode_CostCenter" />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('LocationBranchArea')">
+                                <label class="control-label">Branch Area <i title="Branch Area is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" c-label="Branch Area" ng-required="GetIsRequired('LocationBranchArea')" maxlength="{{GetMaxLength('LocationBranchArea')}}" name="LocationBranchArea" ng-model="Schema.LocationBranchArea" />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('LocationReportingSchedule')">
+                                <label class="control-label">Reporting Schedule <i title="Reporting Schedule is required" class="fa fa-exclamation-circle"></i></label>
+                                <input c-label="Reporting Schedule" class="form-control" type="text" name="LocationReportingSchedule" ng-model="Schema.LocationReportingSchedule" ng-required="GetIsRequired('LocationReportingSchedule')" maxlength="{{GetMaxLength('LocationReportingSchedule')}}" />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('LocationAddress')">
+                                <label class="control-label">Address <i title="Address is required" class="fa fa-exclamation-circle"></i></label>
+                                <textarea c-label="Address" class="form-control" name="LocationAddress" ng-model="Schema.LocationAddress" ng-required="GetIsRequired('LocationAddress')" maxlength="{{GetMaxLength('LocationAddress')}}"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--Descriptions Tab-->
+            <div id="description" role="tabpanel" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Descriptions</h5>
+                </div>
+
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-md-12 row">
+                        <div class="col-md-12">
+                            <br />
+                            <div class="form-group">
+                                <label class="control-label">Description</label>
+                                <!--<textarea class="form-control" name="Description" ng-model="Schema.Description"></textarea>-->
+                                <div text-angular name="Description" ta-text-editor-class="clearfix border-around" ta-html-editor-class="border-around" ng-model="Schema.Description"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Required Work Experience</label>
+                                <!--<textarea class="form-control" name="WorkExperience" ng-model="Schema.WorkExperience"></textarea>-->
+                                <div text-angular ng-model="Schema.WorkExperience"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Qualification</label>
+                                <!--<textarea class="form-control" name="Qualification" ng-model="Schema.Qualification"></textarea>-->
+                                <div text-angular ng-model="Schema.Qualification"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Other Details</label>
+                                <!--<textarea class="form-control" name="OtherDetails" ng-model="Schema.OtherDetails"></textarea>-->
+                                <div text-angular ng-model="Schema.OtherDetails"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="report" ng-if="(Schema.ID > 0)" role="tabpanel" class="tab-pane fade report-tab-pane">
+                <insys-report options="rptOptions"></insys-report>
+            </div>
+
+            <div id="approvercomment" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Others</h5>
+                </div>
+
+                <div class="rf-body with-banner">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-12">
+                            <br />
+                            <div class="form-group">
+                                <label class="control-label">Approver Comment <i title="Address is required" class="fa fa-exclamation-circle"></i></label>
+                                <textarea maxlength="500" class="form-control" name="ApproverComment" ng-model="Schema.ApproverComment"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="approvalHistory" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Approval History</h5>
+                </div>
+
+                <div class="rf-body with-banner">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="app-hist" ng-repeat="d in ApprovalHistory">
+                            <i class="fas" ng-class="getFilingStatusIcon(d.ApprovalAction)"></i>
+                            <div class="ah-desc">
+                                <h5 ng-bind="d.ApprovalAction + ' by ' + d.Approver"></h5>
+                                <label ng-bind="FormatDate(d.DateTimeCreated, 'MMM DD, YYYY hh:mm A')"></label>
+                                <p ng-bind="IsNull(d.ApproverComment, 'No comment')"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

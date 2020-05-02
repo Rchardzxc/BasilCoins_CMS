@@ -1,0 +1,168 @@
+﻿<div class="record">
+    <div class="record-header"></div>
+    <div class="record-body">
+        <!--Tabs-->
+        <div class="record-tab d-none d-md-block">
+            <div class="record-tab-header">
+                <span>Tabs</span>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                </li>
+                <li class="nav-item">
+                    <a data-target="#identity" class="nav-link" data-toggle="tab" role="tab">Identification</a>
+                </li>
+                <li class="nav-item" ng-click="ShowCompanies()">
+                    <a data-target="#orgstructure" class="nav-link" data-toggle="tab" role="tab">Organizational Structure</a>
+                </li>
+            </ul>
+        </div>
+        <!--Form-->
+        <form ng-submit="saveForm()" autocomplete="off" spellcheck="false" class="tab-content" method="post">
+            <!--Button Group-->
+            <div class="rh-btn-grp">
+                <button class="emphasized d-none d-md-block" ng-if="tblOptions.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()" type="button"><i class="fas fa-plus"></i> New</button>
+                <button class="emphasized d-none d-md-block" type="submit"><i class="fas fa-save"></i> Save</button>
+                <button class="d-none d-md-block" type="button"><i class="fas fa-trash"></i> Delete</button>
+
+                <!--These dropdowns will display when mobile-->
+                <!--Actions-->
+                <div class="dropdown mobile d-block d-md-none">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="emphasized" ng-if="tblOptions.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()" type="button">New</button>
+                        <button class="dropdown-item" type="submit">Save</button>
+                        <button class="dropdown-item" type="button">Delete Record</button>
+                    </div>
+                </div>
+                <!--Tabs-->
+                <div class="dropdown mobile d-block d-md-none" role="tablist">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Tabs</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-target="#identity" class="nav-link" data-toggle="tab" role="tab">Identification</a>
+                            </li>
+                            <li class="nav-item" ng-click="ShowCompanies()">
+                                <a data-target="#orgstructure" class="nav-link" data-toggle="tab" role="tab">Organizational Structure</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!--General Tab-->
+            <div id="general" role="tabpanel" class="tab-pane fade show active">
+                <!--Form Header-->
+                <div class="rf-header">
+                    <h5>General</h5>
+                </div>
+                <!--Form Content-->
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <!--Panel 1-->
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+
+                            <div class="form-group" required>
+                                <label class="control-label">Code <i title="Code is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="Code" ng-model="Schema.Code" required />
+                            </div>
+                            <div class="form-group" required>
+                                <label class="control-label">Company Name <i title="Company Name is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="Company Name" ng-model="Schema.Name" required />
+                            </div>
+                            <div class="form-group" required>
+                                <label class="control-label">Address <i title="Address is required" class="fa fa-exclamation-circle"></i></label>
+                                <textarea class="form-control" name="Address" ng-model="Schema.Address" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Zip Code</label>
+                                <input class="form-control" type="text" name="ZipCode" ng-model="Schema.ZipCode" />
+                            </div>
+
+                        </div>
+                        <!--Panel 2-->
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+
+                            <div class="form-group">
+                                <label class="control-label">President</label>
+                                <input class="form-control" type="text" name="President" ng-model="Schema.President" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Vice President</label>
+                                <input class="form-control" type="text" name="VicePresident" ng-model="Schema.VicePresident" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Owner</label>
+                                <input class="form-control" type="text" name="Owner" ng-model="Schema.Owner" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Identification Tab-->
+            <div id="identity" role="tabpanel" class="tab-pane fade">
+                <!--Form Header-->
+                <div class="rf-header">
+                    <h5>Identification</h5>
+                </div>
+
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group">
+                                <label class="control-label">TIN No.</label>
+                                <input class="form-control" type="text" name="TIN" ng-model="Schema.TIN" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">SSS No.</label>
+                                <input class="form-control" type="text" name="SSSNo" ng-model="Schema.SSSNo" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">PhilHealth No.</label>
+                                <input class="form-control" type="text" name="PhilHealthNo" ng-model="Schema.PhilHealthNo" />
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group">
+                                <label class="control-label">HDMF No.</label>
+                                <input class="form-control" type="text" name="HDMFNo" ng-model="Schema.HDMFNo" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Tel No.</label>
+                                <input class="form-control" type="text" name="TelNo" ng-model="Schema.TelNo" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Vat Reg. No.</label>
+                                <input class="form-control" type="text" name="VatRegNo" ng-model="Schema.VatRegNo" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Organizational Structure Tab-->
+            <div id="orgstructure" role="tabpanel" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Organizational Structure</h5>
+                    <!--<p class="d-none d-sm-block">Define the hierarchy of each organizational type for this company. Right click each item to choose an action.</p>-->
+                </div>
+
+                <div class="rf-body h-220" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="detail-form">
+                        <div class="df-body tree">
+                            <div ng-transclude insys-tree="companiesTree" display-column="'Name'" allow-check="false"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

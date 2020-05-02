@@ -1,0 +1,141 @@
+﻿<div class="filing-application">
+    <ul class="nav nav-tabs filings-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" data-target="#application" role="tab">Applications</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" data-target="#approval" role="tab">Approvals</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <!--Application-->
+        <div class="tab-pane fade show active" id="application" role="tabpanel">
+            <!--TAB-->
+                <ul class="nav nav-tabs filing-type-tab" role="tablist">
+                    <li class="nav-item" ng-click="loadTabSchema('leave','tLeave')">
+                        <a class="nav-link filing-type-item active" data-toggle="tab" data-target="#ionsLeaveContent" role="tab">
+                            <label>Leave</label>
+                            <span ng-if="ft.Count > 0" ng-bind="ft.Count"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item" ng-click="loadTabSchema('ot','tOvertime')">
+                        <a class="nav-link filing-type-item" data-toggle="tab" data-target="#ionsOtContent" role="tab">
+                            <label>Overtime</label>
+                            <span ng-if="ft.Count > 0" ng-bind="ft.Count"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item" ng-click="loadTabSchema('ob','tOB')">
+                        <a class="nav-link filing-type-item" data-toggle="tab" data-target="#ionsObContent" role="tab">
+                            <label>Official Business</label>
+                            <span ng-if="ft.Count > 0" ng-bind="ft.Count"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item" ng-click="loadTabSchema('ml','tMissedLog')">
+                        <a class="nav-link filing-type-item" data-toggle="tab" data-target="#ionsMlContent" role="tab">
+                            <label>Missed Log</label>
+                            <span ng-if="ft.Count > 0" ng-bind="ft.Count"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item" ng-click="loadTabSchema('cos','tChangeOfSchedule')">
+                        <a class="nav-link filing-type-item" data-toggle="tab" data-target="#ionsCosContent" role="tab">
+                            <label>Change of Schedule</label>
+                            <span ng-if="ft.Count > 0" ng-bind="ft.Count"></span>
+                        </a>
+                    </li>
+                </ul>
+            <!--TAB-->
+            <!--TAB CONTENT-->
+            <!--LEAVE-->
+            <div id="ionsLeaveContent" role="tabpanel" class="tab-pane fade show active record">
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="detail-form">
+                        <div class="df-body list grid">
+                            <insys-table options="FilingOptions['leave']" get-load="FilingOptions['leave'].trigger"></insys-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--OVERTIME-->
+            <div id="ionsOtContent" role="tabpanel" class="tab-pane fade record">
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="detail-form">
+                        <div class="df-body list grid">
+                            <insys-table options="FilingOptions['ot']" get-load="FilingOptions['ot'].trigger"></insys-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--OFFICIAL BUSINESS-->
+            <div id="ionsObContent" role="tabpanel" class="tab-pane fade record">
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="detail-form">
+                        <div class="df-body list grid">
+                            <insys-table options="FilingOptions['ob']" get-load="FilingOptions['ob'].trigger"></insys-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--MISSED LOG-->
+            <div id="ionsMlContent" role="tabpanel" class="tab-pane fade record">
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="detail-form">
+                        <div class="df-body list grid">
+                            <insys-table options="FilingOptions['ml']" get-load="FilingOptions['ml'].trigger"></insys-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--CHANGE OF SCHEDULE-->
+            <div id="ionsCosContent" role="tabpanel" class="tab-pane fade record">
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="detail-form">
+                        <div class="df-body list grid">
+                            <insys-table options="FilingOptions['cos']" get-load="FilingOptions['cos'].trigger"></insys-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- TAB CONTENT -->
+        </div>
+        <!--Approval-->
+        <div class="tab-pane fade" id="approval" role="tabpanel">
+            <div class="filing-type-tab">
+                <div class="filing-type-item" ng-class="{'active' : $index == 0}" ng-repeat="ft in FilingTypes">
+                    <label ng-bind="ft.Name"></label>
+                    <span ng-if="ft.Count > 0" ng-bind="ft.Count"></span>
+                </div>
+            </div>
+            <div class="filing-listing">
+                <h5 class="filing-title">Leave</h5>
+                <div class="filing-listing-btngroup">
+                    <button><i class="fas fa-filter"></i> Filter</button>
+                </div>
+                <div class="listing-container">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Leave Item</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Reason</th>
+                                <th>Posted</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-dblclick="FileApplication()">
+                                <td>VL</td>
+                                <td>10/08/2019</td>
+                                <td>10/08/2019</td>
+                                <td>Sample Reason</td>
+                                <td>Yes</td>
+                                <td>Filed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

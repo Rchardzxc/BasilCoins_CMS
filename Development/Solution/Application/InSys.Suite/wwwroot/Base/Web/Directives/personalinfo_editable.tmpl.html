@@ -1,0 +1,152 @@
+﻿<div class="col-lg-10 col-md-12 row">
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="form-group">
+            <label class="control-label">Last name <i title="Last name is required" class="fa fa-exclamation-circle"></i></label>
+            <input ng-input restrict-input="'lettersonly'" class="form-control" name="LastName" c-label="Last Name" ng-model="Schema.LastName" type="text" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Middle name <i title="Middle name is required" class="fa fa-exclamation-circle"></i></label>
+            <input ng-input restrict-input="'lettersonly'" class="form-control" name="MiddleName" c-label="Middle Name" ng-model="Schema.MiddleName" type="text" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Nickname <i title="Nickname is required" class="fa fa-exclamation-circle"></i></label>
+            <input ng-input restrict-input="'lettersonly'" class="form-control" name="NickName" c-label="Nick Name" ng-model="Schema.NickName" type="text" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Date of Birth <i title="Date of Birth is required" class="fa fa-exclamation-circle"></i></label>
+            <div class="input-group custom-ig-lu">
+                <input onkeydown="return false;" type="text" ng-model="Schema.BirthDate" c-label="Birth Date" name="BirthDate" ng-input text-type="'date'" class="form-control" ng-min="DateToday" />
+                <span class="input-group-btn lu">
+                    <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="lbl-grp">
+            <label>Age</label>
+            <p ng-bind="GetAge(FormatDate(Schema.BirthDate, 'MM/DD/YYYY'))"></p>
+        </div>
+        <div class="form-group">
+            <div insys-lookup lookup-options="CivilStatusLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name' , 'valueContainer': 'ID_CivilStatus', 'displayContainer': 'CivilStatus', 'label': 'Civil Status'}"></div>
+        </div>
+        <div class="form-group">
+            <div is-required="GetIsRequired('ID_BloodType')" insys-lookup lookup-options="BloodTypeLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name' , 'valueContainer': 'ID_BloodType', 'displayContainer': 'BloodType', 'label': 'Blood Type'}"></div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Weight (kg)<i title="Weight is required" class="fa fa-exclamation-circle"></i></label>
+            <input class="form-control" name="Weight" ng-model="Schema.Weight" ng-input/>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="form-group">
+            <label class="control-label">First name <i title="First name is required" class="fa fa-exclamation-circle"></i></label>
+            <input ng-input restrict-input="'lettersonly'" class="form-control" name="FirstName" c-label="First Name" ng-model="Schema.FirstName" type="text" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Suffix <i title="Suffix is required" class="fa fa-exclamation-circle"></i></label>
+            <input ng-input restrict-input="'lettersonly'" class="form-control" name="Suffix" ng-model="Schema.Suffix" type="text" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Gender <i title="Gender is required" class="fa fa-exclamation-circle"></i></label>
+            <select c-label="Gender" name="ID_Gender" ng-options="cl.ID as cl.Name for cl in GenderList" class="form-control" ng-model="Schema.ID_Gender"></select>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Place of Birth <i title="Place of Birth is required" class="fa fa-exclamation-circle"></i></label>
+            <input class="form-control" name="BirthPlace" c-label="Birth Place" ng-model="Schema.BirthPlace" type="text" />
+        </div>
+        <div class="form-group">
+            <div insys-lookup lookup-options="ReligionLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name' , 'valueContainer': 'ID_Religion', 'displayContainer': 'Religion', 'label': 'Religion'}"></div>
+        </div>
+        <div class="form-group">
+            <div insys-lookup lookup-options="CitizenshipLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name' , 'valueContainer': 'ID_Citizenship', 'displayContainer': 'Citizenship', 'label': 'Citizenship'}"></div>
+        </div>
+        <div class="form-group">
+            <div insys-lookup lookup-options="Nationalitylookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name' , 'valueContainer': 'ID_Nationality', 'displayContainer': 'Nationality', 'label': 'Nationality'}"></div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Height (cm)<i title="Height is required" class="fa fa-exclamation-circle"></i></label>
+            <input class="form-control" name="Height" ng-model="Schema.Height" type="text" ng-input text-type="'decimal'" /> <!--ng-maxlength="GetMaxLength('Height')"-->
+        </div>
+    </div>
+    <div class="r-title col-12">Contact Info</div>
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="form-group">
+            <label class="control-label">Mobile No. <i title="Mobile No. is required" class="fa fa-exclamation-circle"></i></label>
+            <input class="form-control" name="MobileNo" ng-model="Schema.MobileNo" type="text" ng-input text-type="'decimal'"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Phone No. <i title="Phone No. is required" class="fa fa-exclamation-circle"></i></label>
+            <input class="form-control" name="PhoneNo" ng-model="Schema.PhoneNo" type="text" ng-input text-type="'decimal'"/>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="form-group">
+            <label class="control-label">Email Address <i title="Email Address is required" class="fa fa-exclamation-circle"></i></label>
+            <input class="form-control" name="EmailAddress" c-label="Email address" ng-model="Schema.EmailAddress" type="text" />
+        </div>
+    </div>
+    <div class="r-title col-12">Address</div>
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="form-group">
+            <center>
+                <span class="form-check-holder"><input type="checkbox" style="opacity:0;" /></span>
+            </center>
+        </div>
+        <div class="rs-title">Permanent</div>
+
+        <div class="form-group">
+            <label class="control-label">No/Blk/Lot <i title="No/Blk/Lot is required" class="fa fa-exclamation-circle"></i></label>
+            <input class="form-control" name="HouseNo" ng-model="PermanentPersonaAddress.HouseNo" type="text" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Street/Subdivision <i title="Street/Subdivision is required" class="fa fa-exclamation-circle"></i></label>
+            <input class="form-control" name="StreetName" c-label="Street Name" ng-model="PermanentPersonaAddress.StreetName" type="text" />
+        </div>
+        <div cascade="UpdateCity(row, false)" insys-lookup lookup-options="provinceLookup" lookup-data="{'model': PermanentPersonaAddress,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Province', 'displayContainer': 'Province', 'label': 'Province'}"></div>
+        <div is-disabled="DoExist(PermanentPersonaAddress.ID_Province, 1)" cascade="UpdateBarangay(row, false)" insys-lookup lookup-options="cityLookup" lookup-data="{'model': PermanentPersonaAddress,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_City', 'displayContainer': 'City', 'label': 'City'}"></div>
+        <div is-disabled="DoExist(PermanentPersonaAddress.ID_City, 2)" insys-lookup lookup-options="barangayLookup" lookup-data="{'model': PermanentPersonaAddress,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Barangay', 'displayContainer': 'Barangay', 'label': 'Barangay'}"></div>
+
+    </div>
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="form-group">
+            <span class="form-check-holder"><input type="checkbox" class="tbl-check" ng-model="SameAsPermanent1" ng-change="CheckBoxChange(this)" /><label class="control-label">Same as Permanent</label></span>
+        </div>
+        <div class="rs-title">Present</div>
+        <div class="form-group">
+            <label class="control-label">No/Blk/Lot <i title="No/Blk/Lot is required" class="fa fa-exclamation-circle"></i></label>
+            <input class="form-control" name="HouseNo" ng-model="PresentPersonaAddress.HouseNo" type="text" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Street/Subdivision <i title="Street/Subdivision is required" class="fa fa-exclamation-circle"></i></label>
+            <input class="form-control" name="StreetName" c-label="Street Name" ng-model="PresentPersonaAddress.StreetName" type="text" />
+        </div>
+        <div cascade="UpdateCity(row, true)" insys-lookup lookup-options="provinceLookup2" lookup-data="{'model': PresentPersonaAddress,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Province', 'displayContainer': 'Province', 'label': 'Province'}"></div>
+        <div is-disabled="DoExist(PresentPersonaAddress.ID_Province, 3)" cascade="UpdateBarangay(row, true)" insys-lookup lookup-options="cityLookup2" lookup-data="{'model': PresentPersonaAddress,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_City', 'displayContainer': 'City', 'label': 'City'}"></div>
+        <div is-disabled="DoExist(PresentPersonaAddress.ID_City, 4)" insys-lookup lookup-options="barangayLookup2" lookup-data="{'model': PresentPersonaAddress,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Barangay', 'displayContainer': 'Barangay', 'label': 'Barangay'}"></div>
+
+    </div>
+    <div class="r-title col-12">Government ID</div>
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="form-group">
+            <label class="control-label">SSS No. <i title="SSS No. is required" class="fa fa-exclamation-circle"></i></label>
+            <input ng-blur="GovBlur()" class="form-control" name="SSSNo" ng-model="Schema.SSSNo" type="text" ng-input text-type="'number'"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">HDMF No. <i title="HDMF No. is required" class="fa fa-exclamation-circle"></i></label>
+            <input ng-blur="GovBlur()" class="form-control" name="HDMFNo" ng-model="Schema.HDMFNo" type="text" ng-input text-type="'number'" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">GSIS No. <i title="GSIS No. is required" class="fa fa-exclamation-circle"></i></label>
+            <input ng-blur="GovBlur()" class="form-control" name="GSISNo" ng-model="Schema.GSISNo" type="text" ng-input text-type="'number'" />
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-12">
+        <div class="form-group">
+            <label class="control-label">PhilHealth No. <i title="PhilHealth No. is required" class="fa fa-exclamation-circle"></i></label>
+            <input ng-blur="GovBlur()" class="form-control" name="PhilHealthNo" ng-model="Schema.PhilHealthNo" type="text" ng-input text-type="'number'"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">TIN No. <i title="TIN No. is required" class="fa fa-exclamation-circle"></i></label>
+            <input ng-blur="GovBlur()" class="form-control" name="TINNo" ng-model="Schema.TINNo" type="text" ng-input db-data-type="'int'"/>
+        </div>
+    </div>
+</div>

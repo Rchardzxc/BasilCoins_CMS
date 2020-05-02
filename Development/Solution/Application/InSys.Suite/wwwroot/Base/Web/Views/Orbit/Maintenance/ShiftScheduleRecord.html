@@ -1,0 +1,145 @@
+﻿<div class="record">
+    <div class="record-header"></div>
+    <div class="record-body">
+        <!--Tabs-->
+        <div class="record-tab d-none d-md-block">
+            <div class="record-tab-header">
+                <span>Tabs</span>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                </li>
+                <li class="nav-item">
+                    <a ng-click="LoadScheduleDetails()" data-target="#shiftScheduleDetails" class="nav-link" data-toggle="tab" role="tab">Details</a>
+                </li>
+            </ul>
+        </div>
+
+        <form ng-submit="saveForm()" name="form.shiftschedule" novalidate autocomplete="off" spellcheck="false" class="tab-content" method="post">
+            <div class="rh-btn-grp">
+                <button class="emphasized d-none d-md-block" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()" type="button"><i class="fas fa-plus"></i> New</button>
+                <button class="emphasized d-none d-md-block" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0"><i class="fas fa-save"></i> Save</button>
+
+                <!--These dropdowns will display when mobile-->
+                <!--Actions-->
+                <div class="dropdown mobile d-block d-md-none">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()">New</button>
+                        <button class="dropdown-item" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0">Save</button>
+                    </div>
+                </div>
+                <!--Tabs-->
+                <div class="dropdown mobile d-block d-md-none" role="tablist">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Tabs</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-target="#details" class="nav-link" data-toggle="tab" role="tab">Details</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--General Tab-->
+            <div id="general" role="tabpanel" class="tab-pane fade show active">
+                <!--Form Header-->
+                <div class="rf-header">
+                    <h5>General</h5>
+                </div>
+
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('Code')">
+                                <label class="control-label">Code <i title="Code is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="Code" placeholder="Enter code" ng-model="Schema.Code" ng-required="GetIsRequired('Code')" maxlength="{{GetMaxLength('Code')}}" />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('TimeIn')">
+                                <label class="control-label">Time In <i title="Time In is required" class="fa fa-exclamation-circle"></i></label>
+                                <input type="text" c-label="Time In" ng-change="ComputeWorkingHours()" name="TimeIn" ng-model="Schema.TimeIn" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder="hh:mm" class="form-control" ng-required="GetIsRequired('TimeIn')" />
+                            </div>
+                            <!--<div class="form-group" ng-required="GetIsRequired('WorkingHours')" readonly>
+                                <label class="control-label">Working Hours <i title="Working Hours is required" class="fa fa-exclamation-circle"></i></label>
+                                <input c-label="Working Hours" class="form-control" type="text" name="WorkingHours" ng-model="Schema.WorkingHours" ng-required="GetIsRequired('WorkingHours')" maxlength="{{GetMaxLength('WorkingHours')}}" />
+                            </div>-->
+                        </div>
+
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('Name')">
+                                <label class="control-label">Name <i title="Name is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="Name" placeholder="Enter Name" ng-model="Schema.Name" ng-required="GetIsRequired('Name')" maxlength="{{GetMaxLength('Name')}}" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('TimeOut')">
+                                <label class="control-label">Time Out <i title="Time Out is required" class="fa fa-exclamation-circle"></i></label>
+                                <input type="text" c-label="Time Out" name="TimeOut" ng-model="Schema.TimeOut" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder="hh:mm" class="form-control" ng-required="GetIsRequired('TimeOut')" />
+                            </div>
+                            <div class="form-group">
+                                <span class="form-check-holder">
+                                    <input id="IsActive-ur-check-0" name="IsActive" class="form-check" ng-model="Schema.IsActive" type="checkbox" />
+                                    <label for="IsActive-ur-check-0">Active</label>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rf-title col-xl-10 col-lg-10 col-md-12">Half Day Working Hours</div>
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('FirstHalfTimeOut')">
+                                <label class="control-label">1st Half Out <i title="1st Half Out is required" class="fa fa-exclamation-circle"></i></label>
+                                <input type="text" c-label="1st Half Out" ng-change="ComputeFirstHalfHours()" name="FirstHalfTimeOut" ng-model="Schema.FirstHalfTimeOut" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder="hh:mm" class="form-control" ng-required="GetIsRequired('FirstHalfTimeOut')" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('FirstHalfWorkingHours')">
+                                <label class="control-label">1st Half Working Hours <i title="1st Half Working Hours is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" c-label="1st Half Working Hours" 
+                                       ng-model="Schema.FirstHalfWorkingHours"
+                                       ng-required="GetIsRequired('FirstHalfWorkingHours')"
+                                       maxlength="{{GetMaxLength('FirstHalfWorkingHours')}}" />
+                            </div>
+                            <div class="form-group">
+                                <span class="form-check-holder">
+                                    <input id="FirstInLastOut-ur-check-0" name="FirstInLastOut" class="form-check" ng-model="Schema.FirstInLastOut" type="checkbox" />
+                                    <label for="FirstInLastOut-ur-check-0">First-In Las-tOut</label>
+                                </span>
+                            </div>       
+                        </div>
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('SecondHalfTimeIn')">
+                                <label class="control-label">2nd Half In <i title="2nd Half In is required" class="fa fa-exclamation-circle"></i></label>
+                                <input type="text" c-label="2nd Half In" ng-change="ComputeSecondHalfHours()" name="SecondHalfTimeIn" ng-model="Schema.SecondHalfTimeIn" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder="hh:mm" class="form-control" ng-required="GetIsRequired('SecondHalfTimeIn')" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('SecondHalfWorkingHours')">
+                                <label class="control-label">2nd Half Working Hours <i title="2nd Half Working Hours is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" c-label="2nd Half Working Hours" name="SecondHalfWorkingHours" ng-model="Schema.SecondHalfWorkingHours" ng-required="GetIsRequired('SecondHalfWorkingHours')" maxlength="{{GetMaxLength('SecondHalfWorkingHours')}}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Descriptions Tab-->
+            <div id="shiftScheduleDetails" role="tabpanel" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Details</h5>
+                </div>
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="detail-form">
+                        <div class="df-body list grid">
+                            <insys-table options="ShiftScheduleDetailsOption" get-load="ShiftScheduleDetailsOption.trigger" onload="SetFormatAndActions()"></insys-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

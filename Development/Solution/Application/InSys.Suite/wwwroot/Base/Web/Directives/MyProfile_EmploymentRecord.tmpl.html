@@ -1,0 +1,198 @@
+﻿<div class="mp-employmentRecord">
+    <ul class="nav nav-tabs pi-navtab">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#payroll">Payroll</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#organization">Organization</a>
+        </li>
+        <!--<li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#approver">Approver</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#training_bond">Training Bond</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#attachments">Attachments</a>
+        </li>-->
+    </ul>
+    <div class="tab-content">
+        <!--General-->
+        <div class="tab-pane container active" id="payroll">
+            <div class="pi-head">Payroll</div>
+            <div class="col-lg-10 col-md-12 row">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Monthly Rate</label>
+                        <p ng-bind="Val(FormatNumber(Employee.MonthlyRate))"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Daily Rate</label>
+                        <p ng-bind="Val(FormatNumber(Employee.DailyRate))"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Hourly Rate</label>
+                        <p ng-bind="Val(FormatNumber(Employee.HourlyRate))"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Daily SMW</label>
+                        <p ng-bind="Val(FormatNumber(Employee.DailySMW))"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Monthly SMW</label>
+                        <p ng-bind="Val(FormatNumber(Employee.MonthlySMW))"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Currency</label>
+                        <p ng-bind="Val(Employee.Currency)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Payroll Scheme</label>
+                        <p ng-bind="Val(Employee.PayrollScheme)"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Payroll Frequency</label>
+                        <p ng-bind="Val(Employee.PayrollFrequency)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Payment Mode</label>
+                        <p ng-bind="Val(Employee.PaymentMode)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Parameter</label>
+                        <p ng-bind="Val(Employee.Parameter)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Leave Parameter</label>
+                        <p ng-bind="Val(Employee.LeaveParameter)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Payroll Status</label>
+                        <p ng-bind="Val(Employee.PayrollStatus)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Payroll Classification</label>
+                        <p ng-bind="Val(Employee.PayrollClassification)"></p>
+                    </div>
+                    <!--<div class="form-group">
+                        <span class="form-check-holder er-readonly">
+                            <input id="mp-payroll-check-1" class="form-check" ng-model="true" type="checkbox" disabled />
+                            <label for="mp-payroll-check-1">MWE</label>
+                        </span>
+                    </div>-->
+                </div>
+                <div class="pi-title col-12">Bank</div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Account No. Type</label>
+                        <p ng-bind="Val(Employee.AccountNumberType)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Bank Account No.</label>
+                        <p ng-bind="Val(Employee.BankAcctNo)"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Company Bank Acct.</label>
+                        <p ng-bind="Val(Employee.CompanyBankAcct)"></p>
+                    </div>
+                </div>
+                <div class="pi-title col-12">Previous</div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Previous Taxable Amt.</label>
+                        <p ng-bind="Val(Employee.PrevEmpTaxableAmt)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Previous Withholding Tax</label>
+                        <p ng-bind="Val(Employee.PrevEmpWitholdingTax)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Previous Emp Date</label>
+                        <p ng-bind="Val(Employee.PrevEmpEndDate)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Previous 13th Month</label>
+                        <p ng-bind="Val(Employee.Prev13thMonth)"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Previous Compensation</label>
+                        <p ng-bind="Val(Employee.PrevCompensation)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Non Tax Prev Contribution</label>
+                        <p ng-bind="Val(Employee.NonTaxPrevContribution)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Non Tax Prev Compensation</label>
+                        <p ng-bind="Val(Employee.NonTaxPrevCompensation)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Non Tax Prev 13th Month</label>
+                        <p ng-bind="Val(Employee.NonTaxPrev13thMonth)"></p>
+                    </div>
+                </div>
+                <div class="pi-title col-12">Tax</div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Tax Rate</label>
+                        <p ng-bind="Val(Employee.TaxRate)"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Tax Exemption</label>
+                        <p ng-bind="Val(Employee.TaxExemption)"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Organization-->
+        <div class="tab-pane container" id="organization">
+            <div class="pi-head">Organization</div>
+            <div class="col-lg-10 col-md-12 row">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Company</label>
+                        <p ng-bind="Val(Employee.Company)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Branch</label>
+                        <p ng-bind="Val(Employee.Branch)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Division</label>
+                        <p ng-bind="Val(Employee.Division)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Department</label>
+                        <p ng-bind="Val(Employee.Department)"></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="lbl-grp">
+                        <label>Section</label>
+                        <p ng-bind="Val(Employee.Section)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Job Class Group</label>
+                        <p ng-bind="Val(Employee.JobClassGroup)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Job Class</label>
+                        <p ng-bind="Val(Employee.JobClass)"></p>
+                    </div>
+                    <div class="lbl-grp">
+                        <label>Designation</label>
+                        <p ng-bind="Val(Employee.Designation)"></p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>

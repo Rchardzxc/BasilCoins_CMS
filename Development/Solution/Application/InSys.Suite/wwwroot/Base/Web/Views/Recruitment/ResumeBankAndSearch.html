@@ -1,0 +1,38 @@
+﻿<div class="resume-bank main-container">
+    <div class="module-title"><i ng-click="return()" ng-if="RecordID != ''" class="fas fa-long-arrow-alt-left" title="Back to list"></i> Resume Bank & Search</div>
+    <ui-view>
+        <!--Filtered Tabs-->
+        <div class="list-tab d-none d-lg-flex" ng-if="RecordID == ''">
+            <div class="lt-holder">
+                <div ng-style="{width: at.Width}" ng-repeat="at in AllTabs" ng-click="changeTab($index, at.ID)" id="lt-{{$index}}" class="lt-item" ng-class="{'active' : $index == 0}" title="{{ at.Name }}">
+                    <label ng-bind="at.Name"></label>
+                    <span ng-class="{'invi' : getRecruitmentCount(at.ID).Cnt == 0}">{{getRecruitmentCount(at.ID).Cnt}}</span>
+                </div>
+            </div>
+        </div>
+        <!--Dropdown Display When Tab Overflows-->
+        <div ng-if="ExcessTabs.length > 0" class="dropdown dp-tab-btn d-none d-lg-block" title="More">
+            <button class="dropdown-toggle" data-toggle="dropdown"><i class="fas fa-caret-square-down"></i> More</button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dp-item" id="dp-lt-{{$index + AllTabs.length}}" ng-repeat="at in ExcessTabs" ng-class="{'active' : ($index + AllTabs.length) == 0}" ng-click="changeTab(($index + AllTabs.length), at.ID)" title="{{ at.Name }}">
+                    <label ng-bind="at.Name"></label>
+                    <span ng-class="{'invi' : getRecruitmentCount(at.ID).Cnt == 0}">{{getRecruitmentCount(at.ID).Cnt}}</span>
+                </div>
+            </div>
+        </div>
+        <!--Full Dropdown Display When Width 992px-->
+        <div class="dropdown dp-tab-grp d-block d-lg-none">
+            <button class="btn dropdown-toggle" data-toggle="dropdown">Tabs</button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dp-item" id="d-lt-{{$index}}" ng-repeat="at in ApplicationStatusList" ng-class="{'active' : $index == 0}" ng-click="changeTab($index, at.ID)" title="{{ at.Name }}">
+                    <label ng-bind="at.Name"></label>
+                    <span ng-class="{'invi' : getRecruitmentCount(at.ID).Cnt == 0}">{{getRecruitmentCount(at.ID).Cnt}}</span>
+                </div>
+            </div>
+        </div>
+        <!--<div ng-repeat="at in ApplicationStatusList" id="ct-{{$index}}" class="content-tab" ng-class="{'active' : $index == 0}">
+            <div ng-include="HtmlTemplatePath + '/Web/Directives/insysTable.tmpl.html'" include-replace></div>
+        </div>-->
+        <div ng-include="HtmlTemplatePath + '/Web/Directives/insysTable.tmpl.html'" include-replace></div>
+    </ui-view>
+</div>

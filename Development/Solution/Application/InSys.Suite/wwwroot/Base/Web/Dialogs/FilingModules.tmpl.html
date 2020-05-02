@@ -1,0 +1,24 @@
+﻿<div class="panel">
+    <div class="panel-heading">
+        <label><i class="fas fa-tasks"></i> Select module(s)</label>
+        <i class="fas fa-times" ng-click="close()"></i>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-12 row">
+            <div ng-repeat="d in FilingModules" class="col-md-6">
+                <div class="fmd-holder">
+                    <span class="fcheck-init"><span class="fas fa-check" ng-class="{'fcheck-ok' : d.IsChecked}"></span> {{ SetIcon(d.Name) }}</span>
+                    <input id="fmc-{{$index}}" type="checkbox" class="form-check" ng-model="d.IsChecked" />
+                    <label for="fmc-{{$index}}" ng-bind="d.Name"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <p><span ng-bind="countSelected()"></span> of <span ng-bind="FilingModules.length"></span> item(s) selected</p>
+        <div>
+            <button type="button" class="btn cancel" ng-click="close()">Cancel</button>
+            <button type="button" class="btn emphasized" ng-click="load()">Load</button>
+        </div>
+    </div>
+</div>

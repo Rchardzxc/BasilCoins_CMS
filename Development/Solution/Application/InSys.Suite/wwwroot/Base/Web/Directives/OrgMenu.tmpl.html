@@ -1,0 +1,21 @@
+﻿<div class="org-menu-holder">
+    <ul class="m-menu-ul">
+        <li ng-repeat="m in tree"> 
+            <div class="org-menu-itm">
+                <input class="tree-check" ng-click="Check(m)" type="checkbox" ng-model="m.IsChecked" />
+                <i class="fas" ng-class="{'fa-check-square' : m.IsChecked, 'fa-square': !m.IsChecked}"></i>
+                <i class="fas org-menu-toggle" ng-click="openChild(m)" ng-class="m.IsOpen == true && m.Children.length > 0 ? 'fa-chevron-down' : 'fa-chevron-right'"></i>
+                <label ng-click="openChild(m)" ng-bind="m.Name" title="{{ m.Name }}" ng-class="{ 'open' : m.IsOpen}"></label>
+                <label ng-bind="m.OrgType" class="org-menu-type"></label>
+            </div>
+            <org-menu ng-transclude ng-if="m.IsOpen" delete-org="deleteOrg" parent-data="m" tree-data="m.Children"></org-menu>
+        </li>
+        <li class="org-menu-add">
+            <div class="om-add" ng-click="addRecord(parentData)">
+                <i class="fas fa-plus-circle"></i>
+                <label>Add {{tree[0].OrgType}} {{tree[0].Parent != null ? ('for ' + tree[0].Parent) : null}}</label>
+            </div>
+        </li>
+    </ul>
+    
+</div>

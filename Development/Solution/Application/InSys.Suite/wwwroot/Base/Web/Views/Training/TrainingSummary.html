@@ -1,0 +1,40 @@
+﻿<div class="training-summary main-container" ng-class="{'not-approver': MenuPrivileges.IsApprover == false}">
+    <div class="module-title">
+        <i ng-click="return()" ng-if="RecordID != ''" class="fas fa-long-arrow-alt-left" title="Back to list"></i> Training Summary
+    </div>
+    <ui-view>
+        <div ng-if="MenuPrivileges.IsApprover == false" ng-include="HtmlTemplatePath + '/Web/Directives/insysTable.tmpl.html'" include-replace></div>
+        <div ng-if="MenuPrivileges.IsApprover == true" class="list-tab d-none d-lg-flex">
+            <div class="lt-holder">
+                <div ng-click="changeTab(0)" id="lt-0" class="lt-item active" title="Training-Summary">
+                    <label>Training Summary</label>
+                    <span ng-class="{'invi' : TabsCount[0] == 0}" ng-bind="TabsCount[0]"></span>
+                </div>
+                <div ng-click="changeTab(1)" id="lt-1" class="lt-item" title="Approvals">
+                    <label>Approvals</label>
+                    <span ng-class="{'invi' : TabsCount[1] == 0}" ng-bind="TabsCount[1]"></span>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="MenuPrivileges.IsApprover == true" class="dropdown dp-tab-grp d-block d-lg-none">
+            <button class="btn dropdown-toggle" data-toggle="dropdown">Tabs</button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dp-item active" id="d-lt-0" ng-click="changeTab(0)" title="Training-Summary">
+                    <label>Training Summary</label>
+                    <span ng-class="{'invi' :TabsCount[0] == 0}" ng-bind="TabsCount[0]"></span>
+                </div>
+                <div class="dp-item" id="d-lt-1" ng-click="changeTab(1)" title="Approvals">
+                    <label>Approvals</label>
+                    <span ng-class="{'invi' :TabsCount[1] == 0}" ng-bind="TabsCount[1]"></span>
+                </div>
+            </div>
+        </div>
+        <div ng-if="MenuPrivileges.IsApprover == true" id="ct-0" class="content-tab active">
+            <div ng-include="HtmlTemplatePath + '/Web/Directives/insysTable.tmpl.html'" include-replace></div>
+        </div>
+        <div ng-if="MenuPrivileges.IsApprover == true" id="ct-1" class="content-tab">
+            <div ng-include="HtmlTemplatePath + '/Web/Directives/insysTable.tmpl.html'" include-replace></div>
+        </div>
+    </ui-view>
+</div>

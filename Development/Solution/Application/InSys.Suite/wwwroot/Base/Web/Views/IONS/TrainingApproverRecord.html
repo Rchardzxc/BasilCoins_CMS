@@ -1,0 +1,200 @@
+﻿<div class="record">
+    <div class="record-header"></div>
+    <div class="record-body">
+        <!--Tabs-->
+        <div class="record-tab d-none d-md-block">
+            <div class="record-tab-header">
+                <span>Tabs</span>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                    <a data-target="#others" class="nav-link" data-toggle="tab" role="tab">Others</a>
+                    <a data-target="#approvalHistory" ng-click="getApprovalHistory(73, Schema.ID, Schema.ID_Employee)" class="nav-link" data-toggle="tab" role="tab">Approval History</a>
+                </li>
+            </ul>
+        </div>
+        <form ng-submit="saveForm()" name="form.training" novalidate autocomplete="off" class="tab-content" method="post">
+            <!--Button Group-->
+            <div class="rh-btn-grp">
+                <button class="emphasized d-none d-md-block" type="button" ng-click="Approve()"><i class="fas fa-check"></i> Approve</button>
+                <button class="d-none d-md-block" type="button" ng-click="Disapprove()"><i class="fas fa-trash"></i> Disapprove</button>
+                <!--These dropdowns will display when mobile-->
+                <!--Actions-->
+                <div class="dropdown mobile d-block d-md-none">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button" ng-click="Approve()">Approve</button>
+                        <button class="dropdown-item" type="submit" ng-click="Disapprove()">Disapprove</button>
+                    </div>
+                </div>
+                <!--Tabs-->
+                <div class="dropdown mobile d-block d-md-none" role="tablist">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Tabs</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                                <a data-target="#others" class="nav-link" data-toggle="tab" role="tab">Others</a>
+                                <a data-target="#approvalHistory" ng-click="getApprovalHistory(73, Schema.ID, Schema.ID_Employee)" class="nav-link" data-toggle="tab" role="tab">Approval History</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="er-banner">
+                <i class="fas fa-user"></i>
+                <div class="er-desc">
+                    <h5 ng-bind="Schema.Employee"></h5>
+                </div>
+            </div>
+            <!--General Tab-->
+            <div id="general" role="tabpanel" class="tab-pane fade show active">
+                <!--Form Header-->
+                <div class="rf-header">
+                    <h5>General</h5>
+                </div>
+
+                <!--Form Content-->
+                <div class="rf-body with-banner" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <!--Panel 1-->
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" required>
+                                <label class="control-label">Title</label>
+                                <input class="form-control" type="text" ng-model="Schema.Title" readonly />
+                            </div>
+                            <div class="form-group" required>
+                                <label class="control-label">Description</label>
+                                <input class="form-control" type="text" ng-model="Schema.Description" readonly />
+                            </div>
+                            <div class="form-group" required>
+                                <label class="control-label">Provider</label>
+                                <input class="form-control" type="text" ng-model="Schema.Provider" readonly />
+                            </div>
+                            <div class="form-group" required>
+                                <label class="control-label">Location</label>
+                                <input class="form-control" type="text" ng-model="Schema.Location" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Start Date</label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" ng-model="Schema.StartDate" ng-input text-type="'date'" placeholder="Start Date" class="form-control" readonly />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">End Date</label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" ng-model="Schema.EndDate" ng-input text-type="'date'" placeholder="End Date" class="form-control" readonly />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Start Time</label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" ng-model="Schema.StartTime" ng-input text-type="'time'" placeholder="Start Time" class="form-control" readonly />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-clock"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">End Time</label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" ng-model="Schema.EndTime" ng-input text-type="'time'" placeholder="End Time" class="form-control" readonly />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-clock"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group">
+                                <label class="control-label">Application Expiration Date</label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" ng-model="Schema.ApplicationExpirationDate" ng-input text-type="'date'" placeholder="Start Date" class="form-control" readonly />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group" required>
+                                <label class="control-label">Course Rating</label>
+                                <input class="form-control" type="text" ng-model="Schema.CourseRating" readonly />
+                            </div>
+                            <div class="form-group" required>
+                                <label class="control-label">Number of Attendees</label>
+                                <input class="form-control" type="text" ng-model="Schema.ExpectedAttendees" readonly />
+                            </div>
+                            <div class="form-group" required>
+                                <label class="control-label">Price</label>
+                                <input class="form-control" type="text" ng-model="Schema.Price" readonly />
+                            </div>
+                            <div class="form-group" required>
+                                <label class="control-label">Penalty for Withdrawal</label>
+                                <input class="form-control" type="text" ng-model="Schema.PenaltyForWithdrawal" readonly />
+                            </div>
+                            <div class="form-group" required>
+                                <label class="control-label">Penalty for No Show</label>
+                                <input class="form-control" type="text" ng-model="Schema.PenaltyForNoShow" readonly />
+                            </div>
+                            <div class="form-group">
+                                <span class="form-check-holder er-readonly">
+                                    <input id="ew-tc-check-1" class="form-check" ng-model="Schema.WithCertification" type="checkbox" disabled />
+                                    <label for="ew-tc-check-1">With Certificate</label>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="others" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Others</h5>
+                </div>
+
+                <div class="rf-body with-banner">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-12">
+                            <br />
+                            <div class="form-group">
+                                <label class="control-label">Reason for not attending</label>
+                                <textarea maxlength="500" class="form-control" ng-model="Schema.ReasonForNotAttending" readonly></textarea>
+                            </div>
+                            <div class="form-group" required>
+                                <label class="control-label">Reason for Disapproving Employee Request <i title="Maximum of 500 characters." class="fa fa-question-circle" style="font-size: 10px"></i> <i title="Reason is required" class="fa fa-exclamation-circle"></i></label>
+                                <textarea maxlength="500" class="form-control" ng-model="Schema.ReasonForDisapproving" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="approvalHistory" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Approval History</h5>
+                </div>
+
+                <div class="rf-body with-banner">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="app-hist" ng-repeat="d in ApprovalHistory">
+                            <i class="fas" ng-class="getFilingStatusIcon(d.ApprovalAction)"></i>
+                            <div class="ah-desc">
+                                <h5 ng-bind="d.ApprovalAction + ' by ' + d.Approver"></h5>
+                                <label ng-bind="FormatDate(d.DateTimeCreated, 'MMM DD, YYYY hh:mm A')"></label>
+                                <p ng-bind="IsNull(d.ApproverComment, 'No comment')"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+﻿<div class="panel">
+    <div class="panel-heading">
+        <label><i class="fas fa-user-check"></i> <span ng-bind="Param.Title"></span></label>
+        <i class="fas fa-times" ng-click="close()"></i>
+    </div>
+    <div class="panel-body row">
+        <div class="approver-matrix main-container">
+            <div ng-include="HtmlTemplatePath + '/Web/Directives/insysTable.tmpl.html'" include-replace></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+﻿<ul class="m-menu-ul">
+    <li ng-repeat="m in tree">
+        <a ng-click="openChild(m)" title="{{ m.Name }}" ng-class="{'open': m.IsOpen == true && m.Children.length > 0, 'active': checkActiveMenu(m)}">
+            <i ng-if="m.Children.length == 0" class="fas fa-cube"></i>
+            <i ng-if="m.Children.length > 0" class="fas fa-folder" ng-class="{'fa-folder-open': m.IsOpen == true}"></i>
+            <div><label ng-bind="m.Name"></label></div>
+            <i ng-if="m.Children.length > 0" class="fas fa-chevron-right" ng-class="{'fcd': m.IsOpen == true}"></i>
+        </a>
+        <insys-menu ng-transclude ng-if="m.Children.length > 0 && m.IsOpen" tree-data="m.Children"></insys-menu>
+    </li>
+</ul>

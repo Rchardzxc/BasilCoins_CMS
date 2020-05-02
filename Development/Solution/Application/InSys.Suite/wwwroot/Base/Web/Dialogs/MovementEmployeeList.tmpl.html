@@ -1,0 +1,22 @@
+﻿<div class="panel">
+    <div class="panel-heading">
+        <label><i class="fas fa-user-check"></i> Select Employee(s)</label>
+        <i class="fas fa-times" ng-click="close()"></i>
+    </div>
+    <div class="panel-body row">
+        <div class="approver-matrix main-container">
+            <div class="col-md-12">
+                <div ng-class="{'col-md-6': DlgModel.ID_MovementType == 7 || DlgModel.ID_MovementType == 8 || DlgModel.ID_MovementType == 10}">
+                    Movement Type
+                    <div class="form-group d-h">
+                        <select ng-change="CheckValue()" c-label="Movement Type" name="ID_MovementType" class="form-control" ng-model="DlgModel.ID_MovementType" ng-required="true">
+                            <option ng-value="d.ID" ng-repeat="d in MovementSource" ng-bind="d.Name"></option>
+                        </select>
+                    </div>
+                </div>
+                <div ng-if="DlgModel.ID_MovementType == 7 || DlgModel.ID_MovementType == 8 || DlgModel.ID_MovementType == 10" class="col-md-6"></div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+﻿<div class="record">
+    <div class="record-header"></div>
+    <div class="record-body">
+        <!--Tabs-->
+        <div class="record-tab d-none d-md-block">
+            <div class="record-tab-header">
+                <span>Tabs</span>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                </li>
+            </ul>
+        </div>
+
+        <form ng-submit="saveForm()" autocomplete="off" class="tab-content" method="post" novalidate name="form.customer">
+            <!--Button Group-->
+            <div class="rh-btn-grp">
+                <button class="emphasized d-none d-md-block" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()" type="button"><i class="fas fa-plus"></i> New</button>
+                <button class="emphasized d-none d-md-block" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="changePassword()" type="button"> Change Password</button>
+                <button class="emphasized d-none d-md-block" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0"><i class="fas fa-save"></i> Save</button>
+
+                <!--These dropdowns will display when mobile-->
+                <!--Actions-->
+                <div class="dropdown mobile d-block d-md-none">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()">New</button>
+                        <button class="dropdown-item" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0">Save</button>
+                    </div>
+                </div>
+                <!--Tabs-->
+                <div class="dropdown mobile d-block d-md-none" role="tablist">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Tabs</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--General Tab-->
+            <div id="general" role="tabpanel" class="tab-pane fade show active">
+                <!--Form Header-->
+                <div class="rf-header">
+                    <h5>General</h5>
+                </div>
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-12">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('Name')">
+                                <label class="control-label">Name <i title="Name is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" c-label="Name" name="Name" ng-model="Schema.Name" type="text" maxlength="{{GetMaxLength('Name')}}" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('FirstName')">
+                                <label class="control-label">First Name <i title="First Name is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" c-label="FirstName" name="FirstName" ng-model="Schema.FirstName" type="text" maxlength="{{GetMaxLength('FirstName')}}" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('Address')">
+                                <label class="control-label">Address <i title="Address is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" c-label="Address" name="Address" ng-model="Schema.Address" type="text" maxlength="{{GetMaxLength('Address')}}" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('ZipCode')">
+                                <label class="control-label">ZipCode <i title="ZipCode is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" c-label="ZipCode" name="ZipCode" ng-model="Schema.ZipCode" type="text" maxlength="{{GetMaxLength('ZipCode')}}" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('ID_Province')">
+                                <div insys-lookup lookup-options="provinceLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Province', 'displayContainer': 'Province', 'label': 'Province'}"></div>
+                            </div>
+                            <div class="form-group">
+                                <span class="form-check-holder">
+                                    <input id="ur-check-0" name="IsActive" class="form-check" ng-model="Schema.IsActive" type="checkbox" />
+                                    <label for="ur-check-0">Active</label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-12">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('EmailAddress')">
+                                <label class="control-label">Email Address <i title="Email Address is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" c-label="EmailAddress" name="EmailAddress" ng-model="Schema.EmailAddress" type="text" maxlength="{{GetMaxLength('EmailAddress')}}" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('LastName')">
+                                <label class="control-label">Last Name <i title="Last Name is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" c-label="LastName" name="LastName" ng-model="Schema.LastName" type="text" maxlength="{{GetMaxLength('LastName')}}" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('City')">
+                                <label class="control-label">City <i title="City is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" c-label="City" name="City" ng-model="Schema.City" type="text" maxlength="{{GetMaxLength('City')}}" />
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('ID_Country')">
+                                <div insys-lookup lookup-options="countryLookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Country', 'displayContainer': 'Country', 'label': 'Country'}"></div>
+                            </div>
+                            <div class="form-group" ng-required="GetIsRequired('DateVerified')">
+                                <label class="control-label">Date Verified <i title="Date Verified is required" class="fa fa-exclamation-circle"></i></label>
+                                <input readonly class="form-control" c-label="DateVerified" name="DateVerified" ng-model="Schema.DateVerified" type="text" maxlength="{{GetMaxLength('DateVerified')}}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="z.Data.Standard" Version="1.2.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\InSys.ITI.Controller\InSys.ITI.Controller.csproj" />
+    <ProjectReference Include="..\..\InSys.ITI.Models\InSys.ITI.Models.csproj" />
+  </ItemGroup>
+
+</Project>

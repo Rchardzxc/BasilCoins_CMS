@@ -1,0 +1,11 @@
+﻿<div class="company main-container">
+    <!--<div class="module-title"><i ng-click="return()" ng-if="RecordID != ''" class="fas fa-long-arrow-alt-left" title="Back to list"></i> <label ng-bind="ListTitle || 'Company'"></label></div>-->
+    <div class="module-title">
+        <i ng-click="return()" ng-if="RecordID != ''" class="fas fa-long-arrow-alt-left" title="Back to list"></i>
+        Company
+    </div>
+    <ui-view>
+        <div ng-if="Session('ID_Roles') == 1" ng-include="HtmlTemplatePath + '/Web/Directives/insysTable.tmpl.html'" include-replace></div>
+        <div ng-if="Session('ID_Roles') > 1" ng-include="HtmlTemplatePath + '/Web/Directives/Company.tmpl.html'" include-replace></div>
+    </ui-view>
+</div>

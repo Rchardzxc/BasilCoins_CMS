@@ -1,0 +1,25 @@
+﻿<div class="panel">
+    <div class="panel-heading">
+        <label><i class="fas fa-clipboard-check"></i> New Employee</label>
+        <i class="fas fa-times" ng-click="close()"></i>
+    </div>
+    <div class="panel-body">
+        <button type="button" class="btn create-emp" ng-click="CreateNew()" ng-disabled="IsSelectEmployee"><i class="fas fa-user-plus"> </i>New employee</button>
+        <div class="divider-emp">OR</div>
+        <div class="form-group chk-emp">
+            <span class="form-check-holder">
+                <input id="er-pc-check-1" class="form-check" ng-model="IsSelectEmployee" type="checkbox" />
+                <label for="er-pc-check-1">Select employee</label>
+            </span>
+        </div>
+        <div ng-if="IsSelectEmployee" class="is-select-panel">
+            <label class="note-emp">Note: All employees in this look-up already had their personal information recorded.</label>
+            <div insys-lookup cascade="getSchema(row)" lookup-options="PersonaLookUp" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Persona', 'displayContainer': 'Name', 'label': 'Employee'}"></div>
+            <button type="button" class="btn proceed-emp" ng-click="Select()">Proceed</button>
+        </div>
+    </div>
+    <!--<div class="panel-footer">
+        <button type="button" class="btn emphasized" ng-click="CreateNew()">New employee</button> &nbsp;
+        
+    </div>-->
+</div>

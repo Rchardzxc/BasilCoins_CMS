@@ -1,0 +1,147 @@
+﻿
+<div class="record">
+    <div class="record-header"></div>
+    <div class="record-body">
+        <!--Tabs-->
+        <div class="record-tab d-none d-md-block">
+            <!--<div class="record-tab-header">
+                <span>Tabs</span>
+            </div>-->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                </li>
+                <li class="nav-item">
+                    <a data-target="#approvalHistory" ng-click="GetApprovalHistory()" class="nav-link" data-toggle="tab" role="tab">Approval History</a>
+                </li>
+            </ul>
+        </div>
+
+        <form ng-submit="saveForm()" name="'form.overtime'" novalidate autocomplete="off" spellcheck="false" class="tab-content orbit-overtime" method="post">
+            <div class="rh-btn-grp">
+                <button class="emphasized d-none d-md-block" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()" type="button"><i class="fas fa-plus"></i> New</button>
+                <button ng-if="!Schema.IsPosted && (MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0" class="emphasized d-none d-md-block" type="submit"><i class="fas fa-save"></i> Save</button>
+                <button type="button" name="Approve" class="emphasized d-none d-md-block" ng-if="(Schema.ID_FilingStatus != 2 && Schema.IsPosted)" ng-click="Approve()"><i class="fas fa-check-circle"></i> Approve</button>
+                <button type="button" name="Disapprove" class="emphasized d-none d-md-block" ng-if="(Schema.ID_FilingStatus != 3 && Schema.IsPosted)" ng-click="Disapprove()"><i class="fas fa-check-circle"></i> Disapprove</button>
+                <button type="button" name="Post" class="emphasized d-none d-md-block" ng-if="(!Schema.IsPosted && Schema.ID > 0)" ng-click="SavePost()"><i class="fas fa-flag"></i> Save & Post</button>
+                <button type="button" name="Unpost" class="emphasized d-none d-md-block" ng-if="(Schema.IsPosted)" ng-click="UnPost()"><i class="fas fa-ban"></i> Unpost</button>
+
+                <!--These dropdowns will display when mobile-->
+                <!--Actions-->
+                <div class="dropdown mobile d-block d-md-none">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()">New</button>
+                        <button class="dropdown-item" type="submit" ng-if="!Schema.IsPosted && (MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0">Save</button>
+                        <button type="button" name="Approve" class="dropdown-item" ng-if="(Schema.ID_FilingStatus != 2 && Schema.IsPosted)" ng-click="Approve()"><i class="fas fa-check-circle"></i> Approve</button>
+                        <button type="button" name="Disapprove" class="dropdown-item" ng-if="(Schema.ID_FilingStatus != 3 && Schema.IsPosted)" ng-click="Dispprove()"><i class="fas fa-check-circle"></i> Dispprove</button>
+                        <button type="button" name="Post" class="dropdown-item" ng-if="(!Schema.IsPosted && Schema.ID > 0)" ng-click="SavePost()"><i class="fas fa-flag"></i> Save & Post</button>
+                        <button type="button" name="Unpost" class="dropdown-item" ng-if="(Schema.IsPoste)" ng-click="UnPost()"><i class="fas fa-ban"></i> Unpost</button>
+                    </div>
+                </div>
+                <!--Tabs-->
+                <div class="dropdown mobile d-block d-md-none" role="tablist">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Tabs</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-target="#approvalHistory" ng-click="GetApprovalHistory()" class="nav-link" data-toggle="tab" role="tab">Approval History</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--General Tab-->
+            <div id="general" role="tabpanel" class="tab-pane fade show active">
+                <!--Form Header-->
+                <div class="rf-header">
+                    <h5>General</h5>
+                </div>
+
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <label ng-if="Schema.IsPosted" class="form-label-status"><i class="fas fa-flag"></i>&nbsp;&nbsp;Posted</label>
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" readonly>
+                                <label class="control-label">Ref#</label>
+                                <input class="form-control" type="text" name="ReferenceNo" ng-model="Schema.ReferenceNo" readonly />
+                            </div>
+                            <div class="form-group">
+                                <div insys-lookup lookup-options="employeelookup" lookup-data="{'model': Schema,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Employee', 'displayContainer': 'Employee', 'label': 'Employee'}"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Work Credit <i title="Work Credit is required" class="fa fa-exclamation-circle"></i></label>
+                                <select c-label="ID_WorkCredit" name="ID_WorkCredit" ng-options="nr.ID as nr.Name for nr in WorkCreditList" class="form-control" ng-model="Schema.ID_WorkCredit"></select>
+                            </div>
+                            <div class="form-group">
+                                <insys-upload readonly="false" name="Attachment" target-model="Schema.Attachment" options="UploadOptions"></insys-upload>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Reason<i title="Reason is required" class="fa fa-exclamation-circle"></i></label>
+                                <textarea class="form-control" c-label="Reason" name="Reason" ng-model="Schema.Reason"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group">
+                                <label class="control-label">Filing Status <i title="Filing Status is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control-status" name="ID_FilingStatus" type="text" value="{{DisplayFilingStatus}}" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Work Date <i title="Work Date is required" class="fa fa-exclamation-circle"></i></label>
+                                <div class="input-group custom-ig-lu">
+                                    <input type="text" name="WorkDate" ng-model="Schema.WorkDate" ng-input text-type="'date'" class="form-control" ng-change="ChangeStartDate()" />
+                                    <span class="input-group-btn lu">
+                                        <button class="btn btn-default lookup-btn" type="button"><i class="fas fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Start Time <i title="Start Time is required" class="fa fa-exclamation-circle"></i></label>
+                                <input type="text" ng-blur="ValidateStartTime()" name="StartTime" ng-model="Schema.StartTime" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder="hh:mm" class="form-control" ng-change="ComputeHours()" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">End Time <i title="End Time is required" class="fa fa-exclamation-circle"></i></label>
+                                <input type="text" name="EndTime" ng-model="Schema.EndTime" ng-input text-type="'time'" text-format="'hh:mm A'" placeholder="hh:mm" class="form-control" ng-change="ComputeHours()" />
+                            </div>
+                            <div class="form-group" disabled>
+                                <label class="control-label">Computed Hours <i title="Computed Hours is required" class="fa fa-exclamation-circle"></i></label>
+                                <input readonly c-label="Computed Hours" class="form-control" type="text" name="ComputedHours" ng-input text-type="'decimal'" ng-model="Schema.ComputedHours"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Considered Hours <i title="Considered Hours is required" class="fa fa-exclamation-circle"></i></label>
+                                <input c-label="Considered Hours" class="form-control" type="text" ng-input text-type="'decimal'" name="ConsideredHours" ng-model="Schema.ConsideredHours" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="approvalHistory" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Approval History</h5>
+                </div>
+                <div class="rf-body with-banner">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="app-hist" ng-repeat="d in ApprovalHistory">
+                            <div class="ah-desc">
+                                <div class="status">
+                                    <i class="fas" ng-class="getFilingStatusIcon(d.ApprovalAction)"></i>
+                                    <h5 ng-bind="d.ApprovalAction + ' By ' + d.Approver"></h5>
+                                </div>
+                                <label ng-bind="FormatDate(d.DateTimeCreated, 'MMM DD, YYYY hh:mm A')"></label>
+                                <p ng-bind="IsNull(d.ApproverComment, 'No comment')"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

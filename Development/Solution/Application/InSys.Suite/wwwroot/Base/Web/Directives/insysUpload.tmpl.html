@@ -1,0 +1,11 @@
+﻿<div class="form-group file-upload" ng-required="required">
+    <label class="control-label"><label ng-bind="IsNull(label, elementName)"></label> <i title="Upload is required" class="fa fa-exclamation-circle"></i></label>
+    <div class="input-group custom-ig-lu three-button">
+        <input type="text" name="{{elementName}}" c-label="{{label}}" class="form-control" ng-required="required" title="{{fileName}}" ng-value="fileName" ng-keydown="disable($event)" ng-readonly="readonly" />
+        <span class="input-group-btn lu">
+            <button class="btn btn-default lookup-btn" title="Clear" type="button" ng-disabled="fileName == ''" ng-click="clear()"><i class="fas fa-times"></i></button>
+            <button class="btn btn-default lookup-btn" title="Upload" type="button" ng-if="!(readonly == true)" ng-click="upload()"><i class="fas fa-upload"></i></button>
+            <button class="btn btn-default lookup-btn" title="Download" type="button" ng-disabled="fileName == '' || IsHidden" ng-click="downloadFile()"><i class="fas fa-download"></i></button>
+        </span>
+    </div>
+</div>

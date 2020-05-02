@@ -1,0 +1,140 @@
+﻿<div class="record">
+    <div class="record-header"></div>
+    <div class="record-body">
+        <!--Left Side-->
+        <div class="er-left">
+            <div class="er-profile">
+                <img src="{{HtmlTemplatePath}}Resources/Images/HRMS-Vector-compressor.png"/>
+                <div class="ep-desc">
+                    <h5 ng-bind="Schema.Name"></h5>
+                    <label ng-bind="IsNull(EmployeeRecord.Designation, 'N/A')"></label>
+                </div>
+            </div>
+            <div class="er-side-content">
+                <div class="er-info">
+                    <div class="er-info-itm">
+                        <i class="fas fa-phone"></i>
+                        <label ng-bind="IsNull(EmployeeRecord.CompanyPhoneNo, 'N/A')"></label>
+                    </div>
+                    <div class="er-info-itm">
+                        <i class="fas fa-envelope"></i>
+                        <label ng-bind="IsNull(EmployeeRecord.CompanyEmail, 'N/A')"></label>
+                    </div>
+                    <div class="er-info-itm">
+                        <i class="fas fa-hashtag"></i>
+                        <label ng-bind="IsNull(EmployeeRecord.CompanyMobileNo, 'N/A')"></label>
+                    </div>
+                    <div class="er-info-itm">
+                        <i class="fas fa-user-clock"></i>
+                        <label ng-bind="IsNull(EmployeeRecord.EmployeeStatus, 'N/A')"></label>
+                    </div>
+                    <div class="er-info-itm">
+                        <i class="fas fa-calendar-check"></i>
+                        <label ng-bind="IsNull(FormatDate(EmployeeRecord.StartDate, 'MMM DD, YYYY'), 'N/A')"></label>
+                    </div>
+                    <div class="er-info-itm wrap">
+                        <i class="fas fa-building"></i>
+                        <label ng-bind="IsNull(EmployeeRecord.Department, 'N/A')"></label>
+                    </div>
+                </div>
+                <div class="er-leave-credit">
+                    <div class="er-left-title">Leave Credit</div>
+                    <div class="elc-holder">
+                        <div class="elc-item first">
+                            <h5>12</h5>
+                            <label>Annual Leave</label>
+                        </div>
+                        <div class="elc-item second">
+                            <h5>6</h5>
+                            <label>Used Leave</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="er-link">
+                    <div class="er-left-title">Others</div>
+                    <div class="er-link-itm" ng-click="setActiveView(1)">Employment Record</div>
+                    <div class="er-link-itm" ng-click="setActiveView(2)">Employee Movement</div>
+                    <div class="er-link-itm" ng-click="setActiveView(3)">Schedule</div>
+                </div>
+            </div>
+        </div>
+        <!--Content-->
+        <form ng-submit="saveForm()" class="er-content" name="form.employeerecord" novalidate autocomplete="off" spellcheck="false" method="post">
+            <!--Button Group-->
+            <div class="rh-btn-grp">
+                <button class="emphasized d-none d-md-block" type="submit" ng-if="isEditable"><i class="fas fa-save"></i> Save</button>
+                <button class="emphasized d-none d-md-block" type="button" ng-click="editRecord()" ng-if="MenuPrivileges.HasEdit && !isEditable"><i class="fas fa-user-edit"></i> Edit</button>
+            </div>
+            <!--Personal Info-->
+            <div ng-if="showPersonalInfo">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a data-target="#personalinfo" class="nav-link active" data-toggle="tab" role="tab">Personal</a>
+                    </li>
+                    <li class="nav-item" ng-click="loadEducationalRecord()">
+                        <a data-target="#educational" class="nav-link" data-toggle="tab" role="tab">Education/s</a>
+                    </li>
+                    <li class="nav-item" ng-click="loadEmploymentHistory()">
+                        <a data-target="#employment" class="nav-link" data-toggle="tab" role="tab">Employment/s</a>
+                    </li>
+                    <li class="nav-item" ng-click="LoadLicences()">
+                        <a data-target="#licences" class="nav-link" data-toggle="tab" role="tab">Licenses/Cert.</a>
+                    </li>
+                    <li class="nav-item" ng-click="LoadReferences()">
+                        <a data-target="#reference" class="nav-link" data-toggle="tab" role="tab">Reference/s</a>
+                    </li>
+                </ul>
+                <div class="tab-content er-tab-content">
+                    <div id="personalinfo" role="tabpanel" class="tab-pane fade show active ">
+                        <div ng-if="!isEditable" ng-include="HtmlTemplatePath + '/Web/Directives/personalinfo.tmpl.html'"></div>
+                        <div ng-if="isEditable" onload="SetupInputField(TableSchema)" ng-include="HtmlTemplatePath + '/Web/Directives/personalinfo_editable.tmpl.html'"></div>
+                    </div>
+                    <div id="educational" role="tabpanel" class="tab-pane fade er-tab-content-table">
+                        <div ng-if="!isEditable" ng-include="HtmlTemplatePath + '/Web/Directives/educationalbg.tmpl.html'"></div>
+                        <div ng-if="isEditable" onload="SetupInputField(EducationalSchema)" ng-include="HtmlTemplatePath + '/Web/Directives/educationalbg_editable.tmpl.html'"></div>
+                    </div>
+                    <div id="employment" role="tabpanel" class="tab-pane fade er-tab-content-table">
+                        <div ng-if="!isEditable" ng-include="HtmlTemplatePath + '/Web/Directives/prevemployment.tmpl.html'"></div>
+                        <div ng-if="isEditable" onload="SetupInputField(TableSchema)" ng-include="HtmlTemplatePath + '/Web/Directives/prevemployment_editable.tmpl.html'"></div>
+                    </div>
+                    <div id="licences" role="tabpanel" class="tab-pane fade er-tab-content-table">
+                        <div ng-if="!isEditable" ng-include="HtmlTemplatePath + '/Web/Directives/licences.tmpl.html'"></div>
+                        <div ng-if="isEditable" onload="SetupInputField(TableSchema)" ng-include="HtmlTemplatePath + '/Web/Directives/licences_editable.tmpl.html'"></div>
+                    </div>
+                    <div id="reference" role="tabpanel" class="tab-pane fade er-tab-content-table">
+                        <div ng-if="!isEditable" ng-include="HtmlTemplatePath + '/Web/Directives/references.tmpl.html'"></div>
+                        <div ng-if="isEditable" onload="SetupInputField(TableSchema)" ng-include="HtmlTemplatePath + '/Web/Directives/references_editable.tmpl.html'"></div>
+                    </div>
+                </div>
+            </div>
+            <!--Other View-->
+            <div ng-if="!showPersonalInfo">
+                <!--Employment Record-->
+                <div ng-if="activeView == 1">
+                    <div class="ov-title">
+                        <i class="fas fa-arrow-left" ng-click="backView()"></i>
+                        <label>Employment Record</label>
+                    </div>
+                    <div ng-if="!isEditable" ng-include="HtmlTemplatePath + '/Web/Directives/employmentrecord.tmpl.html'"></div>
+                    <div ng-if="isEditable" ng-include="HtmlTemplatePath + '/Web/Directives/employmentrecord_editable.tmpl.html'"></div>
+                </div>
+                <!--Employee Movement-->
+                <div ng-if="activeView == 2">
+                    <div class="ov-title">
+                        <i class="fas fa-arrow-left" ng-click="backView()"></i>
+                        <label>Employee Movement</label>
+                    </div>
+                    <div ng-include="HtmlTemplatePath + '/Web/Directives/employeemovement.tmpl.html'"></div>
+                </div>
+                <!--Schedule-->
+                <div ng-if="activeView == 3">
+                    <div class="ov-title">
+                        <i class="fas fa-arrow-left" ng-click="backView()"></i>
+                        <label>Schedule</label>
+                    </div>
+                    <div ng-include="HtmlTemplatePath + '/Web/Directives/employeeschedule.tmpl.html'"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

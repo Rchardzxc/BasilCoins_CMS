@@ -1,0 +1,115 @@
+﻿<div class="overtime table-summary main-container">
+    <div class="module-title"><i ng-click="return()" ng-if="RecordID != ''" class="fas fa-long-arrow-alt-left" title="Back to list"></i> Overtime</div>
+    <div class="summary-flex">
+        <!--Summary-->
+        <div class="table-summary-container" ng-show="RecordID == ''">
+            <!--Summary Filter-->
+            <div class="summary-filter">
+                <div class="form-group">
+                    <label>Month</label>
+                    <select class="form-control">
+                        <option>January</option>
+                        <option>February</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Day</label>
+                    <select class="form-control">
+                        <option>-</option>
+                        <option>01</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Cut-off</label>
+                    <select class="form-control">
+                        <option>-</option>
+                        <option>1st</option>
+                    </select>
+                </div>
+            </div>
+            <div class="summary-container">
+                <!--Summary Count-->
+                <div class="summary-div">
+                    <div class="sum-count">
+                        <div class="sum-count-itm">
+                            <h5>34</h5>
+                            <label>Filed</label>
+                        </div>
+                        <div class="sum-count-itm">
+                            <h5>27</h5>
+                            <label>Approved</label>
+                        </div>
+                        <div class="sum-count-itm">
+                            <h5>7</h5>
+                            <label>Disapproved</label>
+                        </div>
+                    </div>
+                </div>
+                <!--Summary Chart-->
+                <div class="summary-chart">
+                    <h5 class="summary-title">Work Credit</h5>
+                    <div id="chartWorkCreditContainer">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+                <!--Date w/ Most OT Filed-->
+                <div class="summary-div">
+                    <h5 class="summary-title">Dates w/ Most OT Filed</h5>
+                    <div class="sum-emp-itm">
+                        <div class="sum-emp-icon"><i class="fas fa-calendar"></i></div>
+                        <div class="sum-emp-desc">
+                            <h5>Jan. 03, 2020</h5>
+                            <label class="gray">6 OT filed</label>
+                        </div>
+                    </div>
+                    <div class="sum-emp-itm">
+                        <div class="sum-emp-icon"><i class="fas fa-calendar"></i></div>
+                        <div class="sum-emp-desc">
+                            <h5>Jan. 10, 2020</h5>
+                            <label class="gray">4 OT filed</label>
+                        </div>
+                    </div>
+                </div>
+                <!--Employees w/ Longest OT-->
+                <div class="summary-div">
+                    <h5 class="summary-title">With Longest OT</h5>
+                    <div class="sum-emp-itm">
+                        <div class="sum-emp-initial" ng-bind="SetIcon('John Doe')"></div>
+                        <div class="sum-emp-desc">
+                            <h5>John Doe</h5>
+                            <label>5 hours</label>
+                        </div>
+                    </div>
+                    <div class="sum-emp-itm">
+                        <div class="sum-emp-initial" ng-bind="SetIcon('Howard Wolowitz')"></div>
+                        <div class="sum-emp-desc">
+                            <h5>Howard Wolowitz</h5>
+                            <label>4 hours</label>
+                        </div>
+                    </div>
+                </div>
+                <!--Employees w/ Most OT Filed-->
+                <div class="summary-div">
+                    <h5 class="summary-title">With Most OT Filed</h5>
+                    <div class="sum-emp-itm">
+                        <div class="sum-emp-initial" ng-bind="SetIcon('Sheldon Cooper')"></div>
+                        <div class="sum-emp-desc">
+                            <h5>Sheldon Cooper</h5>
+                            <label class="gray">4 OT filed</label>
+                        </div>
+                    </div>
+                    <div class="sum-emp-itm">
+                        <div class="sum-emp-initial" ng-bind="SetIcon('HLeonard Hofstadter')"></div>
+                        <div class="sum-emp-desc">
+                            <h5>Leonard Hofstadter</h5>
+                            <label class="gray">3 OT filed</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ui-view>
+            <div ng-include="HtmlTemplatePath + '/Web/Directives/insysTable.tmpl.html'" include-replace></div>
+        </ui-view>
+    </div>
+</div>

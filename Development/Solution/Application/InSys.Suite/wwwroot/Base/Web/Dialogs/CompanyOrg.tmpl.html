@@ -1,0 +1,20 @@
+﻿<div class="panel" ng-init="Init()">
+    <div class="panel-heading">
+        <div class="ph-desc">
+            <label><i class="fas fa-plus"></i> Add {{Org.OrgType}}</label>
+            <label class="sub">{{Org.Parent != null ? ('for ' + Org.Parent) : null}}</label>
+        </div>
+        <i class="fas fa-times" ng-click="Close()"></i>
+    </div>
+    <form ng-submit="Submit()"> 
+        <div class="panel-body">
+            
+            <div class="form-group">
+                <div insys-lookup lookup-options="MasterLookup" lookup-data="{'model': Org || {},'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Master', 'displayContainer': 'Name', 'label': ''}"></div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button class="btn emphasized" type="submit">Add</button>
+        </div>
+    </form>
+</div>

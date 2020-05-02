@@ -1,0 +1,45 @@
+﻿<div id="insysDatePicker">
+    <div class="idp-header">
+        <div class="idp-select">
+            <select name="insysDatePicker-month" ng-model="data.currentMonth" id="insysDatePicker-month" ng-change="jump()" ng-options="item.ID as item.Name for item in months"></select>
+            <select name="insysDatePicker-year" ng-model="data.currentYear" id="insysDatePicker-year" ng-change="jump()" ng-options="item for item in years"></select>
+        </div>
+        <div class="idp-btn"> <i id="insysDatePicker-previous" class="fa fa-chevron-left" ng-click="previous()" title="Previous"></i> <i id="insysDatePicker-next" class="fa fa-chevron-right" ng-click="next()" title="Next"></i> <i id="insysDatePicker-today" class="fa fa-calendar" ng-click="goToday()" title="Current Day"></i></div>
+    </div>
+    <div class="idp-body">
+        <table>
+            <thead>
+                <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+            </thead>
+            <tbody id="insysDatePicker-body">
+                <tr>
+                    <td ng-repeat="n in [].constructor(firstDay) track by $index"></td>
+                    <td ng-class="{\'bg-info\': IsDateActive($index + 1), \'disabled\': IsDisabled($index + 1)}" ng-mouseup="getCalendarValue($index + 1)" ng-repeat="n in [].constructor(7 - firstDay) track by $index" ng-bind="$index + 1"></td>
+                </tr>
+                <tr>
+                    <td ng-class="{\'bg-info\': IsDateActive($index + (8-firstDay)), \'disabled\': IsDisabled($index + (8-firstDay))}" ng-mouseup="getCalendarValue($index + (8-firstDay))" ng-repeat="n in [].constructor(7) track by $index" ng-bind="$index + (8-firstDay)"></td>
+                </tr>
+                <tr>
+                    <td ng-class="{\'bg-info\': IsDateActive($index + (8-firstDay) + 7), \'disabled\': IsDisabled($index + (8-firstDay) + 7)}" ng-mouseup="getCalendarValue($index + (8-firstDay) + 7)" ng-repeat="n in [].constructor(7) track by $index" ng-bind="$index + (8-firstDay) + 7"></td>
+                </tr>
+                <tr>
+                    <td ng-class="{\'bg-info\': IsDateActive($index + (8-firstDay) + 14), \'disabled\': IsDisabled($index + (8-firstDay) + 14)}" ng-mouseup="getCalendarValue($index + (8-firstDay) + 14)" ng-repeat="n in [].constructor(7) track by $index" ng-bind="$index + (8-firstDay) + 14"></td>
+                </tr>
+                <tr>
+                    <td ng-class="{\'bg-info\': IsDateActive($index + (8-firstDay) + 21), \'disabled\': IsDisabled($index + (8-firstDay) + 21)}" ng-if="($index + (8-firstDay) + 20) < daysInMonth(data.currentMonth, data.currentYear)" ng-mouseup="getCalendarValue($index + (8-firstDay) + 21)" ng-repeat="n in [].constructor(7) track by $index" ng-bind="$index + (8-firstDay) + 21"></td>
+                </tr>
+                <tr>
+                    <td ng-class="{\'bg-info\': IsDateActive($index + (8-firstDay) + 28), \'disabled\': IsDisabled($index + (8-firstDay) + 28)}" ng-if="($index + (8-firstDay) + 27) < daysInMonth(data.currentMonth, data.currentYear)" ng-mouseup="getCalendarValue($index + (8-firstDay) + 28)" ng-repeat="n in [].constructor(7) track by $index" ng-bind="$index + (8-firstDay) + 28"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+﻿<div class="panel">
+    <div class="panel-heading">
+        <label><i class="fas fa-file-alt"></i> Download Files</label>
+        <i class="fas fa-times" ng-click="close()"></i>
+    </div>
+    <div class="panel-body">
+        <div class="col-12 row dl-container">
+            <div class="col-xl-4 col-lg-6 downloadfile" title="{{ f.FileName }}" ng-repeat="f in files" ng-click="downloadFile(f.OrigFile, f.FileName)">
+                <i class="fas" ng-class="getExtension(f.FileExt)"></i>
+                <div class="dl-desc">
+                    <div class="dl-name" ng-bind="f.FileName"></div>
+                    <div class="dl-size" ng-bind="getSize(f.FileSize)"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

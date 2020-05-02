@@ -1,0 +1,159 @@
+﻿<div class="record">
+    <div class="record-header"></div>
+    <div class="record-body">
+        <!--Tabs-->
+        <div class="record-tab d-none d-md-block">
+            <div class="record-tab-header">
+                <span>Tabs</span>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                </li>
+                <li class="nav-item">
+                    <a ng-click="LoadLeaveParameterItems()" data-target="#details" class="nav-link" data-toggle="tab" role="tab">Details</a>
+                </li>
+            </ul>
+        </div>
+
+        <form ng-submit="saveForm()" name="form.leaveparameter" novalidate autocomplete="off" spellcheck="false" class="tab-content" method="post">
+            <div class="rh-btn-grp">
+                <button class="emphasized d-none d-md-block" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()" type="button"><i class="fas fa-plus"></i> New</button>
+                <button class="emphasized d-none d-md-block" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0"><i class="fas fa-save"></i> Save</button>
+
+                <!--These dropdowns will display when mobile-->
+                <!--Actions-->
+                <div class="dropdown mobile d-block d-md-none">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Actions</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button" ng-if="MenuPrivileges.HasNew == true && IsNull(Schema.ID, 0) != 0" ng-click="newForm()">New</button>
+                        <button class="dropdown-item" type="submit" ng-if="(MenuPrivileges.HasEdit == true && IsNull(Schema.ID, 0) >= 0) || IsNull(Schema.ID, 0) == 0">Save</button>
+                    </div>
+                </div>
+                <!--Tabs-->
+                <div class="dropdown mobile d-block d-md-none" role="tablist">
+                    <button class="emphasized dropdown-toggle" type="button" data-toggle="dropdown">Tabs</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a data-target="#general" class="nav-link active" data-toggle="tab" role="tab">General</a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-target="#details" class="nav-link" data-toggle="tab" role="tab">Details</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--General Tab-->
+            <div id="general" role="tabpanel" class="tab-pane fade show active">
+                <!--Form Header-->
+                <div class="rf-header">
+                    <h5>General</h5>
+                </div>
+
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="col-xl-10 col-lg-10 col-md-12 row">
+                        <div class="col-xl-6 col-lg-10">
+                            <br />
+                            <div class="form-group" ng-required="GetIsRequired('Code')">
+                                <label class="control-label">Code <i title="Code is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="Code" ng-model="Schema.Code" ng-required="GetIsRequired('Code')" maxlength="{{GetMaxLength('Code')}}" />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('Name')">
+                                <label class="control-label">Name <i title="Name is required" class="fa fa-exclamation-circle"></i></label>
+                                <input class="form-control" type="text" name="Name" ng-model="Schema.Name" ng-required="GetIsRequired('Name')" maxlength="{{GetMaxLength('Name')}}" />
+                            </div>
+
+                            <div class="form-group" ng-required="GetIsRequired('Comment')">
+                                <label class="control-label">Comment <i title="Comment is required" class="fa fa-exclamation-circle"></i></label>
+                                <textarea name="Comment" class="form-control" ng-model="Schema.Comment" ng-required="GetIsRequired('Comment')" maxlength="{{GetMaxLength('Comment')}}"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <span class="form-check-holder">
+                                    <input id="IsActive-ur-check-0" name="IsActive" class="form-check" ng-model="Schema.IsActive" type="checkbox" />
+                                    <label for="IsActive-ur-check-0">Is Active</label>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Descriptions Tab-->
+            <div id="details" role="tabpanel" class="tab-pane fade">
+                <div class="rf-header">
+                    <h5>Details</h5>
+                </div>
+                <div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+                    <div class="detail-form">
+
+                        <div class="df-head flex-end">
+                            <div class="df-btn-grp">
+                                <button ng-click="newLeaveParameterDetails()" type="button"><i class="fas fa-plus"></i> Add</button>
+                                <!--<button ng-click="saveSchemaDetails()" type="button"><i class="fas fa-save"></i> Save Details</button>-->
+                                <button ng-click="delLeaveParameterDetails()" type="button"><i class="fas fa-trash"></i> Delete</button>
+                            </div>
+                        </div>
+
+                        <div class="df-body list">
+                            <div class="tbl-holder no-paging" ng-class="{ 'custom-scroll' : isChrome }">
+                                <table id="leaveparameter_details" class="table table-striped table-hover table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th class="tbl-ctrl">
+                                                <input type="checkbox" class="tbl-check" id="selectAllLeaveParameterDetailRecords" ng-model="CheckAll.LeaveParameterDetailRecord" ng-click="CheckAllLeaveParameterDetailRecords()" />
+                                                <label for="selectAllLeaveParameterDetailRecords"></label>
+                                            </th>
+                                            <th>Leave</th>
+                                            <th>Accrual Type</th>
+                                            <th>Ref. Date</th>
+                                            <th>Accrual Options</th>
+                                            <th>Custom Day</th>
+                                            <th>Balance</th>
+                                            <th>Comment</th>
+                                            <th>Active</th>
+                                            <!--<th>Sequence</th>-->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="lp in LeaveParameterDetailRecord">
+                                            <td class="tbl-ctrl">
+                                                <input type="checkbox" class="tbl-check" id="dsd-sdc-{{$index}}" ng-model="lp.IsChecked" />
+                                                <label for="dsd-sdc-{{$index}}"></label>
+                                            </td>
+                                            <td><select name="ID_LeavePayrollItem" c-label="Payroll Item" ng-required="GetIsRequired('ID_LeavePayrollItem')" ng-model="lp.ID_LeavePayrollItem" ng-options="h.ID as h.Name for h in LeavePayrollItem" class="form-control"></select></td>
+                                            <td><select name="ID_LeaveAccrualType" c-label="Accrual Type" ng-required="GetIsRequired('ID_LeaveAccrualType')" ng-model="lp.ID_LeaveAccrualType" ng-options="h.ID as h.Name for h in LeaveAccrualType  " class="form-control"></select></td>
+                                            <td><select name="ID_LeaveParameterItemReferenceDate" c-label="Parameter Item Reference Date" ng-required="GetIsRequired('ID_LeaveParameterItemReferenceDate')" ng-model="lp.ID_LeaveParameterItemReferenceDate" ng-options="h.ID as h.Name for h in LeaveParameterItemReferenceDate" class="form-control"></select></td>
+                                            <td><select name="ID_AccrualOption" c-label="Accrual Option" ng-required="GetIsRequired('ID_AccrualOption')" ng-model="lp.ID_AccrualOption" ng-options="h.ID as h.Name for h in AccrualOption" class="form-control"></select></td>
+                                            <td><input type="text" name="AccrualDay" class="form-control" ng-model="lp.AccrualDay" /></td>
+                                            <td><input type="text" name="InitialValue" c-label="Initial Value" ng-required="GetIsRequired('InitialValue')" maxlength="{{GetMaxLength('InitialValue')}}" class="form-control" ng-model="lp.InitialValue" /></td>
+                                            <td><input type="text" name="Comment" class="form-control" ng-m odel="lp.Comment" ng-required="GetIsRequired('Comment')" maxlength="{{GetMaxLength('Comment')}}" /></td>
+                                            <td class="chck">
+                                                <input type="checkbox" name="IsActive" class="tbl-check tbl-check-dt" id="IsActive-eer-{{$index}}" ng-model="lp.IsActive" />
+                                                <label for="IsActive-eer-{{$index}}"></label>
+                                            </td>
+                                            <!--<td><input type="number" name="SeqNo" class="form-control" ng-model="lp.SeqNo" /></td>-->
+                                        </tr>
+                                        <tr class="no_record" ng-if="LeaveParameterDetailRecord.length == 0">
+                                            <td>
+                                                <div class="no-rec-ico">
+                                                    <i class="fas fa-file-alt"></i>
+                                                    <i class="fas fa-search"></i>
+                                                </div>
+                                                <p>No record found.</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

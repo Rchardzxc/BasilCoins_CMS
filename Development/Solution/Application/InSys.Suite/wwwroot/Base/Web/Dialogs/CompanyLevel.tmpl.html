@@ -1,0 +1,17 @@
+﻿<div class="cl-main">
+    <div class="cl-header">
+        <h4>Add Company Level</h4>
+        <span ng-click="Close()" class="fas fa-times"></span>
+    </div>
+    <div class="cl-content">
+        <form ng-submit="Submit()">
+            <div class="form-group">
+                <div insys-lookup lookup-options="OrgTypeLookup" lookup-data="{'model': CompanyOrgType || {},'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_OrgType', 'displayContainer': 'OrgType', 'label': 'Type'}"></div>
+            </div>
+            <div class="form-group">
+                <input type="number" name="SeqNo" ng-model="CompanyOrgType.SeqNo" />
+            </div>
+            <input type="submit" value="Save" />
+        </form>
+    </div>
+</div>

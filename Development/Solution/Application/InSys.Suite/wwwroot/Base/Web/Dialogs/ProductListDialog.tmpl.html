@@ -1,0 +1,25 @@
+﻿<div class="panel">
+    <div class="panel-heading">
+        <div class="ph-desc">
+            <label><i class="fas fa-plus"></i> Load Products</label>
+        </div>
+        <i class="fas fa-times" ng-click="Close()"></i>
+    </div>
+    <form ng-submit="LoadProducts()">
+        <div class="panel-body">
+
+            <div class="form-group">
+                <select class="form-control" ng-options="type.ID as type.OrgType for type in orgTypes"
+                        ng-model="selectedOrgType" ng-change="LoadMasterOption()">
+                    <option ng-value="undefined" ng-bind="'All Products'"></option>
+                </select>
+            </div>
+            <div class="form-group" ng-if="selectedOrgType != undefined">
+                <div insys-lookup is-required="true" lookup-options="MasterLookup" lookup-data="{'model': Org,'targetValue': 'ID', 'targetDisplay': 'Name', 'valueContainer': 'ID_Master', 'displayContainer': 'Name', 'label': 'Master List'}"></div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button class="btn emphasized" type="submit">Load</button>
+        </div>
+    </form>
+</div>

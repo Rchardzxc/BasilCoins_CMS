@@ -1,0 +1,44 @@
+﻿<div class="hide login" ng-class="{'show': CtrlReady == true}" ng-controller="Login">
+    <div class="login-overlay"></div>
+    <div class="login-holder">
+        <div class="login-desc d-none d-md-block">
+            <h1>InSys Human Resource Management System</h1>
+            <p class="d-none d-lg-block">The system is a comprehensive and customizable workforce management tool which provides advanced features and functions required by large organizations.</p>
+        </div>
+        <div class="login-card-holder">
+            <form class="login-panel" name="form.loginForm" ng-submit="Login()" autocomplete="off" method="post">
+                <h5>Log-in</h5>
+                <div class="input-grp">
+                    <i class="fas fa-user-circle"></i>
+                    <input class="txt" name="username" type="text" ng-model="UserLogin.Username" required="required" placeholder="Username" />
+                </div>
+                <div class="input-grp">
+                    <i class="fas fa-lock"></i>
+                    <input class="txt" name="password" type="password" ng-model="UserLogin.Password" required="required" placeholder="Password" />
+                </div>
+                <div class="login-bottom">
+                    <button type="submit" ng-class="ResultSet.Type == 5 || ResultSet.Type == 2 ? 'error' : ''" ng-bind-html="ResultSet.Type == 5 || ResultSet.Type == 2 ? ResultSet.Message : 'Log-in'"></button>
+                    <label>Forgot your password?</label>
+                </div>
+            </form>
+            <div class="kiosk-panel d-none d-sm-flex">
+                <div class="kiosk-sy"></div>
+                <div id="inner-wrap">
+                    <svg class="waves" xmlns="http://www.w3.org/2000/svg" width="100vw" height="230" viewBox="0 0 960 214.5" preserveAspectRatio="xMinYMid meet">
+                        <path fill="rgba(245,245,245,0.2)" d="M2663.6 73.2S2577 92 2529 89c-130.7-8.5-209.5-56.3-286.7-62.4s-125.7 18-188.3 18c-5 0-10-.4-14.5-.7-52-5-149.2-43-220.7-39-31.7 2-64 14-96.4 30-160.4 80-230.2-5.6-340.4-18-110-12-146.6 20-274 36S820.4 0 605.8 0C450.8 0 356 71 225.2 62.2 128 56 60.7 28-.3 11.2V104c22 7.3 46 14.2 70.4 16.7 110 12.3 147-19.3 275-35.5s350 39.8 369 43c27 4.3 59 8 94 10 13 .5 26 1 39 1 156 2 250-70.3 381-62 130.5 8.2 209.5 56.3 286.7 62 77 6.4 125.8-18 188.3-17.5 5 0 10 .2 14.3.6 52 5 145 49.5 220.7 38.2 32-5 64-15 96.6-31 160.5-79.4 230.3 6 340 18.4 110 12 146.3-20 273.7-36l15.5-2V73l1-.5z" />
+                    </svg>
+                </div>
+                <div class="icon-div">
+                    <div class="ico-outline one"></div>
+                    <div class="ico-outline two"></div>
+                    <i class="fas fa-circle one"></i>
+                    <i class="fas fa-circle two"></i>
+                    <i class="fas fa-users"></i>
+                </div>
+                <p class="kiosk-desc">Want to be a part of our growing team? Join us and together we will pursue innovation and excellence to the brands we carry.</p>
+                <button>Join us now</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="Base/Web/Controllers/Login.js"></script>

@@ -1,0 +1,408 @@
+﻿<div class="rf-body" ng-class="{'custom-scroll' : isChrome}">
+    <div class="rs-head">
+        <div class="rs-pic" lazy-load-image="{Image: Schema.ImageFile, Container: 'Photos'}"></div>
+        <div class="rs-desc d-none d-sm-block">
+            <h4><span ng-bind="Schema.FirstName"></span> <span ng-bind="Schema.LastName"></span></h4>
+            <label>Applying for <span ng-bind="Val(Schema.Designation)"></span></label>
+        </div>
+        <div class="rs-status">
+            <label class="control-label">Application Status:</label>
+            <select ng-options="asl.ID as asl.Name for asl in ApplicationStatusList" class="form-control" ng-model="Schema.ID_RecruitmentStatus"></select>
+        </div>
+    </div>
+    <div class="rs-body">
+        <div class="rs-left d-none d-md-block">
+            <div class="rs-mrf-no">
+                <label>MRF No.</label>
+                <select ng-options="k.ID as k.Name for k in KioskMRFList" class="form-control" ng-model="Schema.ID_MRF" disabled></select>
+            </div>
+            <insys-upload class="rs-attachment" readonly="false" required="false" name="UploadedResume" target-model="Schema.UploadedResume" options="UploadOptions"></insys-upload>
+        </div>
+        <div class="rs-right">
+            <!--<ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" title="Overview">
+                    <a class="nav-link active" data-toggle="tab" data-target="#sum-cv-1" role="tab"><i class="fas fa-file-contract"></i></a>
+                </li>
+            </ul>-->
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id= "sum-cv-1" role="tabpanel">
+                    <div class="col-md-12 row">
+                        <div class="col-lg-6 col-md-10 col-12">
+                            <div class="lbl-grp">
+                                <label>Position Applied For</label>
+                                <p ng-bind="Val(Schema.Designation)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Available Start Date</label>
+                                <p ng-bind="Val(FormatDate(Schema.AvailableStartDate, 'LL'))"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Sourcing Partner</label>
+                                <p ng-bind="Val(Schema.SourcingPartner2)"></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-10 col-12">
+                            <div class="lbl-grp">
+                                <label>Desired Position</label>
+                                <p ng-bind="Val(Schema.Designation2)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Desired Pay</label>
+                                <p ng-bind="Val(FormatCurrency(Schema.DesiredPay))"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--PERSONAL INFO-->
+                    <div class="r-title col-md-12">Personal Info</div>
+                    <div class="col-md-12 row">
+                        <div class="col-lg-6 col-md-10 col-12">
+                            <div class="lbl-grp">
+                                <label>Last name</label>
+                                <p ng-bind="Val(Schema.LastName)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Middlename</label>
+                                <p ng-bind="Val(Schema.MiddleName)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Nickname</label>
+                                <p ng-bind="Val(Schema.NickName)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Date of Birth</label>
+                                <p ng-bind="Val(FormatDate(Schema.BirthDate, 'LL'))"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Age</label>
+                                <p ng-bind="Val(Schema.Age)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Civil Status</label>
+                                <p ng-bind="Val(Schema.CivilStatus)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Weight</label>
+                                <p ng-bind="Val(Schema.Weight)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Blood Type</label>
+                                <p ng-bind="Val(Schema.BloodType)"></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-10 col-12">
+                            <div class="lbl-grp">
+                                <label>First name</label>
+                                <p ng-bind="Val(Schema.FirstName)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Suffix</label>
+                                <p ng-bind="Val(Schema.Suffix)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Gender</label>
+                                <p ng-bind="Val(Schema.Gender)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Place of Birth</label>
+                                <p ng-bind="Val(Schema.BirthPlace)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Religion</label>
+                                <p ng-bind="Val(Schema.Religion)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Citizenship</label>
+                                <p ng-bind="Val(Schema.Citizenship)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Height</label>
+                                <p ng-bind="Val(Schema.Height)"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--CONTACT INFO-->
+                    <div class="r-title col-md-12">Contact Info</div>
+                    <div class="col-md-12 row">
+                        <div class="col-lg-6 col-md-10 col-12">
+                            <div class="lbl-grp">
+                                <label>Mobile No</label>
+                                <p ng-bind="Val(Schema.MobileNo)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Phone No</label>
+                                <p ng-bind="Val(Schema.PhoneNo)"></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-10 col-12">
+                            <div class="lbl-grp">
+                                <label>Email Address</label>
+                                <p ng-bind="Val(Schema.EmailAddress)"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--ADDRESS-->
+                    <div class="r-title col-md-12">Address</div>
+                    <div class="col-md-12 row">
+                        <div class="col-lg-6 col-md-10 col-12">
+                            <div class="rs-title">Permanent</div>
+
+                            <div class="lbl-grp">
+                                <label>Address Property</label>
+                                <p ng-bind="Val(PermanentAddress[0].AddressProperty)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>No/Blk/Lot</label>
+                                <p ng-bind="Val(PermanentAddress[0].HouseNo)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Street name/Subdivision</label>
+                                <p ng-bind="Val(PermanentAddress[0].StreetName)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Province</label>
+                                <p ng-bind="Val(PermanentAddress[0].Province)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>City</label>
+                                <p ng-bind="Val(PermanentAddress[0].City)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Barangay</label>
+                                <p ng-bind="Val(PermanentAddress[0].Barangay)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>ZipCode</label>
+                                <p ng-bind="Val(PermanentAddress[0].ZipCode)"></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-10 col-12">
+                            <div class="rs-title">Present</div>
+                            <div class="lbl-grp">
+                                <label>Address Property</label>
+                                <p ng-bind="Val(PresentAddress[0].AddressProperty)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>No/Blk/Lot</label>
+                                <p ng-bind="Val(PresentAddress[0].HouseNo)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Street name/Subdivision</label>
+                                <p ng-bind="Val(PresentAddress[0].StreetName)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Province</label>
+                                <p ng-bind="Val(PresentAddress[0].Province)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>City</label>
+                                <p ng-bind="Val(PresentAddress[0].City)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Barangay</label>
+                                <p ng-bind="Val(PresentAddress[0].Barangay)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>ZipCode</label>
+                                <p ng-bind="Val(PresentAddress[0].ZipCode)"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="r-title col-md-12">GOVERNMENT IDENTIFICATION</div>
+                    <div class="col-md-12 row">
+                        <div class="col-lg-6 col-md-10 col-12">
+                            <div class="lbl-grp">
+                                <label>SSS No.</label>
+                                <p ng-bind="Val(Schema.SSSNo)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>HDMF No.</label>
+                                <p ng-bind="Val(Schema.HDMFNo)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Passport No.</label>
+                                <p ng-bind="Val(Schema.PassportNo)"></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-10 col-12">
+                            <div class="lbl-grp">
+                                <label>PhilHealth No.</label>
+                                <p ng-bind="Val(Schema.PhilHealthNo)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>TIN</label>
+                                <p ng-bind="Val(Schema.TINNo)"></p>
+                            </div>
+                            <div class="lbl-grp">
+                                <label>Drivers License</label>
+                                <p ng-bind="Val(Schema.DriversLicenseNo)"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--EDUCATIONAL BACKGROUND-->
+                    <div class="r-title col-md-12">Educational Background</div>
+                    <div class="tbl-holder" ng-class="{ 'custom-scroll' : isChrome }">
+                        <table class="table table-striped table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Educational Attainment</th>
+                                    <th>School Attended</th>
+                                    <th>Course/Degree</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="d in SchemaEducational">
+                                    <td><span ng-bind="getDDValue(EducationalAttainmentList, d.ID_EducationAttainmentStatus)"></span></td>
+                                    <td><span ng-bind="Val(d.SchoolAttended)"></span></td>
+                                    <td><span ng-bind="Val(d.CourseDegree)"></span></td>
+                                    <td><span ng-bind="Val(FormatDate(d.From, 'LL'))"></span></td>
+                                    <td><span ng-bind="Val(FormatDate(d.To, 'LL'))"></span></td>
+                                </tr>
+                                <tr class="no_record" ng-if="SchemaEducational.length == 0">
+                                    <td>
+                                        <div class="no-rec-ico">
+                                            <i class="fas fa-file-alt"></i>
+                                            <i class="fas fa-search"></i>
+                                        </div>
+                                        <p>No record found.</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--EMPLOYMENT RECORD-->
+                    <div class="r-title col-md-12">Employment Record</div>
+                    <div class="tbl-holder" ng-class="{ 'custom-scroll' : isChrome }">
+                        <table class="table table-striped table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Previous Company</th>
+                                    <th>Address</th>
+                                    <th>Salary</th>
+                                    <th>Position</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Reason for leaving</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="d in SchemaEmployment">
+                                    <td><span ng-bind="Val(d.Company)"></span></td>
+                                    <td><span ng-bind="Val(d.Address)"></span></td>
+                                    <td><span ng-bind="Val(FormatCurrency(d.Salary))"></span></td>
+                                    <td><span ng-bind="Val(d.Position)"></span></td>
+                                    <td><span ng-bind="Val(FormatDate(d.From, 'LL'))"></span></td>
+                                    <td><span ng-bind="Val(FormatDate(d.To, 'LL'))"></span></td>
+                                    <td><span ng-bind="Val(d.ReasonForLeaving)"></span></td>
+                                </tr>
+                                <tr class="no_record" ng-if="SchemaEmployment.length == 0">
+                                    <td>
+                                        <div class="no-rec-ico">
+                                            <i class="fas fa-file-alt"></i>
+                                            <i class="fas fa-search"></i>
+                                        </div>
+                                        <p>No record found.</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--CHARACTER REF-->
+                    <div class="r-title col-md-12">Character Reference</div>
+                    <div class="tbl-holder" ng-class="{ 'custom-scroll' : isChrome }">
+                        <table class="table table-striped table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Contact No.</th>
+                                    <th>Company</th>
+                                    <th>Position</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="d in SchemaCharRef">
+                                    <td><span ng-bind="Val(d.Name)"></span></td>
+                                    <td><span ng-bind="Val(d.ContactNo)"></span></td>
+                                    <td><span ng-bind="Val(d.Company)"></span></td>
+                                    <td><span ng-bind="Val(d.Position)"></span></td>
+                                </tr>
+                                <tr class="no_record" ng-if="SchemaCharRef.length == 0">
+                                    <td>
+                                        <div class="no-rec-ico">
+                                            <i class="fas fa-file-alt"></i>
+                                            <i class="fas fa-search"></i>
+                                        </div>
+                                        <p>No record found.</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--CHARACTER REF (FROM Previous Employment)-->
+                    <div class="r-title col-md-12">Character Reference (From Previous Employment)</div>
+                    <div class="tbl-holder" ng-class="{ 'custom-scroll' : isChrome }">
+                        <table class="table table-striped table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Contact No.</th>
+                                    <th>Company</th>
+                                    <th>Position</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="d in SchemaCharRefPrevER">
+                                    <td><span ng-bind="Val(d.Name)"></span></td>
+                                    <td><span ng-bind="Val(d.ContactNo)"></span></td>
+                                    <td><span ng-bind="Val(d.Company)"></span></td>
+                                    <td><span ng-bind="Val(d.Position)"></span></td>
+                                </tr>
+                                <tr class="no_record" ng-if="SchemaCharRefPrevER.length == 0">
+                                    <td>
+                                        <div class="no-rec-ico">
+                                            <i class="fas fa-file-alt"></i>
+                                            <i class="fas fa-search"></i>
+                                        </div>
+                                        <p>No record found.</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--LICENSES-->
+                    <div class="r-title col-md-12">Licenses/Certificates</div>
+                    <div class="tbl-holder" ng-class="{ 'custom-scroll' : isChrome }">
+                        <table class="table table-striped table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>License No.</th>
+                                    <th>Validity Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="d in SchemaLicenses">
+                                    <td><span ng-bind="Val(d.Name)"></span></td>
+                                    <td><span ng-bind="Val(d.Description)"></span></td>
+                                    <td><span ng-bind="Val(d.LicenseNo)"></span></td>
+                                    <td><span ng-bind="Val(FormatDate(d.ValidityDate, 'LL'))"></span></td>
+                                </tr>
+                                <tr class="no_record" ng-if="SchemaLicenses.length == 0">
+                                    <td>
+                                        <div class="no-rec-ico">
+                                            <i class="fas fa-file-alt"></i>
+                                            <i class="fas fa-search"></i>
+                                        </div>
+                                        <p>No record found.</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
